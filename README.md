@@ -7,7 +7,7 @@ En este proyecto se construira una aplicación móvil en Android que tendrá un 
 * Xml
 * Android Studio
 
-## Metodologia Implementada
+## Metodología Implementada
 * GitFlow
 
 ## Autores ✒️
