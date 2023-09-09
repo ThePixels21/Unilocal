@@ -11,5 +11,5 @@ En este proyecto se construira una aplicación móvil en Android que tendrá un 
 * GitFlow
 
 ## Autores ✒️
-Santiago Quintero Rincón
+Santiago Quintero Rincón,
 Juan Felipe Franco Tamayo
