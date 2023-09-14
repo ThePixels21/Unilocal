@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".actividades.LoginActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher_round"/>
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:text="@string/lbl_iniciar_sesion"/>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:inputType="textEmailAddress"
+        android:hint="@string/txt_email" />
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:inputType="textPassword"
+        android:hint="@string/txt_contrasenia" />
+
+    <Button
+        android:id="@+id/btn_iniciar_sesion"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/white"
+        android:outlineSpotShadowColor="#094293"
+        android:textColor="@color/black"
+        android:text="@string/lbl_iniciar_sesion"
+        />
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#0000FF"
+        android:text="@string/lbl_olvido_contrasenia"/>
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="250dp"
+        android:textAlignment="center"
+        android:textColor="#0000FF"
+        android:text="@string/lbl_registrarse"/>
+</LinearLayout>
