@@ -14,17 +14,6 @@
         android:layout_marginTop="60dp"
         android:src="@drawable/baseline_account_circle_24"
         />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/baseline_question_mark_24"
-        android:layout_margin="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:background="#00BCD4"
-        ></com.google.android.material.floatingactionbutton.FloatingActionButton>
-
     <EditText
         android:layout_width="300dp"
         android:layout_height="60dp"
@@ -51,17 +40,45 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:inputType="textEmailAddress" />
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="380dp"
+        android:hint="@string/txt_ciudad"
+        android:layout_centerHorizontal="true"
+        android:gravity="center" />
 
     <EditText
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="380dp"
+        android:layout_marginTop="450dp"
         android:layout_marginEnd="60dp"
         android:gravity="center"
         android:hint="@string/txt_contrasenia"
         android:inputType="textPassword" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="520dp"
+        android:layout_marginEnd="60dp"
+        android:gravity="center"
+        android:hint="@string/txt_contrasenia"
+        android:inputType="textPassword" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="590dp"
+        android:layout_marginEnd="60dp"
+        android:gravity="center"
+        android:hint="@string/txt_registrarse_btn"/>
 
 
 </RelativeLayout>

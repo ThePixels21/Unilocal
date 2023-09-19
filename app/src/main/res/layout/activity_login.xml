@@ -48,12 +48,14 @@
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:textColor="#0000FF"
-        android:text="@string/lbl_olvido_contrasenia"/>
+        android:text="@string/lbl_olvido_contrasenia"
+        android:onClick="irAOlvidoContrasena"/>
     <TextView
         android:layout_width="300dp"
         android:layout_height="20dp"
         android:layout_marginTop="250dp"
         android:textAlignment="center"
         android:textColor="#0000FF"
-        android:text="@string/lbl_registrarse"/>
+        android:text="@string/lbl_registrarse"
+        android:onClick="irARegsitro"/>
 </LinearLayout>
