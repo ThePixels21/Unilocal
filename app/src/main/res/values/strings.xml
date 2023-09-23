@@ -6,7 +6,7 @@
     <string name="txt_email">Email</string>
     <string name="txt_contrasenia">Contraseña</string>
     <string name="lbl_olvido_contrasenia">¿Olvido su contraseña?</string>
-    <string name="lbl_registrarse">¿No tiene cuenta? Registrate aquí</string>
+    <string name="lbl_registrarse">¿No tiene cuenta? Registrese aquí</string>
 
     <!-- main_activity -->
     <string name="txt_busqueda">Buscar Lugar</string>
