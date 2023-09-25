@@ -1,8 +1,8 @@
 package co.edu.eam.proyectounilocal.modelo
 
-class Usuario (var id:Int,
-               var nombre:String,
-               var nickname:String,
-               var email:String,
-               var contrasenia:String ) {
+class Usuario(id: Int, nombre: String, var nickname:String, var ciudad:String, correo: String, password: String): Persona(id, nombre, correo, password){
+
+    override fun toString(): String {
+        return "Usuario(nickname='$nickname') ${super.toString()}"
+    }
 }

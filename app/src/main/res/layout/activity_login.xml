@@ -59,18 +59,18 @@
         android:textColor="@color/black" />
 
     <TextView
+        android:id="@+id/txt_olvido_contrasenia"
         android:layout_width="150dp"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
-        android:onClick="irAOlvidoContrasena"
         android:text="@string/lbl_olvido_contrasenia"
         android:textColor="#0000FF" />
 
     <TextView
+        android:id="@+id/txt_no_cuenta"
         android:layout_width="300dp"
         android:layout_height="20dp"
         android:layout_marginTop="250dp"
-        android:onClick="irARegsitro"
         android:text="@string/lbl_registrarse"
         android:textAlignment="center"
         android:textColor="#0000FF" />
