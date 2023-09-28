@@ -15,8 +15,6 @@ import co.edu.eam.proyectounilocal.fragmentos.MisLugaresFragment
 
 class MainActivity : AppCompatActivity() {
 
-
-
     companion object {
         lateinit var binding: ActivityMainBinding
         var MENU_INICIO = "inicio"

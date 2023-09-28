@@ -28,7 +28,7 @@ class Lugar(var nombre:String,
         var mensaje = "Cerrado"
 
         for(horario in horarios){
-            if( horario.diasSemana.contains( DiaSemana.values()[dia-1] ) && hora < horario.horaInicio && hora > horario.horaFinal  ){
+            if( horario.diaSemana.contains( DiaSemana.values()[dia-1] ) && hora < horario.horaInicio && hora > horario.horaFinal  ){
                 mensaje = "Abierto"
                 break
             }
@@ -45,7 +45,7 @@ class Lugar(var nombre:String,
         var mensaje = ""
 
         for(horario in horarios){
-            if( horario.diasSemana.contains( DiaSemana.values()[dia-1] ) ){
+            if( horario.diaSemana.contains( DiaSemana.values()[dia-1] ) ){
                 mensaje = horario.horaFinal.toString()
                 break
             }
