@@ -8,7 +8,9 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import co.edu.eam.proyectounilocal.R
+import co.edu.eam.proyectounilocal.bd.Usuarios
 import co.edu.eam.proyectounilocal.databinding.ActivityBusquedaBinding
+import co.edu.eam.proyectounilocal.fragmentos.BusquedasRecientesFragment
 import co.edu.eam.proyectounilocal.fragmentos.ResultadoBusquedaFragment
 
 class BusquedaActivity : AppCompatActivity() {
@@ -24,6 +26,12 @@ class BusquedaActivity : AppCompatActivity() {
             if(i == EditorInfo.IME_ACTION_SEARCH){
                 val busqueda = binding.buscador.text.toString()
                 if(busqueda.isNotEmpty()){
+                    //Guardar busqueda usuario
+                    val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
+                    val codigoUsuario = sp.getInt("codigo_usuario", -1)
+                    if(codigoUsuario != -1){
+                        Usuarios.buscar(codigoUsuario)!!.agregarBusqueda(busqueda)
+                    }
                     //Ejecutar fragmento busqueda
                     supportFragmentManager.beginTransaction()
                         .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(busqueda))
@@ -35,6 +43,11 @@ class BusquedaActivity : AppCompatActivity() {
         }
 
         binding.back.setOnClickListener { startActivity(Intent(this, MainActivity::class.java)) }
+
+        supportFragmentManager.beginTransaction()
+            .replace(binding.contenido.id, BusquedasRecientesFragment())
+            .addToBackStack("recientes")
+            .commit()
 
     }
 
