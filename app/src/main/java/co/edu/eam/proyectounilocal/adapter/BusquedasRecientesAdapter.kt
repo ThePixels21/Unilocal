@@ -40,7 +40,7 @@ class BusquedasRecientesAdapter(var lista:ArrayList<String>): RecyclerView.Adapt
         override fun onClick(p0: View?) {
             BusquedaActivity.binding.buscador.setText(reciente.text.toString())
             BusquedaActivity.binding.buscador.setSelection(reciente.text.toString().length)
-            //click
+            //Cambiar fragmento
             val ac: BusquedaActivity = BusquedaActivity()
             BusquedaActivity.fragmentMngr.beginTransaction()
                 .replace(BusquedaActivity.binding.contenido.id, ResultadoBusquedaFragment.newInstance(reciente.text.toString()))

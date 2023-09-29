@@ -50,6 +50,8 @@ class BusquedaActivity : AppCompatActivity() {
 
         binding.back.setOnClickListener { startActivity(Intent(this, MainActivity::class.java)) }
 
+        this.setClickListenersCategorias()
+
         supportFragmentManager.beginTransaction()
             .replace(binding.contenido.id, BusquedasRecientesFragment())
             .addToBackStack("recientes")
@@ -65,4 +67,105 @@ class BusquedaActivity : AppCompatActivity() {
             imm.showSoftInput(binding.buscador, InputMethodManager.SHOW_IMPLICIT)
         },100)
     }
+
+    fun setClickListenersCategorias(){
+
+        //Hotel
+        binding.categoriaHotel.setOnClickListener {
+            val categoria: String = "categoria/1"
+            supportFragmentManager.beginTransaction()
+                .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
+                .addToBackStack("busqueda_categoria")
+                .commit()
+
+            binding.buscador.setText(categoria)
+            binding.buscador.setSelection(categoria.length)
+        }
+
+        //Cafe
+        binding.categoriaCafe.setOnClickListener {
+            val categoria: String = "categoria/2"
+            supportFragmentManager.beginTransaction()
+                .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
+                .addToBackStack("busqueda_categoria")
+                .commit()
+
+            binding.buscador.setText(categoria)
+            binding.buscador.setSelection(categoria.length)
+        }
+
+        //Restaurante
+        binding.categoriaRestaurante.setOnClickListener {
+            val categoria: String = "categoria/3"
+            supportFragmentManager.beginTransaction()
+                .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
+                .addToBackStack("busqueda_categoria")
+                .commit()
+
+            binding.buscador.setText(categoria)
+            binding.buscador.setSelection(categoria.length)
+        }
+
+        //Parque
+        binding.categoriaParque.setOnClickListener {
+            val categoria: String = "categoria/4"
+            supportFragmentManager.beginTransaction()
+                .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
+                .addToBackStack("busqueda_categoria")
+                .commit()
+
+            binding.buscador.setText(categoria)
+            binding.buscador.setSelection(categoria.length)
+        }
+
+        //Bar
+        binding.categoriaBar.setOnClickListener {
+            val categoria: String = "categoria/5"
+            supportFragmentManager.beginTransaction()
+                .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
+                .addToBackStack("busqueda_categoria")
+                .commit()
+
+            binding.buscador.setText(categoria)
+            binding.buscador.setSelection(categoria.length)
+        }
+
+        //Centro comercial
+        binding.categoriaCentroComercial.setOnClickListener {
+            val categoria: String = "categoria/6"
+            supportFragmentManager.beginTransaction()
+                .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
+                .addToBackStack("busqueda_categoria")
+                .commit()
+
+            binding.buscador.setText(categoria)
+            binding.buscador.setSelection(categoria.length)
+        }
+
+        //Tienda
+        binding.categoriaTienda.setOnClickListener {
+            val categoria: String = "categoria/7"
+            supportFragmentManager.beginTransaction()
+                .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
+                .addToBackStack("busqueda_categoria")
+                .commit()
+
+            binding.buscador.setText(categoria)
+            binding.buscador.setSelection(categoria.length)
+        }
+
+        //Museo
+        binding.categoriaMuseo.setOnClickListener {
+            val categoria: String = "categoria/8"
+            supportFragmentManager.beginTransaction()
+                .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
+                .addToBackStack("busqueda_categoria")
+                .commit()
+
+            binding.buscador.setText(categoria)
+            binding.buscador.setSelection(categoria.length)
+        }
+
+    }
+
 }
