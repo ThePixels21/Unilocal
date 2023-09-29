@@ -8,17 +8,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal"
         android:background="@drawable/fondo_busqueda">
 
         <EditText
-            android:layout_width="290dp"
+            android:enabled="false"
+            android:allowClickWhenDisabled="true"
+            android:id="@+id/buscador"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@null"
-            android:imeOptions="actionSearch"
             android:singleLine="true"
             android:hint="@string/txt_busqueda"
             android:paddingStart="10dp"
