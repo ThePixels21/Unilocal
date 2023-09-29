@@ -70,8 +70,12 @@ class InfoLugarFragment : Fragment() {
 
         var telefonos = ""
         if(lugar.telefonos.isNotEmpty()){
-            for (tel in lugar.telefonos){
-                telefonos += "$tel\n"
+            for (i in 0 until lugar.telefonos.size){
+                if(i < lugar.telefonos.size-1){
+                    telefonos += "${lugar.telefonos.get(i)}\n"
+                } else {
+                    telefonos += "${lugar.telefonos.get(i)}"
+                }
             }
         } else {
             telefonos = "No tiene telefonos de contacto"

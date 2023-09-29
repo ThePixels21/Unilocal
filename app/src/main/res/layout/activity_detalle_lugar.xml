@@ -40,6 +40,15 @@
                 android:gravity="center"/>
 
             <ImageButton
+                android:id="@+id/img_fav"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:src="@drawable/ic_favorite_border_40" />
+
+            <ImageButton
+                android:id="@+id/btn_search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

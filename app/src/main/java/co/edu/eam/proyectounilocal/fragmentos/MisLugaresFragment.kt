@@ -1,6 +1,7 @@
 package co.edu.eam.proyectounilocal.fragmentos
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.edu.eam.proyectounilocal.R
+import co.edu.eam.proyectounilocal.actividades.BusquedaActivity
 import co.edu.eam.proyectounilocal.actividades.MainActivity
 import co.edu.eam.proyectounilocal.adapter.LugarAdapter
 import co.edu.eam.proyectounilocal.bd.Lugares
@@ -29,6 +31,8 @@ class MisLugaresFragment : Fragment() {
         binding.btnVolver.setOnClickListener{ requireActivity().supportFragmentManager.beginTransaction().replace( R.id.contenido_principal, InicioFragment() )
             .addToBackStack(MainActivity.MENU_INICIO).commit()
         MainActivity.binding.menuInferior.menu.getItem(0).isChecked = true}
+
+        binding.btnSearch.setOnClickListener { startActivity(Intent(requireActivity(), BusquedaActivity::class.java)) }
 
         binding.btnNuevoLugar.setOnClickListener { requireActivity().supportFragmentManager.beginTransaction().replace( R.id.contenido_principal, CrearLugarFragment() )
             .addToBackStack(MainActivity.MENU_CREAR_LUGAR).commit() }

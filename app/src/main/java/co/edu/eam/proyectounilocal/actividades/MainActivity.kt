@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.databinding.ActivityMainBinding
 import co.edu.eam.proyectounilocal.fragmentos.CrearLugarFragment

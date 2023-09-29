@@ -60,6 +60,20 @@ object Lugares {
         return lista.firstOrNull { l -> l.id == id }
     }
 
+    fun obtenerFavoritos(codigoUsuario: Int):ArrayList<Lugar>{
+        val usuario = Usuarios.buscar(codigoUsuario)
+        val lista: ArrayList<Lugar> = ArrayList()
+        if(usuario != null){
+            for (codigoLugar in usuario.lugaresFavoritos){
+                val lugar = obtener(codigoLugar)
+                if(lugar != null){
+                    lista.add(lugar)
+                }
+            }
+        }
+        return lista
+    }
+
     fun buscarNombre(nombre:String): ArrayList<Lugar> {
         return lista.filter { l -> l.nombre.lowercase().contains(nombre.lowercase()) && l.estado == EstadoLugar.ACEPTADO }.toCollection(ArrayList())
     }
