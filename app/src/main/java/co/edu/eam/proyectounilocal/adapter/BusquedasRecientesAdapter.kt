@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.BusquedaActivity
+import co.edu.eam.proyectounilocal.fragmentos.ResultadoBusquedaFragment
 import co.edu.eam.proyectounilocal.modelo.Lugar
 
 class BusquedasRecientesAdapter(var lista:ArrayList<String>): RecyclerView.Adapter<BusquedasRecientesAdapter.ViewHolder>() {
@@ -37,7 +38,14 @@ class BusquedasRecientesAdapter(var lista:ArrayList<String>): RecyclerView.Adapt
         }
 
         override fun onClick(p0: View?) {
+            BusquedaActivity.binding.buscador.setText(reciente.text.toString())
+            BusquedaActivity.binding.buscador.setSelection(reciente.text.toString().length)
             //click
+            val ac: BusquedaActivity = BusquedaActivity()
+            BusquedaActivity.fragmentMngr.beginTransaction()
+                .replace(BusquedaActivity.binding.contenido.id, ResultadoBusquedaFragment.newInstance(reciente.text.toString()))
+                .addToBackStack("busqueda")
+                .commit()
         }
 
     }

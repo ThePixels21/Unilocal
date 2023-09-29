@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.bd.Usuarios
 import co.edu.eam.proyectounilocal.databinding.ActivityBusquedaBinding
@@ -15,12 +16,17 @@ import co.edu.eam.proyectounilocal.fragmentos.ResultadoBusquedaFragment
 
 class BusquedaActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityBusquedaBinding
+    companion object{
+        lateinit var binding: ActivityBusquedaBinding
+        lateinit var fragmentMngr: FragmentManager
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBusquedaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        fragmentMngr = supportFragmentManager
 
         binding.buscador.setOnEditorActionListener{ textView, i, keyEvent ->
             if(i == EditorInfo.IME_ACTION_SEARCH){
@@ -35,7 +41,7 @@ class BusquedaActivity : AppCompatActivity() {
                     //Ejecutar fragmento busqueda
                     supportFragmentManager.beginTransaction()
                         .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(busqueda))
-                        .addToBackStack("Busqueda")
+                        .addToBackStack("busqueda")
                         .commit()
                 }
             }
