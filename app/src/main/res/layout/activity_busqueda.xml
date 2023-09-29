@@ -80,7 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="Restaurante" />
+                        android:text="@string/txt_restaurante" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -104,7 +104,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="Hotel" />
+                        android:text="@string/txt_hotel" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -128,7 +128,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="Centro Comercial" />
+                        android:text="@string/txt_centro_comercial" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -152,7 +152,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="Tienda" />
+                        android:text="@string/txt_tienda" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -176,7 +176,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="Bar" />
+                        android:text="@string/txt_bar" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -200,7 +200,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="Café" />
+                        android:text="@string/txt_cafe" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -224,7 +224,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="Parque" />
+                        android:text="@string/txt_parque" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -248,7 +248,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="Museo" />
+                        android:text="@string/txt_museo" />
                 </LinearLayout>
 
             </LinearLayout>

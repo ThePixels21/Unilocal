@@ -33,7 +33,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Detalles"
+                        android:text="@string/txt_detalles"
                         android:textStyle="bold"
                         android:textSize="25sp"/>
 
@@ -41,7 +41,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="\uf05a"
+                        android:text="@string/img_reloj"
                         android:layout_centerVertical="true"
                         android:textSize="20sp"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="17sp"
-                    android:text="Detalles del lugar" />
+                    android:text="@string/txt_detalles_del_lugar" />
 
             </LinearLayout>
 
@@ -75,7 +75,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Horarios"
+                        android:text="@string/txt_horarios"
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
@@ -86,7 +86,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:fontFamily="@font/font_awesome_6_free_solid_900"
-                        android:text="\uf017"
+                        android:text="@string/img_reloj"
                         android:textSize="20sp" />
 
                     <TextView
@@ -96,7 +96,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:textSize="17sp"
-                        android:text="Cerrado"
+                        android:text="@string/txt_cerrado"
                         android:layout_marginEnd="40dp"/>
 
                 </RelativeLayout>
@@ -108,12 +108,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="17sp"
-                        android:text="Lunes" />
+                        android:text="@string/txt_lunes" />
                     <TextView
                         android:id="@+id/horario_lunes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="No abre"
+                        android:text="@string/txt_no_abre"
                         android:textSize="17sp"
                         android:layout_alignParentRight="true" />
                 </RelativeLayout>
@@ -125,13 +125,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="17sp"
-                        android:text="Martes" />
+                        android:text="@string/txt_martes" />
                     <TextView
                         android:id="@+id/horario_martes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="17sp"
-                        android:text="No abre"
+                        android:text="@string/txt_no_abre"
                         android:layout_alignParentRight="true" />
                 </RelativeLayout>
                 <RelativeLayout
@@ -141,13 +141,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="17sp"
-                        android:text="Miércoles" />
+                        android:text="@string/txt_miercoles" />
                     <TextView
                         android:id="@+id/horario_miercoles"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="17sp"
-                        android:text="No abre"
+                        android:text="@string/txt_no_abre"
                         android:layout_alignParentRight="true" />
                 </RelativeLayout>
                 <RelativeLayout
@@ -157,13 +157,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="17sp"
-                        android:text="Jueves" />
+                        android:text="@string/txt_jueves" />
                     <TextView
                         android:id="@+id/horario_jueves"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="17sp"
-                        android:text="No abre"
+                        android:text="@string/txt_no_abre"
                         android:layout_alignParentRight="true" />
                 </RelativeLayout>
                 <RelativeLayout
@@ -173,13 +173,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="17sp"
-                        android:text="Viernes" />
+                        android:text="@string/txt_viernes" />
                     <TextView
                         android:id="@+id/horario_viernes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="17sp"
-                        android:text="No abre"
+                        android:text="@string/txt_no_abre"
                         android:layout_alignParentRight="true" />
                 </RelativeLayout>
                 <RelativeLayout
@@ -189,13 +189,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="17sp"
-                        android:text="Sábado" />
+                        android:text="@string/txt_sabado" />
                     <TextView
                         android:id="@+id/horario_sabado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="17sp"
-                        android:text="No abre"
+                        android:text="@string/txt_no_abre"
                         android:layout_alignParentRight="true" />
                 </RelativeLayout>
                 <RelativeLayout
@@ -205,13 +205,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="17sp"
-                        android:text="Domingo" />
+                        android:text="@string/txt_domingo" />
                     <TextView
                         android:id="@+id/horario_domingo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="17sp"
-                        android:text="No abre"
+                        android:text="@string/txt_no_abre"
                         android:layout_alignParentRight="true" />
                 </RelativeLayout>
 
@@ -237,7 +237,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Contacto"
+                        android:text="@string/txt_contacto"
                         android:textStyle="bold"
                         android:textSize="25sp"/>
 
@@ -245,7 +245,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="\uf095"
+                        android:text="@string/icon_uf095"
                         android:layout_centerVertical="true"
                         android:textSize="20sp"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
@@ -257,7 +257,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="17sp"
-                    android:text="Contacto del lugar" />
+                    android:text="@string/txt_contacto_del_lugar" />
 
             </LinearLayout>
 
@@ -279,7 +279,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Categoría"
+                        android:text="@string/txt_categoria"
                         android:textStyle="bold"
                         android:textSize="25sp"/>
 
@@ -288,7 +288,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:text="\uf0ac"
+                        android:text="@string/icon_uf0ac"
                         android:layout_centerVertical="true"
                         android:textSize="20sp"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
@@ -300,7 +300,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="17sp"
-                    android:text="Categoría del lugar" />
+                    android:text="@string/txt_categoria_del_lugar" />
 
             </LinearLayout>
 

@@ -32,7 +32,7 @@
                 android:id="@+id/nombre_lugar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Nombre lugar"
+                android:text="@string/txt_nombre_lugar"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_weight="5"

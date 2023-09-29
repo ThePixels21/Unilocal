@@ -88,5 +88,8 @@ class LoginActivity : AppCompatActivity() {
     fun irAOlvidoContrasenia(){
         val intent = Intent(this, OlvidoContrasenaActivity::class.java)
         startActivity(intent)
+
     }
+
+
 }

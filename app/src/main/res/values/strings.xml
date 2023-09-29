@@ -17,7 +17,18 @@
     <string name="txt_ciudad">Ciudad de residencia</string>
     <string name="txt_registrarse_btn">Registrarse</string>
 
-    <!-- Textos de crear lugar -->
+    <!-- Activity_busqueda -->
+    <string name="txt_restaurante">Restaurante</string>
+    <string name="txt_hotel">Hotel</string>
+    <string name="txt_centro_comercial">Centro comercial</string>
+    <string name="txt_tienda">Tienda</string>
+    <string name="txt_bar">Bar</string>
+    <string name="txt_cafe">Café</string>
+    <string name="txt_parque">Parque</string>
+    <string name="txt_museo">Museo</string>
+
+    <!-- Fragmento crear lugar -->
+    <string name="txt_crear_lugar">Crear lugar</string>
     <string name="txt_nombre_lugar">Nombre del lugar</string>
     <string name="txt_descripcion_lugar">Descripción del lugar</string>
     <string name="txt_direccion_lugar">Dirección del lugar</string>
@@ -25,4 +36,30 @@
     <string name="txt_btn_crear_lugar">Crear lugar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- fragmento info lugar -->
+    <string name="txt_detalles">Detalles</string>
+    <string name="img_reloj">\uf05a</string>
+    <string name="txt_detalles_del_lugar">Detalles del lugar</string>
+    <string name="txt_horarios">Horarios</string>
+    <string name="txt_cerrado">Cerrado</string>
+    <string name="txt_lunes">Lunes</string>
+    <string name="txt_martes">Martes</string>
+    <string name="txt_miercoles">Miércoles</string>
+    <string name="txt_jueves">Jueves</string>
+    <string name="txt_viernes">Viernes</string>
+    <string name="txt_sabado">Sábado</string>
+    <string name="txt_domingo">Domingo</string>
+    <string name="txt_no_abre">No abre</string>
+    <string name="txt_contacto">Contacto</string>
+    <string name="icon_uf095">\uf095</string>
+    <string name="txt_contacto_del_lugar">Contacto del lugar</string>
+    <string name="txt_categoria">Categoría</string>
+    <string name="icon_uf0ac">\uf0ac</string>
+    <string name="txt_categoria_del_lugar">Categoría del lugar</string>
+
+    <!-- fragmento mis lugares -->
+    <string name="txt_mis_lugares">Mis lugares</string>
+
+
 </resources>
