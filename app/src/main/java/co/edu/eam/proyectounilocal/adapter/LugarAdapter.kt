@@ -12,11 +12,13 @@ import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.DetalleLugarActivity
+import co.edu.eam.proyectounilocal.actividades.GestionarLugarActivity
 import co.edu.eam.proyectounilocal.bd.Comentarios
 import co.edu.eam.proyectounilocal.modelo.Lugar
 import org.w3c.dom.Text
 
-class LugarAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<LugarAdapter.ViewHolder>() {
+class LugarAdapter(var lista:ArrayList<Lugar>, codigoUsuario: Int = -1): RecyclerView.Adapter<LugarAdapter.ViewHolder>() {
+    val codigoUsuario = codigoUsuario
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_lugar, parent, false)
@@ -37,12 +39,14 @@ class LugarAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<LugarAdapte
         val calificacion: TextView = itemView.findViewById(R.id.calificacion_lugar)
         val listaEstrellas: LinearLayout = itemView.findViewById(R.id.lista_estrellas)
         var codigoLugar: Int = 0
+        var lugarActual: Lugar? = null
 
         init {
             itemView.setOnClickListener(this)
         }
 
         fun bind(lugar: Lugar){
+            lugarActual = lugar
             nombre.text = lugar.nombre
             codigoLugar = lugar.id
             val abierto = lugar.estaAbierto()
@@ -75,9 +79,15 @@ class LugarAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<LugarAdapte
         }
 
         override fun onClick(p0: View?) {
-            var intent = Intent(nombre.context, DetalleLugarActivity::class.java)
-            intent.putExtra("codigo", codigoLugar)
-            nombre.context.startActivity(intent)
+            if(codigoUsuario != -1 && lugarActual != null && lugarActual!!.idCreador == codigoUsuario){
+                var intent = Intent(nombre.context, GestionarLugarActivity::class.java)
+                intent.putExtra("codigo", codigoLugar)
+                nombre.context.startActivity(intent)
+            } else{
+                var intent = Intent(nombre.context, DetalleLugarActivity::class.java)
+                intent.putExtra("codigo", codigoLugar)
+                nombre.context.startActivity(intent)
+            }
         }
     }
 }

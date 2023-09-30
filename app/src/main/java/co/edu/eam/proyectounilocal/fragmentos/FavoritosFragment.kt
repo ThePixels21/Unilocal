@@ -40,7 +40,7 @@ class FavoritosFragment : Fragment() {
         if(codigoUsuario != -1){
             lista = Lugares.obtenerFavoritos(codigoUsuario)
 
-            val adapter = LugarAdapter(lista)
+            val adapter = LugarAdapter(lista, codigoUsuario)
             binding.listaMisFavoritos.adapter = adapter
             binding.listaMisFavoritos.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         }

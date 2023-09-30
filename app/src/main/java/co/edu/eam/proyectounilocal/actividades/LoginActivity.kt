@@ -27,7 +27,9 @@ class LoginActivity : AppCompatActivity() {
         if(correo!!.isNotEmpty() && tipo!!.isNotEmpty()){
             when(tipo){
                 "usuario" -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(intent)
                 }
                 //moderador
             }

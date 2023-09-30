@@ -1,5 +1,6 @@
 package co.edu.eam.proyectounilocal.fragmentos
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -47,7 +48,14 @@ class ResultadoBusquedaFragment : Fragment() {
             } else {
                 lista = Lugares.buscarNombre(busqueda!!)
             }
-            val adapter = LugarAdapter(lista)
+            val adapter: LugarAdapter
+            val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
+            val codigoUsuario = sp.getInt("codigo_usuario", -1)
+            adapter = if(codigoUsuario != -1){
+                LugarAdapter(lista, codigoUsuario)
+            } else {
+                LugarAdapter(lista)
+            }
             binding.listaLugares.adapter = adapter
             binding.listaLugares.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         }

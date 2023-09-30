@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="\uf1f8"
             android:textSize="30sp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:fontFamily="@font/font_awesome_6_free_solid_900" />
     </RelativeLayout>

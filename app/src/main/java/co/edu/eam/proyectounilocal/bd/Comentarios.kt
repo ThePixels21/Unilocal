@@ -23,7 +23,7 @@ object Comentarios {
         var comentario5 = Comentario("No volvería, los precios son muy altos", 5, 2, 2 )
         comentario5.id = 5
         lista.add( comentario5 )
-        var comentario6 = Comentario("Un hotel bien ubicado y con desayuno incluído. Recomendado.", 1, 5, 5 )
+        var comentario6 = Comentario("Un hotel bien ubicado y con desayuno incluído. Recomendado.", 6, 5, 5 )
         comentario6.id = 6
         lista.add( comentario6 )
 

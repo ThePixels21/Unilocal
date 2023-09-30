@@ -41,7 +41,7 @@ class MisLugaresFragment : Fragment() {
         val codigoUsuario = sp.getInt("codigo_usuario", -1)
         if(codigoUsuario != -1){
             lista = Lugares.listarPorPropietario(codigoUsuario)
-            val adapter = LugarAdapter(lista)
+            val adapter = LugarAdapter(lista, codigoUsuario)
             binding.listaMisLugares.adapter = adapter
             binding.listaMisLugares.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         }

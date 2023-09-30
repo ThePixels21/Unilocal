@@ -17,7 +17,7 @@ object Lugares {
 
         val tels:ArrayList<String> = ArrayList()
         tels.add("7828789")
-        tels.add("7828789")
+        tels.add("7464657")
 
         val lugar1 = Lugar("Café ABC", "Excelente café para compartir", 1, EstadoLugar.ACEPTADO, 2, "Calle 123",73.3434f, -40.4345f, 1)
         lugar1.id = 1
@@ -59,6 +59,10 @@ object Lugares {
 
     fun obtener(id:Int): Lugar?{
         return lista.firstOrNull { l -> l.id == id }
+    }
+
+    fun eliminar(lugar: Lugar){
+        lista.remove(lugar)
     }
 
     fun obtenerFavoritos(codigoUsuario: Int):ArrayList<Lugar>{
