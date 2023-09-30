@@ -77,6 +77,8 @@ class ComentariosLugarFragment : Fragment() {
             val adapter = ComentariosAdapter(lista, codigoUsuario)
             binding.listaComentarios.adapter = adapter
             binding.listaComentarios.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
+
+            binding.cantComentarios.text = "(${lista.size})"
         }
 
         return binding.root

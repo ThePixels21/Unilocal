@@ -54,6 +54,14 @@ class LugarAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<LugarAdapte
                 estado.text = "Cerrado"
             }
 
+            val  cantComentarios = Comentarios.listar(lugar.id).size
+
+            if(cantComentarios==1){
+                comentarios.text = "${cantComentarios.toString()} comentario"
+            } else {
+                comentarios.text = "${cantComentarios.toString()} comentarios"
+            }
+
             val cal: Int = lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
 
             calificacion.text = cal.toString()

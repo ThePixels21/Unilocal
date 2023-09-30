@@ -68,9 +68,11 @@ class DetalleLugarActivity : AppCompatActivity() {
         if(fav){
             usuario.lugaresFavoritos.remove(codigoLugar)
             binding.imgFav.setImageResource(R.drawable.ic_favorite_border_40)
+            fav = false
         } else {
             usuario.lugaresFavoritos.add(codigoLugar)
             binding.imgFav.setImageResource(R.drawable.ic_favorite_40)
+            fav = true
         }
     }
 }

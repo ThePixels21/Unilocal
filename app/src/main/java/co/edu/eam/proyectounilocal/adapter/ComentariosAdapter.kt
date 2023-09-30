@@ -58,7 +58,7 @@ class ComentariosAdapter(var lista:ArrayList<Comentario>, var codigoUsuario: Int
             }
 
             if(usuario != null){
-                nombreUsuario.text = usuario.nombre
+                nombreUsuario.text = usuario.nickname
             }
 
             val cal: Int = comentario.calificacion
