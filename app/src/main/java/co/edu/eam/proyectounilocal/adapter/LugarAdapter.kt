@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.DetalleLugarActivity
+import co.edu.eam.proyectounilocal.bd.Comentarios
 import co.edu.eam.proyectounilocal.modelo.Lugar
+import org.w3c.dom.Text
 
 class LugarAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<LugarAdapter.ViewHolder>() {
 
@@ -29,8 +33,9 @@ class LugarAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<LugarAdapte
         val nombre: TextView = itemView.findViewById(R.id.nombre_lugar)
         val estado: TextView = itemView.findViewById(R.id.estado_lugar)
         val imagen: ImageView = itemView.findViewById(R.id.img_lugar)
-        val comentario: TextView = itemView.findViewById(R.id.comentarios_lugar)
+        val comentarios: TextView = itemView.findViewById(R.id.comentarios_lugar)
         val calificacion: TextView = itemView.findViewById(R.id.calificacion_lugar)
+        val listaEstrellas: LinearLayout = itemView.findViewById(R.id.lista_estrellas)
         var codigoLugar: Int = 0
 
         init {
@@ -40,13 +45,25 @@ class LugarAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<LugarAdapte
         fun bind(lugar: Lugar){
             nombre.text = lugar.nombre
             codigoLugar = lugar.id
-            if(lugar.estaAbierto() == "Abierto"){
+            val abierto = lugar.estaAbierto()
+            if(abierto){
                 estado.setTextColor(ContextCompat.getColor(itemView.context, R.color.green))
                 estado.text = "Cierra a las ${lugar.obtenerHoraCierre()}:00"
             } else {
                 estado.setTextColor(ContextCompat.getColor(itemView.context, R.color.red))
-                estado.text = lugar.estaAbierto()
+                estado.text = "Cerrado"
             }
+
+            val cal: Int = lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
+
+            calificacion.text = cal.toString()
+
+            if(cal != 0){
+                for (i in 0 until cal){
+                    (listaEstrellas[i] as TextView).setTextColor(ContextCompat.getColor(listaEstrellas.context, R.color.yellow))
+                }
+            }
+
         }
 
         override fun onClick(p0: View?) {

@@ -1,5 +1,6 @@
 package co.edu.eam.proyectounilocal.bd
 
+import co.edu.eam.proyectounilocal.modelo.Comentario
 import co.edu.eam.proyectounilocal.modelo.EstadoLugar
 import co.edu.eam.proyectounilocal.modelo.Horario
 import co.edu.eam.proyectounilocal.modelo.Lugar
