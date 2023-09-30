@@ -10,7 +10,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/sombra_inferior_layouts"
         android:orientation="vertical"
         android:gravity="center">
 
@@ -64,6 +63,11 @@
             app:tabMode="fixed" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/sombra_inferior_layouts" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"

@@ -37,4 +37,18 @@ object Comentarios {
         comentario.id = lista.size+1
         lista.add( comentario )
     }
+
+    fun comentado(idLugar:Int, idUsuario:Int): Boolean{
+        var list = listar(idLugar)
+        for (coment in list){
+            if(coment.idUsuario == idUsuario){
+                return true
+            }
+        }
+        return false
+    }
+
+    fun eliminarComentario(comentario: Comentario){
+        lista.remove(comentario)
+    }
 }

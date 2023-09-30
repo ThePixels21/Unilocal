@@ -15,9 +15,12 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class DetalleLugarActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityDetalleLugarBinding
     var codigoLugar: Int = -1
     var fav: Boolean = false
+
+    companion object{
+        lateinit var binding: ActivityDetalleLugarBinding
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +36,7 @@ class DetalleLugarActivity : AppCompatActivity() {
             val nombreLugar = Lugares.obtener(codigoLugar)!!.nombre
             binding.nombreLugar.text = nombreLugar
             //Adapter
-            binding.viewPager.adapter = ViewPagerAdapterLugar(this, codigoLugar)
+            binding.viewPager.adapter = ViewPagerAdapterLugar(this, codigoLugar, 1)
             TabLayoutMediator(binding.tabs, binding.viewPager){ tab, pos ->
                 when(pos){
                     0 -> tab.text = "Descripción"

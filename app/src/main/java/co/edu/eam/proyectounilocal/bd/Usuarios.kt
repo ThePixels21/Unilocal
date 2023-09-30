@@ -8,6 +8,11 @@ object Usuarios {
 
     init {
         usuarios.add(Usuario(1, "Santiago", "santiago", "Armenia", "santiago@email.com", "a"))
+        usuarios.add( Usuario(2, "Pepito", "pepe", "Medellín", "pepe@email.com", "3451") )
+        usuarios.add( Usuario(3, "Laura", "laura", "Cali", "laura@email.com", "6543") )
+        usuarios.add( Usuario(4, "Marcos", "marcos", "Popayán", "marcos@email.com", "8635") )
+        usuarios.add( Usuario(5, "Maria", "maria", "Pereira", "maria@email.com", "5437") )
+        usuarios.add( Usuario(1, "Carlos", "carlos", "Barranquilla", "carlos@email.com", "1203") )
     }
 
     fun listar(): ArrayList<Usuario> {
