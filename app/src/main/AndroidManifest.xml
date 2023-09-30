@@ -13,6 +13,12 @@
         android:theme="@style/Theme.ProyectoUnilocal"
         tools:targetApi="31">
         <activity
+            android:name=".actividades.ModDetalleLugarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.ModMainActivity"
+            android:exported="false" />
+        <activity
             android:name=".actividades.GestionarLugarActivity"
             android:exported="false" />
         <activity

@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.adapter.ViewPagerAdapterGestionarLugar
 import co.edu.eam.proyectounilocal.adapter.ViewPagerAdapterLugar
 import co.edu.eam.proyectounilocal.bd.Lugares
 import co.edu.eam.proyectounilocal.bd.Usuarios
 import co.edu.eam.proyectounilocal.databinding.ActivityGestionarLugarBinding
+import co.edu.eam.proyectounilocal.modelo.EstadoLugar
 import co.edu.eam.proyectounilocal.modelo.Usuario
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -27,8 +29,7 @@ class GestionarLugarActivity : AppCompatActivity() {
         binding = ActivityGestionarLugarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnVolver.setOnClickListener { startActivity(Intent(this, MainActivity::class.java)) }
-        binding.btnSearch.setOnClickListener { startActivity(Intent(this, BusquedaActivity::class.java)) }
+        binding.btnVolver.setOnClickListener { this.finish() }
 
         codigoLugar = intent.extras!!.getInt("codigo")
         if(codigoLugar != -1){
@@ -58,6 +59,15 @@ class GestionarLugarActivity : AppCompatActivity() {
                 Lugares.eliminar(lugar)
                 startActivity(Intent(this, MainActivity::class.java))
                 this.finish()
+            }
+
+            //Icono estado
+            if(lugar.estado == EstadoLugar.ACEPTADO){
+                binding.estado.text = "\uf058"
+                binding.estado.setTextColor(ContextCompat.getColor(baseContext, R.color.green))
+            } else if(lugar.estado == EstadoLugar.RECHAZADO){
+                binding.estado.text = "\uf057"
+                binding.estado.setTextColor(ContextCompat.getColor(baseContext, R.color.red))
             }
 
             //Adapter

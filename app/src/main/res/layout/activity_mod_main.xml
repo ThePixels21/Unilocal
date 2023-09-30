@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".actividades.GestionarLugarActivity">
+    tools:context=".actividades.ModMainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,56 +18,26 @@
             android:layout_height="60dp"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/btn_volver"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:src="@drawable/ic_arrow_left_50"
-                android:layout_centerVertical="true"/>
-
             <TextView
-                android:id="@+id/estado"
+                android:id="@+id/btn_cerrar_sesion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/design_default_color_secondary"
-                android:text="\uf017"
+                android:text="\uf359"
+                android:layout_marginStart="5dp"
                 android:textSize="30sp"
                 android:layout_marginEnd="5dp"
-                android:layout_toEndOf="@id/btn_volver"
                 android:layout_centerVertical="true"
                 android:fontFamily="@font/font_awesome_6_free_solid_900" />
 
             <TextView
-                android:id="@+id/nombre_lugar"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:gravity="center"
-                android:text="Nombre lugar"
+                android:text="Moderar"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/btn_eliminar_lugar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="\uf1f8"
-                android:textSize="30sp"
-                android:layout_marginEnd="5dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:fontFamily="@font/font_awesome_6_free_solid_900" />
-
-            <ImageButton
-                android:id="@+id/img_fav"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:src="@drawable/ic_favorite_border_40"
-                android:layout_toLeftOf="@id/btn_eliminar_lugar"
-                android:layout_centerVertical="true"/>
+                android:textStyle="bold" />}
 
         </RelativeLayout>
 

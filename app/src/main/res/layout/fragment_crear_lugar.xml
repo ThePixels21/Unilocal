@@ -31,6 +31,8 @@
                 android:text="Crear lugar"
                 android:layout_weight="5"
                 android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 android:gravity="center"/>
 
             <ImageButton

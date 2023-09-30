@@ -27,7 +27,7 @@ class DetalleLugarActivity : AppCompatActivity() {
         binding = ActivityDetalleLugarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnVolver.setOnClickListener { startActivity(Intent(this, MainActivity::class.java)) }
+        binding.btnVolver.setOnClickListener { this.finish() }
         binding.btnSearch.setOnClickListener { startActivity(Intent(this, BusquedaActivity::class.java)) }
 
         codigoLugar = intent.extras!!.getInt("codigo")

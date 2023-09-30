@@ -13,6 +13,6 @@
 
     <item
         android:id="@+id/menu_favoritos"
-        android:icon="@drawable/ic_star_50"
+        android:icon="@drawable/ic_favorite_40"
         android:title="Favoritos" />
 </menu>

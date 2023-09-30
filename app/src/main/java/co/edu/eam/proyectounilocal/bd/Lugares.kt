@@ -4,10 +4,12 @@ import co.edu.eam.proyectounilocal.modelo.Comentario
 import co.edu.eam.proyectounilocal.modelo.EstadoLugar
 import co.edu.eam.proyectounilocal.modelo.Horario
 import co.edu.eam.proyectounilocal.modelo.Lugar
+import co.edu.eam.proyectounilocal.modelo.RegistroEstadoLugar
 
 object Lugares {
 
     private val lista:ArrayList<Lugar> = ArrayList()
+    private val registros:ArrayList<RegistroEstadoLugar> = ArrayList()
 
     init {
 
@@ -98,6 +100,14 @@ object Lugares {
 
     fun listarPorPropietario(codigo:Int):ArrayList<Lugar>{
         return lista.filter { l -> l.idCreador == codigo }.toCollection(ArrayList())
+    }
+
+    fun agregarRegistro(lugar: Lugar, nuevoEstado: EstadoLugar){
+        registros.add(RegistroEstadoLugar(lugar, nuevoEstado))
+    }
+
+    fun obtenerRegistros(): ArrayList<RegistroEstadoLugar>{
+        return registros
     }
 
     fun cambiarEstado(codigo:Int, nuevoEstado:EstadoLugar){
