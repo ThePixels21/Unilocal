@@ -18,6 +18,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         android:text="@string/lbl_iniciar_sesion"
+        android:textColor="#1C9AEA"
         android:textAlignment="center" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -64,7 +65,7 @@
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:text="@string/lbl_olvido_contrasenia"
-        android:textColor="#0000FF" />
+        android:textColor="#1C9AEA" />
 
     <TextView
         android:id="@+id/txt_no_cuenta"
@@ -73,5 +74,5 @@
         android:layout_marginTop="250dp"
         android:text="@string/lbl_registrarse"
         android:textAlignment="center"
-        android:textColor="#0000FF" />
+        android:textColor="#1C9AEA" />
 </LinearLayout>
