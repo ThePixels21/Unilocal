@@ -9,9 +9,9 @@
     tools:context=".actividades.LoginActivity">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round" />
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo_unilocal" />
 
     <TextView
         android:layout_width="100dp"

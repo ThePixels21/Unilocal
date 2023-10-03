@@ -10,10 +10,18 @@
     tools:context=".actividades.RegistroActivity">
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="88dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="30dp"
-        android:src="@drawable/baseline_account_circle_24"
+        android:src="@drawable/logo_unilocal" />
+
+    <TextView
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:text="@string/txt_bienvenido"
+        android:gravity="center"
+        android:textSize="22dp"
+        android:textColor="#28BEF5"
         />
 
     <com.google.android.material.textfield.TextInputLayout

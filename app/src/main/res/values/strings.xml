@@ -12,6 +12,7 @@
     <string name="txt_busqueda">Buscar Lugar</string>
 
     <!-- registro -->
+    <string name="txt_bienvenido">¡Bienvenid@!</string>
     <string name="txt_nombre">Nombre</string>
     <string name="txt_nickname">Usuario</string>
     <string name="txt_ciudad">Ciudad de residencia</string>
