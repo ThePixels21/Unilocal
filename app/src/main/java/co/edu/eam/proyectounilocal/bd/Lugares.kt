@@ -1,12 +1,15 @@
 package co.edu.eam.proyectounilocal.bd
 
+import co.edu.eam.proyectounilocal.modelo.Comentario
 import co.edu.eam.proyectounilocal.modelo.EstadoLugar
 import co.edu.eam.proyectounilocal.modelo.Horario
 import co.edu.eam.proyectounilocal.modelo.Lugar
+import co.edu.eam.proyectounilocal.modelo.RegistroEstadoLugar
 
 object Lugares {
 
     private val lista:ArrayList<Lugar> = ArrayList()
+    private val registros:ArrayList<RegistroEstadoLugar> = ArrayList()
 
     init {
 
@@ -16,7 +19,7 @@ object Lugares {
 
         val tels:ArrayList<String> = ArrayList()
         tels.add("7828789")
-        tels.add("7828789")
+        tels.add("7464657")
 
         val lugar1 = Lugar("Café ABC", "Excelente café para compartir", 1, EstadoLugar.ACEPTADO, 2, "Calle 123",73.3434f, -40.4345f, 1)
         lugar1.id = 1
@@ -60,6 +63,24 @@ object Lugares {
         return lista.firstOrNull { l -> l.id == id }
     }
 
+    fun eliminar(lugar: Lugar){
+        lista.remove(lugar)
+    }
+
+    fun obtenerFavoritos(codigoUsuario: Int):ArrayList<Lugar>{
+        val usuario = Usuarios.buscar(codigoUsuario)
+        val lista: ArrayList<Lugar> = ArrayList()
+        if(usuario != null){
+            for (codigoLugar in usuario.lugaresFavoritos){
+                val lugar = obtener(codigoLugar)
+                if(lugar != null){
+                    lista.add(lugar)
+                }
+            }
+        }
+        return lista
+    }
+
     fun buscarNombre(nombre:String): ArrayList<Lugar> {
         return lista.filter { l -> l.nombre.lowercase().contains(nombre.lowercase()) && l.estado == EstadoLugar.ACEPTADO }.toCollection(ArrayList())
     }
@@ -79,6 +100,14 @@ object Lugares {
 
     fun listarPorPropietario(codigo:Int):ArrayList<Lugar>{
         return lista.filter { l -> l.idCreador == codigo }.toCollection(ArrayList())
+    }
+
+    fun agregarRegistro(lugar: Lugar, nuevoEstado: EstadoLugar){
+        registros.add(RegistroEstadoLugar(lugar, nuevoEstado))
+    }
+
+    fun obtenerRegistros(): ArrayList<RegistroEstadoLugar>{
+        return registros
     }
 
     fun cambiarEstado(codigo:Int, nuevoEstado:EstadoLugar){

@@ -12,6 +12,9 @@ object Categorias {
         categorias.add(Categoria(3, "Restaurante", "\uf2e7"))
         categorias.add(Categoria(4, "Parque", "\uf1bb"))
         categorias.add(Categoria(5, "Bar", "\uf0fc"))
+        categorias.add(Categoria(6, "Centro Comercial", "\uf54e"))
+        categorias.add(Categoria(7, "Tienda", "\uf07a"))
+        categorias.add(Categoria(8, "Museo", "\uf66f"))
     }
 
     fun listar(): ArrayList<Categoria> {

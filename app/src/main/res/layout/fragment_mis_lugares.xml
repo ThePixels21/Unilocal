@@ -30,10 +30,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/txt_mis_lugares"
                 android:layout_weight="5"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:gravity="center"/>
 
             <ImageButton
+                android:id="@+id/btn_search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

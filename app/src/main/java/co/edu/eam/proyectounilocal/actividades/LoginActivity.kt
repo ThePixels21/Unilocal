@@ -27,9 +27,15 @@ class LoginActivity : AppCompatActivity() {
         if(correo!!.isNotEmpty() && tipo!!.isNotEmpty()){
             when(tipo){
                 "usuario" -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(intent)
                 }
-                //moderador
+                "moderador" -> {
+                    val intent = Intent(this, ModMainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(intent)
+                }
             }
             this.finish()
         } else {
@@ -73,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
                     //Usuario
                     is Usuario -> startActivity(Intent(this, MainActivity::class.java))
                     //Moderador
-                    is Moderador -> startActivity(Intent(this, MainActivity::class.java))
+                    is Moderador -> startActivity(Intent(this, ModMainActivity::class.java))
                 }
             } else {
                 Snackbar.make(window.decorView.rootView, "Datos incorrectos", BaseTransientBottomBar.LENGTH_SHORT).show()

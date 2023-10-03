@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragmentos.ComentariosLugarFragment">
+    tools:context=".fragmentos.ComentariosGestionarLugarFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -130,17 +130,6 @@
                     android:padding="10dp"
                     android:textStyle="bold"
                     android:textColor="@color/black" />
-
-                <Button
-                    android:id="@+id/btn_calificar"
-                    android:layout_width="180dp"
-                    android:layout_height="45dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Calificar y comentar" />
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
