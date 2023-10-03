@@ -26,7 +26,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Calificación"
+                        android:text="@string/txt_calificacion"
                         android:textSize="20sp"
                         android:paddingTop="10dp"
                         android:paddingStart="10dp"
@@ -37,7 +37,7 @@
                         android:id="@+id/cant_comentarios"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:text="@string/txt_0"
                         android:textSize="20sp"
                         android:paddingTop="10dp"
                         android:paddingStart="10dp"
@@ -57,7 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text="0"
+                        android:text="@string/txt_0"
                         android:textColor="@color/black"
                         android:textSize="50sp"
                         android:textStyle="bold" />
@@ -73,7 +73,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/font_awesome_6_free_solid_900"
-                            android:text="\uf005"
+                            android:text="@string/icon_uf005"
                             android:textSize="35sp" />
 
                         <TextView
@@ -81,7 +81,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/font_awesome_6_free_solid_900"
-                            android:text="\uf005"
+                            android:text="@string/icon_uf005"
                             android:textSize="35sp" />
 
                         <TextView
@@ -89,7 +89,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/font_awesome_6_free_solid_900"
-                            android:text="\uf005"
+                            android:text="@string/icon_uf005"
                             android:textSize="35sp" />
 
                         <TextView
@@ -97,7 +97,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/font_awesome_6_free_solid_900"
-                            android:text="\uf005"
+                            android:text="@string/icon_uf005"
                             android:textSize="35sp" />
 
                         <TextView
@@ -105,7 +105,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/font_awesome_6_free_solid_900"
-                            android:text="\uf005"
+                            android:text="@string/icon_uf005"
                             android:textSize="35sp" />
 
                     </LinearLayout>
@@ -124,7 +124,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Comentarios"
+                    android:text="@string/txt_comentarios"
                     android:textSize="20sp"
                     android:layout_marginTop="5dp"
                     android:padding="10dp"
@@ -140,7 +140,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Calificar y comentar" />
+                    android:text="@string/txt_calificar_y_comentar" />
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView

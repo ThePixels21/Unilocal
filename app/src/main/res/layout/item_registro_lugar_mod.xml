@@ -28,7 +28,7 @@
                 android:id="@+id/nombre_lugar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre del lugar"
+                android:text="@string/txt_nombre_lugar"
                 android:layout_centerVertical="true"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/design_default_color_secondary"
-                android:text="\uf017"
+                android:text="@string/icon_uf017"
                 android:textSize="40sp"
                 android:fontFamily="@font/font_awesome_6_free_solid_900"
                 android:layout_alignParentEnd="true"/>
@@ -57,7 +57,7 @@
                 android:layout_marginEnd="5dp"
                 android:textSize="30sp"
                 android:textColor="@color/green"
-                android:text="ESTADO" />
+                android:text="@string/txt_estado" />
 
         </LinearLayout>
 

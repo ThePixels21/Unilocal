@@ -20,7 +20,7 @@
             android:id="@+id/nombre_usuario_comentario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre usuario"
+            android:text="@string/txt_nombre_usuario"
             android:layout_toEndOf="@id/img_usuario"
             android:layout_centerVertical="true"
             android:textColor="@color/black"
@@ -30,7 +30,7 @@
             android:id="@+id/btn_eliminar_comentario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="\uf1f8"
+            android:text="@string/icon_uf1f8"
             android:textSize="30sp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="\uf005"
+                android:text="@string/icon_uf005"
                 android:fontFamily="@font/font_awesome_6_free_solid_900" />
 
             <TextView
@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="\uf005"
+                android:text="@string/icon_uf005"
                 android:fontFamily="@font/font_awesome_6_free_solid_900" />
 
             <TextView
@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="\uf005"
+                android:text="@string/icon_uf005"
                 android:fontFamily="@font/font_awesome_6_free_solid_900" />
 
             <TextView
@@ -78,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="\uf005"
+                android:text="@string/icon_uf005"
                 android:fontFamily="@font/font_awesome_6_free_solid_900" />
 
             <TextView
@@ -86,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="\uf005"
+                android:text="@string/icon_uf005"
                 android:fontFamily="@font/font_awesome_6_free_solid_900" />
 
         </LinearLayout>
@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="fecha" />
+            android:text="@string/txt_fecha" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -106,7 +106,7 @@
             android:id="@+id/comentario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Comentario"
+            android:text="@string/txt_comentario"
             android:textSize="16sp"
             android:textColor="@color/black" />
     </LinearLayout>

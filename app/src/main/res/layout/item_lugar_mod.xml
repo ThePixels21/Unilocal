@@ -28,7 +28,7 @@
                 android:id="@+id/nombre_lugar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre del lugar"
+                android:text="@string/txt_nombre_lugar"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="@color/black" />
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/design_default_color_secondary"
-                android:text="\uf017"
+                android:text="@string/icon_uf017"
                 android:textSize="20sp"
                 android:fontFamily="@font/font_awesome_6_free_solid_900"
                 android:layout_alignParentEnd="true"/>
@@ -56,7 +56,7 @@
                     android:layout_marginEnd="5dp"
                     android:textSize="40sp"
                     android:textColor="@color/green"
-                    android:text="\uf058"
+                    android:text="@string/icon_uf058"
                     android:fontFamily="@font/font_awesome_6_free_solid_900"/>
 
             <TextView
@@ -66,7 +66,7 @@
                 android:layout_marginEnd="5dp"
                 android:textSize="40sp"
                 android:textColor="@color/red"
-                android:text="\uf057"
+                android:text="@string/icon_uf057"
                 android:fontFamily="@font/font_awesome_6_free_solid_900"/>
 
         </LinearLayout>

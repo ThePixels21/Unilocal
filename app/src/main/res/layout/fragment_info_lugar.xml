@@ -41,7 +41,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="@string/img_reloj"
+                        android:text="@string/icon_reloj"
                         android:layout_centerVertical="true"
                         android:textSize="20sp"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
@@ -86,7 +86,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:fontFamily="@font/font_awesome_6_free_solid_900"
-                        android:text="@string/img_reloj"
+                        android:text="@string/icon_reloj"
                         android:textSize="20sp" />
 
                     <TextView

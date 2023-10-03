@@ -28,7 +28,7 @@
                 android:id="@+id/nombre_lugar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre del lugar"
+                android:text="@string/txt_nombre_lugar"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="@color/black" />
@@ -37,7 +37,7 @@
                 android:id="@+id/estado_lugar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Abierto"
+                android:text="@string/txt_abierto"
                 android:layout_alignParentRight="true"/>
 
         </RelativeLayout>
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
                     android:textSize="16sp"
-                    android:text="0" />
+                    android:text="@string/txt_0" />
 
                 <LinearLayout
                     android:id="@+id/lista_estrellas"
@@ -70,7 +70,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:text="\uf005"
+                        android:text="@string/icon_uf005"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
 
                     <TextView
@@ -78,7 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:text="\uf005"
+                        android:text="@string/icon_uf005"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
 
                     <TextView
@@ -86,7 +86,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:text="\uf005"
+                        android:text="@string/icon_uf005"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
 
                     <TextView
@@ -94,7 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:text="\uf005"
+                        android:text="@string/icon_uf005"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
 
                     <TextView
@@ -102,7 +102,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:text="\uf005"
+                        android:text="@string/icon_uf005"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
 
                 </LinearLayout>
@@ -113,7 +113,7 @@
                 android:id="@+id/comentarios_lugar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0 comentarios"
+                android:text="@string/txt_0_comentarios"
                 android:layout_alignParentRight="true"/>
 
         </RelativeLayout>

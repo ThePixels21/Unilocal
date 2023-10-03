@@ -22,7 +22,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Seleccione un nivel de calificación"
+                    android:text="@string/txt_seleccione_un_nivel_de_calificacion"
                     android:textSize="20sp"
                     android:padding="10dp"
                     android:textStyle="bold"
@@ -41,7 +41,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/font_awesome_6_free_solid_900"
-                        android:text="\uf005"
+                        android:text="@string/icon_uf005"
                         android:textSize="60sp" />
 
                     <TextView
@@ -49,7 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/font_awesome_6_free_solid_900"
-                        android:text="\uf005"
+                        android:text="@string/icon_uf005"
                         android:textSize="60sp" />
 
                     <TextView
@@ -57,7 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/font_awesome_6_free_solid_900"
-                        android:text="\uf005"
+                        android:text="@string/icon_uf005"
                         android:textSize="60sp" />
 
                     <TextView
@@ -65,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/font_awesome_6_free_solid_900"
-                        android:text="\uf005"
+                        android:text="@string/icon_uf005"
                         android:textSize="60sp" />
 
                     <TextView
@@ -73,7 +73,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/font_awesome_6_free_solid_900"
-                        android:text="\uf005"
+                        android:text="@string/icon_uf005"
                         android:textSize="60sp" />
 
                 </LinearLayout>
@@ -94,7 +94,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Comentar"
+                    android:text="@string/txt_comentar"
                     android:textSize="20sp"
                     android:padding="10dp"
                     android:textStyle="bold"
@@ -112,7 +112,7 @@
                         android:gravity="left"
                         android:layout_gravity="center"
                         android:background="@drawable/fondo_forms"
-                        android:hint="Describa su experencia en este lugar"/>
+                        android:hint="@string/txt_describa_su_experiencia_en_este_lugar"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,7 +135,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Enviar" />
+                    android:text="@string/txt_enviar" />
             </LinearLayout>
 
         </LinearLayout>

@@ -74,7 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="\uf2e7"
+                        android:text="@string/icon_uf2e7"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="\uf594"
+                        android:text="@string/icon_uf594"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -122,7 +122,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="\uf54e"
+                        android:text="@string/icon_uf54e"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -146,7 +146,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="\uf07a"
+                        android:text="@string/icon_uf07a"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -170,7 +170,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="\uf0fc"
+                        android:text="@string/icon_uf0fc"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -194,7 +194,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="\uf7b6"
+                        android:text="@string/icon_uf7b6"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -218,7 +218,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="\uf1bb"
+                        android:text="@string/icon_uf1bb"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -242,7 +242,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:text="\uf66f"
+                        android:text="@string/icon_uf66f"
                         android:fontFamily="@font/font_awesome_6_free_solid_900" />
                     <TextView
                         android:layout_width="wrap_content"

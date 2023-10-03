@@ -40,7 +40,6 @@
 
     <!-- fragmento info lugar -->
     <string name="txt_detalles">Detalles</string>
-    <string name="img_reloj">\uf05a</string>
     <string name="txt_detalles_del_lugar">Detalles del lugar</string>
     <string name="txt_horarios">Horarios</string>
     <string name="txt_cerrado">Cerrado</string>
@@ -53,14 +52,70 @@
     <string name="txt_domingo">Domingo</string>
     <string name="txt_no_abre">No abre</string>
     <string name="txt_contacto">Contacto</string>
-    <string name="icon_uf095">\uf095</string>
     <string name="txt_contacto_del_lugar">Contacto del lugar</string>
     <string name="txt_categoria">Categoría</string>
-    <string name="icon_uf0ac">\uf0ac</string>
+
     <string name="txt_categoria_del_lugar">Categoría del lugar</string>
 
     <!-- fragmento mis lugares -->
     <string name="txt_mis_lugares">Mis lugares</string>
 
+    <!-- Activity mod main -->
+    <string name="txt_moderar">Moderar</string>
+
+    <!-- fragment busquedas recientes -->
+    <string name="txt_recientes">Recientes</string>
+
+    <!-- fragment comentar -->
+    <string name="txt_seleccione_un_nivel_de_calificacion">Seleccione un nivel de calificación</string>
+    <string name="txt_comentar">Comentar</string>
+    <string name="txt_describa_su_experiencia_en_este_lugar">Describa su experencia en este lugar</string>
+    <string name="txt_enviar">Enviar</string>
+
+    <!-- fragment comentarios gestionar -->
+    <string name="txt_calificacion">Calificación</string>
+    <string name="txt_0">0</string>
+    <string name="txt_comentarios">Comentarios</string>
+
+    <!-- fragment comentarios lugar -->
+    <string name="txt_calificar_y_comentar">Calificar y comentar</string>
+
+    <!-- fragment mis favoritos -->
+    <string name="txt_mis_favoritos">Mis favoritos</string>
+
+    <!-- item comentario -->
+    <string name="txt_comentario">Comentario</string>
+    <string name="txt_fecha">Fecha</string>
+    <string name="txt_nombre_usuario">Nombre ususario</string>
+
+    <!-- item lugar -->
+    <string name="txt_abierto">Abierto</string>
+    <string name="txt_0_comentarios">0 comentarios</string>
+
+    <!-- item reciente -->
+    <string name="txt_reciente">Reciente</string>
+
+    <!-- item registro lugar mod -->
+    <string name="txt_estado">ESTADO</string>
+
+
+    <!-- icons -->
+    <string name="icon_uf0ac">\uf0ac</string>
+    <string name="icon_uf095">\uf095</string>
+    <string name="icon_reloj">\uf05a</string>
+    <string name="icon_uf2e7">\uf2e7</string>
+    <string name="icon_uf594">\uf594</string>
+    <string name="icon_uf54e">\uf54e</string>
+    <string name="icon_uf07a">\uf07a</string>
+    <string name="icon_uf0fc">\uf0fc</string>
+    <string name="icon_uf7b6">\uf7b6</string>
+    <string name="icon_uf1bb">\uf1bb</string>
+    <string name="icon_uf66f">\uf66f</string>
+    <string name="icon_uf017">\uf017</string>
+    <string name="icon_uf1f8">\uf1f8</string>
+    <string name="icon_uf058">\uf058</string>
+    <string name="icon_uf057">\uf057</string>
+    <string name="icon_uf359">\uf359</string>
+    <string name="icon_uf005">\uf005</string>
 
 </resources>

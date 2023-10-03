@@ -17,7 +17,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Recientes"
+                android:text="@string/txt_recientes"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:padding="10dp" />

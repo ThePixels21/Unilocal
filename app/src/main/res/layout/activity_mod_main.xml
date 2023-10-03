@@ -22,7 +22,7 @@
                 android:id="@+id/btn_cerrar_sesion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\uf359"
+                android:text="@string/icon_uf359"
                 android:layout_marginStart="5dp"
                 android:textSize="30sp"
                 android:layout_marginEnd="5dp"
@@ -34,10 +34,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:gravity="center"
-                android:text="Moderar"
+                android:text="@string/txt_moderar"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold" />}
+                android:textStyle="bold" />
 
         </RelativeLayout>
 

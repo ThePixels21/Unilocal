@@ -14,14 +14,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font_awesome_6_free_solid_900"
-            android:text="\uf017"
+            android:text="@string/icon_uf017"
             android:textSize="20sp"
             android:layout_marginEnd="10dp"/>
         <TextView
             android:id="@+id/reciente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reciente"
+            android:text="@string/txt_reciente"
             android:textSize="20sp" />
     </LinearLayout>
 
