@@ -15,9 +15,9 @@
         android:background="@drawable/fondo_busqueda">
 
         <EditText
-            android:enabled="false"
-            android:allowClickWhenDisabled="true"
             android:id="@+id/buscador"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@null"

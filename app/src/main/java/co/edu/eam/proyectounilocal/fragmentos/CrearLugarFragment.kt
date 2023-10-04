@@ -1,6 +1,7 @@
 package co.edu.eam.proyectounilocal.fragmentos
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import co.edu.eam.proyectounilocal.R
+import co.edu.eam.proyectounilocal.actividades.BusquedaActivity
 import co.edu.eam.proyectounilocal.actividades.MainActivity
 import co.edu.eam.proyectounilocal.bd.Categorias
 import co.edu.eam.proyectounilocal.bd.Ciudades
@@ -47,6 +49,8 @@ class CrearLugarFragment : Fragment() {
         binding.btnVolver.setOnClickListener { requireActivity().supportFragmentManager.beginTransaction().replace( R.id.contenido_principal, InicioFragment() )
             .addToBackStack(MainActivity.MENU_INICIO).commit()
             MainActivity.binding.menuInferior.menu.getItem(0).isChecked = true}
+
+        binding.btnBuscar.setOnClickListener { startActivity(Intent(requireActivity(), BusquedaActivity::class.java)) }
 
         return binding.root
     }
