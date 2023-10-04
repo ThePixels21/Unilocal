@@ -48,7 +48,7 @@ class BusquedaActivity : AppCompatActivity() {
             true
         }
 
-        binding.back.setOnClickListener { startActivity(Intent(this, MainActivity::class.java)) }
+        binding.back.setOnClickListener { this.finish() }
 
         this.setClickListenersCategorias()
 
