@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.bd.Usuarios
 import co.edu.eam.proyectounilocal.databinding.ActivityRegistroBinding
@@ -71,10 +72,10 @@ class RegistroActivity : AppCompatActivity() {
             if(password==cpassword){
                 binding.passwordConfirmUsuario.error = null
                 if(Usuarios.agregar(Usuario(0, nombre, nickname, ciudad, email, password))){
-                    Snackbar.make(window.decorView.rootView, "Registrado exitosamente", BaseTransientBottomBar.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Registrado exitosamente", Toast.LENGTH_LONG).show()
                     startActivity(Intent(this, LoginActivity::class.java))
                 }else{
-                    Snackbar.make(window.decorView.rootView, "No se pudo registrar", BaseTransientBottomBar.LENGTH_SHORT).show()
+                    Toast.makeText(this, "No se pudo registrar", Toast.LENGTH_LONG).show()
                 }
             }else{
                 binding.passwordConfirmUsuario.error = "La contraseña ingresada no coincide"

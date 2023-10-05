@@ -163,6 +163,8 @@ class CrearLugarFragment : Fragment() {
                         dia.add(DiaSemana.LUNES)
                         val horario = Horario(0, dia, horaInicio, horaFinal)
                         nuevoLugar.horarios.add(horario)
+                    }else{
+                        Toast.makeText(requireActivity(), "Horario del lunes no válido", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -174,6 +176,8 @@ class CrearLugarFragment : Fragment() {
                         dia.add(DiaSemana.MARTES)
                         val horario = Horario(0, dia, horaInicio, horaFinal)
                         nuevoLugar.horarios.add(horario)
+                    }else{
+                        Toast.makeText(requireActivity(), "Horario del martes no válido", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -185,6 +189,8 @@ class CrearLugarFragment : Fragment() {
                         dia.add(DiaSemana.MIERCOLES)
                         val horario = Horario(0, dia, horaInicio, horaFinal)
                         nuevoLugar.horarios.add(horario)
+                    }else{
+                        Toast.makeText(requireActivity(), "Horario del miércoles no válido", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -196,6 +202,8 @@ class CrearLugarFragment : Fragment() {
                         dia.add(DiaSemana.JUEVES)
                         val horario = Horario(0, dia, horaInicio, horaFinal)
                         nuevoLugar.horarios.add(horario)
+                    }else{
+                        Toast.makeText(requireActivity(), "Horario del jueves no válido", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -207,6 +215,8 @@ class CrearLugarFragment : Fragment() {
                         dia.add(DiaSemana.VIERNES)
                         val horario = Horario(0, dia, horaInicio, horaFinal)
                         nuevoLugar.horarios.add(horario)
+                    }else{
+                        Toast.makeText(requireActivity(), "Horario del viernes no válido", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -218,6 +228,8 @@ class CrearLugarFragment : Fragment() {
                         dia.add(DiaSemana.SABADO)
                         val horario = Horario(0, dia, horaInicio, horaFinal)
                         nuevoLugar.horarios.add(horario)
+                    }else{
+                        Toast.makeText(requireActivity(), "Horario del sábado no válido", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -229,6 +241,8 @@ class CrearLugarFragment : Fragment() {
                         dia.add(DiaSemana.DOMINGO)
                         val horario = Horario(0, dia, horaInicio, horaFinal)
                         nuevoLugar.horarios.add(horario)
+                    }else{
+                        Toast.makeText(requireActivity(), "Horario del domingo no válido", Toast.LENGTH_SHORT).show()
                     }
                 }
 
