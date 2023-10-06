@@ -13,7 +13,25 @@
         android:theme="@style/Theme.ProyectoUnilocal"
         tools:targetApi="31">
         <activity
-            android:name=".actividades.MainActivity"
+            android:name=".actividades.ModDetalleLugarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.ModMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.GestionarLugarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.BusquedaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.OlvidoContrasenaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.DetalleLugarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +39,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".actividades.RegistroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

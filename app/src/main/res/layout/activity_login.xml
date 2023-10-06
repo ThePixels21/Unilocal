@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".actividades.LoginActivity">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo_unilocal" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/lbl_iniciar_sesion"
+        android:textColor="#1C9AEA"
+        android:textAlignment="center" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_layout"
+        style="@style/til_form" >
+
+        <EditText
+            android:id="@+id/email_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/txt_email"
+            android:background="@drawable/fondo_forms"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_layout"
+        style="@style/til_form" >
+
+        <EditText
+            android:id="@+id/password_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:hint="@string/txt_contrasenia"
+            android:background="@drawable/fondo_forms"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_iniciar_sesion"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/lbl_iniciar_sesion"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/txt_olvido_contrasenia"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/lbl_olvido_contrasenia"
+        android:textColor="#1C9AEA" />
+
+    <TextView
+        android:id="@+id/txt_no_cuenta"
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="250dp"
+        android:text="@string/lbl_registrarse"
+        android:textAlignment="center"
+        android:textColor="#1C9AEA" />
+</LinearLayout>

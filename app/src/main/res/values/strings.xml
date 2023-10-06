@@ -1,3 +1,165 @@
 <resources>
     <string name="app_name">ProyectoUnilocal</string>
+    <string name="title_activity_registro_main">RegistroMainActivity</string>
+    <!-- Login -->
+    <string name="lbl_iniciar_sesion">Iniciar sesion</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_contrasenia">Contraseña</string>
+    <string name="lbl_olvido_contrasenia">¿Olvido su contraseña?</string>
+    <string name="lbl_registrarse">¿No tiene cuenta? Registrese aquí</string>
+
+    <!-- Login activity -->
+    <string name="datos_incorrectos">Datos incorrectos</string>
+
+    <!-- main_activity -->
+    <string name="txt_busqueda">Buscar Lugar</string>
+
+    <!-- registro -->
+    <string name="txt_bienvenido">¡Bienvenid@!</string>
+    <string name="txt_nombre">Nombre</string>
+    <string name="txt_nickname">Usuario</string>
+    <string name="txt_ciudad">Ciudad de residencia</string>
+    <string name="txt_registrarse_btn">Registrarse</string>
+
+    <!-- Activity_busqueda -->
+    <string name="txt_restaurante">Restaurante</string>
+    <string name="txt_hotel">Hotel</string>
+    <string name="txt_centro_comercial">Centro comercial</string>
+    <string name="txt_tienda">Tienda</string>
+    <string name="txt_bar">Bar</string>
+    <string name="txt_cafe">Café</string>
+    <string name="txt_parque">Parque</string>
+    <string name="txt_museo">Museo</string>
+
+    <!-- Fragmento crear lugar -->
+    <string name="txt_crear_lugar">Crear lugar</string>
+    <string name="txt_nombre_lugar">Nombre del lugar</string>
+    <string name="txt_descripcion_lugar">Descripción del lugar</string>
+    <string name="txt_direccion_lugar">Dirección del lugar</string>
+    <string name="txt_telefono_lugar">Teléfono del lugar</string>
+    <string name="txt_btn_crear_lugar">Crear lugar</string>
+    <string name="crear_lugar_hint_divider">-</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txt_horario">Horario</string>
+    <string name="txt_seleccione">Seleccione</string>
+
+    <!-- fragmento info lugar -->
+    <string name="txt_detalles">Detalles</string>
+    <string name="txt_detalles_del_lugar">Detalles del lugar</string>
+    <string name="txt_horarios">Horarios</string>
+    <string name="txt_cerrado">Cerrado</string>
+    <string name="txt_lunes">Lunes</string>
+    <string name="txt_martes">Martes</string>
+    <string name="txt_miercoles">Miércoles</string>
+    <string name="txt_jueves">Jueves</string>
+    <string name="txt_viernes">Viernes</string>
+    <string name="txt_sabado">Sábado</string>
+    <string name="txt_domingo">Domingo</string>
+    <string name="txt_no_abre">No abre</string>
+    <string name="txt_contacto">Contacto</string>
+    <string name="txt_contacto_del_lugar">Contacto del lugar</string>
+    <string name="txt_categoria">Categoría</string>
+
+    <string name="txt_categoria_del_lugar">Categoría del lugar</string>
+
+    <!-- fragmento mis lugares -->
+    <string name="txt_mis_lugares">Mis lugares</string>
+
+    <!-- Activity mod main -->
+    <string name="txt_moderar">Moderar</string>
+
+    <!-- fragment busquedas recientes -->
+    <string name="txt_recientes">Recientes</string>
+
+    <!-- fragment comentar -->
+    <string name="txt_seleccione_un_nivel_de_calificacion">Seleccione un nivel de calificación</string>
+    <string name="txt_comentar">Comentar</string>
+    <string name="txt_describa_su_experiencia_en_este_lugar">Describa su experencia en este lugar</string>
+    <string name="txt_enviar">Enviar</string>
+
+    <!-- fragment comentarios gestionar -->
+    <string name="txt_calificacion">Calificación</string>
+    <string name="txt_0">0</string>
+    <string name="txt_comentarios">Comentarios</string>
+
+    <!-- fragment comentarios lugar -->
+    <string name="txt_calificar_y_comentar">Calificar y comentar</string>
+
+    <!-- fragment mis favoritos -->
+    <string name="txt_mis_favoritos">Mis favoritos</string>
+
+    <!-- item comentario -->
+    <string name="txt_comentario">Comentario</string>
+    <string name="txt_fecha">Fecha</string>
+    <string name="txt_nombre_usuario">Nombre ususario</string>
+
+    <!-- item lugar -->
+    <string name="txt_abierto">Abierto</string>
+    <string name="txt_0_comentarios">0 comentarios</string>
+
+    <!-- item reciente -->
+    <string name="txt_reciente">Reciente</string>
+
+    <!-- item registro lugar mod -->
+    <string name="txt_estado">ESTADO</string>
+
+    <!-- registro activity -->
+
+    <string name="campo_obligatorio">Campo obligatorio</string>
+    <string name="registrado_exitosamente">Registrado exitosamente</string>
+    <string name="no_se_pudo_registrar">No se pudo registrar</string>
+    <string name="la_contrasena_ingresada_no_coincide">La contraseña ingresada no coincide</string>
+
+    <!-- lugar adapter -->
+    <string name="cierra_a_las">Cierra a las</string>
+    <string name="cerrado">Cerrado</string>
+
+    <!-- comentar Fargmento -->
+    <string name="comentario_enviado">Comentario enviado</string>
+    <string name="no_se_pudo_enviar_comentario">No se pudo enviar comentario</string>
+
+    <!-- comentario lugar fragmento -->
+    <string name="no_puede_agregar_mas_de_un_comentario">No puede agregar más de un comentario</string>
+
+    <!-- crear lugar fragmento -->
+    <string name="horario_de_lunes_no_valido">Horario de lunes no válido</string>
+    <string name="horario_de_martes_no_valido">Horario de martes no válido</string>
+    <string name="horario_de_miercoles_no_valido">Horario de miércoles no válido</string>
+    <string name="horario_de_jueves_no_valido">Horario de jueves no válido</string>
+    <string name="horario_de_viernes_no_valido">Horario de viernes no válido</string>
+    <string name="horario_de_sabado_no_valido">Horario de sábado no válido</string>
+    <string name="horario_de_domingo_no_valido">Horario de domingo no válido</string>
+    <string name="lugar_creado_rev_mod">Lugar creado correctamente, será revisado por un moderador</string>
+
+    <!-- info lugar fragmento -->
+    <string name="no_tiene_telefonos_contac">No tiene telefonos de contacto</string>
+    <!-- Detalle lugar activity -->
+    <string name="descripcion">Descripción</string>
+    <string name="resenas">Reseñas</string>
+    <string name="fotos">Fotos</string>
+
+    <!-- mod main activity -->
+    <string name="lugares">Lugares</string>
+    <string name="registro">Registro</string>
+
+
+    <!-- icons -->
+    <string name="icon_uf0ac">\uf0ac</string>
+    <string name="icon_uf095">\uf095</string>
+    <string name="icon_reloj">\uf05a</string>
+    <string name="icon_uf2e7">\uf2e7</string>
+    <string name="icon_uf594">\uf594</string>
+    <string name="icon_uf54e">\uf54e</string>
+    <string name="icon_uf07a">\uf07a</string>
+    <string name="icon_uf0fc">\uf0fc</string>
+    <string name="icon_uf7b6">\uf7b6</string>
+    <string name="icon_uf1bb">\uf1bb</string>
+    <string name="icon_uf66f">\uf66f</string>
+    <string name="icon_uf017">\uf017</string>
+    <string name="icon_uf1f8">\uf1f8</string>
+    <string name="icon_uf058">\uf058</string>
+    <string name="icon_uf057">\uf057</string>
+    <string name="icon_uf359">\uf359</string>
+    <string name="icon_uf005">\uf005</string>
+
 </resources>

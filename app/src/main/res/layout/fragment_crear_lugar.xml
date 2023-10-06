@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragmentos.CrearLugarFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/sombra_inferior_layouts"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/btn_volver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:src="@drawable/ic_arrow_down_50" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_crear_lugar"
+                android:layout_weight="5"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <ImageButton
+                android:id="@+id/btn_buscar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:src="@drawable/ic_search_40" />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                tools:context=".actividades.CrearLugarActivity">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nombre_layout"
+                    style="@style/til_form_crear_lugar" >
+
+                    <EditText
+                        android:id="@+id/nombre_lugar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/fondo_forms"
+                        android:hint="@string/txt_nombre_lugar"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/descripcion_layout"
+                    style="@style/til_form_crear_lugar" >
+
+                    <EditText
+                        android:id="@+id/descripcion_lugar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="8"
+                        android:gravity="left"
+                        android:layout_gravity="center"
+                        android:background="@drawable/fondo_forms"
+                        android:hint="@string/txt_descripcion_lugar"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/direccion_layout"
+                    style="@style/til_form_crear_lugar" >
+
+                    <EditText
+                        android:id="@+id/direccion_lugar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/fondo_forms"
+                        android:hint="@string/txt_direccion_lugar"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:hint="@string/txt_horario"
+                        android:textSize="18sp"
+                        android:textColorHint="@color/black"
+                        android:textAlignment="textStart" />
+
+                    <TextView
+                        android:id="@+id/hint_lunes"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:hint="@string/txt_lunes"
+                        android:textSize="16sp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginStart="30dp"
+                        android:textColorHint="@color/black"
+                        android:textAlignment="textStart" />
+
+                    <Spinner
+                        android:id="@+id/inicio_lunes"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_toEndOf="@id/hint_lunes"
+                        android:background="@drawable/fondo_forms"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/divider_lunes"
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="33dp"
+                        android:layout_toEndOf="@id/inicio_lunes"
+                        android:hint="@string/crear_lugar_hint_divider"
+                        android:textColorHint="@color/black"
+                        android:textAlignment="center"
+                        android:textSize="24dp"/>
+
+                    <Spinner
+                        android:id="@+id/final_lunes"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_toEndOf="@id/divider_lunes"
+                        android:background="@drawable/fondo_forms"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/hint_martes"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:hint="@string/txt_martes"
+                        android:textSize="16sp"
+                        android:layout_marginTop="70dp"
+                        android:layout_marginStart="30dp"
+                        android:textColorHint="@color/black"
+                        android:textAlignment="textStart"/>
+
+                    <Spinner
+                        android:id="@+id/inicio_martes"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="70dp"
+                        android:layout_toEndOf="@id/hint_martes"
+                        android:background="@drawable/fondo_forms"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/divider_martes"
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="63dp"
+                        android:layout_toEndOf="@id/inicio_martes"
+                        android:hint="@string/crear_lugar_hint_divider"
+                        android:textAlignment="center"
+                        android:textSize="24dp"
+                        android:textColorHint="@color/black"/>
+
+                    <Spinner
+                        android:id="@+id/final_martes"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="70dp"
+                        android:layout_toEndOf="@id/divider_martes"
+                        android:background="@drawable/fondo_forms"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/hint_miercoles"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:hint="@string/txt_miercoles"
+                        android:textSize="16sp"
+                        android:layout_marginTop="100dp"
+                        android:layout_marginStart="30dp"
+                        android:textColorHint="@color/black"
+                        android:textAlignment="textStart"/>
+
+                    <Spinner
+                        android:id="@+id/inicio_miercoles"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="100dp"
+                        android:layout_toEndOf="@id/hint_miercoles"
+                        android:background="@drawable/fondo_forms"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/divider_miercoles"
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="93dp"
+                        android:layout_toEndOf="@id/inicio_miercoles"
+                        android:hint="@string/crear_lugar_hint_divider"
+                        android:textAlignment="center"
+                        android:textColorHint="@color/black"
+                        android:textSize="24dp"/>
+
+                    <Spinner
+                        android:id="@+id/final_miercoles"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="100dp"
+                        android:layout_toEndOf="@id/divider_miercoles"
+                        android:background="@drawable/fondo_forms"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/hint_jueves"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:hint="@string/txt_jueves"
+                        android:textSize="16sp"
+                        android:layout_marginTop="130dp"
+                        android:layout_marginStart="30dp"
+                        android:textColorHint="@color/black"
+                        android:textAlignment="textStart"/>
+
+                    <Spinner
+                        android:id="@+id/inicio_jueves"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="130dp"
+                        android:layout_toEndOf="@id/hint_jueves"
+                        android:background="@drawable/fondo_forms"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/divider_jueves"
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="123dp"
+                        android:layout_toEndOf="@id/inicio_jueves"
+                        android:hint="@string/crear_lugar_hint_divider"
+                        android:textAlignment="center"
+                        android:textColorHint="@color/black"
+                        android:textSize="24dp"/>
+
+                    <Spinner
+                        android:id="@+id/final_jueves"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="130dp"
+                        android:layout_toEndOf="@id/divider_jueves"
+                        android:background="@drawable/fondo_forms"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/hint_viernes"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:hint="@string/txt_viernes"
+                        android:textSize="16sp"
+                        android:layout_marginTop="160dp"
+                        android:layout_marginStart="30dp"
+                        android:textColorHint="@color/black"
+                        android:textAlignment="textStart"/>
+
+                    <Spinner
+                        android:id="@+id/inicio_viernes"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="160dp"
+                        android:layout_toEndOf="@id/hint_viernes"
+                        android:background="@drawable/fondo_forms"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/divider_viernes"
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="153dp"
+                        android:layout_toEndOf="@id/inicio_viernes"
+                        android:hint="@string/crear_lugar_hint_divider"
+                        android:textAlignment="center"
+                        android:textColorHint="@color/black"
+                        android:textSize="24dp" />
+
+                    <Spinner
+                        android:id="@+id/final_viernes"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="160dp"
+                        android:layout_toEndOf="@id/divider_viernes"
+                        android:background="@drawable/fondo_forms"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/hint_sabado"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:hint="@string/txt_sabado"
+                        android:textSize="16sp"
+                        android:layout_marginTop="190dp"
+                        android:layout_marginStart="30dp"
+                        android:textColorHint="@color/black"
+                        android:textAlignment="textStart" />
+
+                    <Spinner
+                        android:id="@+id/inicio_sabado"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="190dp"
+                        android:layout_toEndOf="@id/hint_sabado"
+                        android:background="@drawable/fondo_forms"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/divider_sabado"
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="183dp"
+                        android:layout_toEndOf="@id/inicio_sabado"
+                        android:hint="@string/crear_lugar_hint_divider"
+                        android:textAlignment="center"
+                        android:textColorHint="@color/black"
+                        android:textSize="24dp" />
+
+                    <Spinner
+                        android:id="@+id/final_sabado"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="190dp"
+                        android:layout_toEndOf="@id/divider_sabado"
+                        android:background="@drawable/fondo_forms"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/hint_domingo"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:hint="@string/txt_domingo"
+                        android:textSize="16sp"
+                        android:layout_marginTop="220dp"
+                        android:layout_marginStart="30dp"
+                        android:textColorHint="@color/black"
+                        android:textAlignment="textStart" />
+                    <Spinner
+                        android:id="@+id/inicio_domingo"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="220dp"
+                        android:layout_toEndOf="@id/hint_domingo"
+                        android:background="@drawable/fondo_forms"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:id="@+id/divider_domingo"
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="213dp"
+                        android:layout_toEndOf="@id/inicio_domingo"
+                        android:hint="@string/crear_lugar_hint_divider"
+                        android:textAlignment="center"
+                        android:textColorHint="@color/black"
+                        android:textSize="24dp" />
+
+                    <Spinner
+                        android:id="@+id/final_domingo"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="220dp"
+                        android:layout_toEndOf="@id/divider_domingo"
+                        android:background="@drawable/fondo_forms"
+                        android:layout_marginBottom="10dp" />
+
+                </RelativeLayout>
+
+                <Spinner
+                    android:id="@+id/ciudad_lugar"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:background="@drawable/fondo_forms"
+                    android:layout_marginBottom="10dp" />
+
+                <Spinner
+                    android:id="@+id/categoria_lugar"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:background="@drawable/fondo_forms"
+                    android:layout_marginBottom="5dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/telefono_layout"
+                    style="@style/til_form_crear_lugar" >
+
+                    <EditText
+                        android:id="@+id/telefono_lugar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:layout_gravity="center"
+                        android:background="@drawable/fondo_forms"
+                        android:hint="@string/txt_telefono_lugar"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btn_crear_lugar"
+                    android:layout_width="210dp"
+                    android:layout_height="60dp"
+                    android:text="@string/txt_btn_crear_lugar" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</FrameLayout>
