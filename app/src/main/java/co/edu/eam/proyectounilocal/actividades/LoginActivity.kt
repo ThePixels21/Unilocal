@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.bd.Personas
 import co.edu.eam.proyectounilocal.databinding.ActivityLoginBinding
@@ -82,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
                     is Moderador -> startActivity(Intent(this, ModMainActivity::class.java))
                 }
             } else {
-                Snackbar.make(window.decorView.rootView, getString(R.string.datos_incorrectos), BaseTransientBottomBar.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.datos_incorrectos), Toast.LENGTH_LONG).show()
             }
         }
     }
