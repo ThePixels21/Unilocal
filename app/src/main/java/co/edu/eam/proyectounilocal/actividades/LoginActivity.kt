@@ -82,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
                     is Moderador -> startActivity(Intent(this, ModMainActivity::class.java))
                 }
             } else {
-                Snackbar.make(window.decorView.rootView, "Datos incorrectos", BaseTransientBottomBar.LENGTH_SHORT).show()
+                Snackbar.make(window.decorView.rootView, getString(R.string.datos_incorrectos), BaseTransientBottomBar.LENGTH_SHORT).show()
             }
         }
     }

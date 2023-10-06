@@ -8,6 +8,9 @@
     <string name="lbl_olvido_contrasenia">¿Olvido su contraseña?</string>
     <string name="lbl_registrarse">¿No tiene cuenta? Registrese aquí</string>
 
+    <!-- Login activity -->
+    <string name="datos_incorrectos">Datos incorrectos</string>
+
     <!-- main_activity -->
     <string name="txt_busqueda">Buscar Lugar</string>
 
@@ -99,6 +102,45 @@
 
     <!-- item registro lugar mod -->
     <string name="txt_estado">ESTADO</string>
+
+    <!-- registro activity -->
+
+    <string name="campo_obligatorio">Campo obligatorio</string>
+    <string name="registrado_exitosamente">Registrado exitosamente</string>
+    <string name="no_se_pudo_registrar">No se pudo registrar</string>
+    <string name="la_contrasena_ingresada_no_coincide">La contraseña ingresada no coincide</string>
+
+    <!-- lugar adapter -->
+    <string name="cierra_a_las">Cierra a las</string>
+    <string name="cerrado">Cerrado</string>
+
+    <!-- comentar Fargmento -->
+    <string name="comentario_enviado">Comentario enviado</string>
+    <string name="no_se_pudo_enviar_comentario">No se pudo enviar comentario</string>
+
+    <!-- comentario lugar fragmento -->
+    <string name="no_puede_agregar_mas_de_un_comentario">No puede agregar más de un comentario</string>
+
+    <!-- crear lugar fragmento -->
+    <string name="horario_de_lunes_no_valido">Horario de lunes no válido</string>
+    <string name="horario_de_martes_no_valido">Horario de martes no válido</string>
+    <string name="horario_de_miercoles_no_valido">Horario de miércoles no válido</string>
+    <string name="horario_de_jueves_no_valido">Horario de jueves no válido</string>
+    <string name="horario_de_viernes_no_valido">Horario de viernes no válido</string>
+    <string name="horario_de_sabado_no_valido">Horario de sábado no válido</string>
+    <string name="horario_de_domingo_no_valido">Horario de domingo no válido</string>
+    <string name="lugar_creado_rev_mod">Lugar creado correctamente, será revisado por un moderador</string>
+
+    <!-- info lugar fragmento -->
+    <string name="no_tiene_telefonos_contac">No tiene telefonos de contacto</string>
+    <!-- Detalle lugar activity -->
+    <string name="descripcion">Descripción</string>
+    <string name="resenas">Reseñas</string>
+    <string name="fotos">Fotos</string>
+
+    <!-- mod main activity -->
+    <string name="lugares">Lugares</string>
+    <string name="registro">Registro</string>
 
 
     <!-- icons -->

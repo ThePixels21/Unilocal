@@ -74,9 +74,9 @@ class GestionarLugarActivity : AppCompatActivity() {
             binding.viewPager.adapter = ViewPagerAdapterGestionarLugar(this, codigoLugar)
             TabLayoutMediator(binding.tabs, binding.viewPager){ tab, pos ->
                 when(pos){
-                    0 -> tab.text = "Descripción"
-                    1 -> tab.text = "Reseñas"
-                    2 -> tab.text = "Fotos"
+                    0 -> tab.text = getString(R.string.descripcion)
+                    1 -> tab.text = getString(R.string.resenas)
+                    2 -> tab.text = getString(R.string.fotos)
                 }
             }.attach()
 

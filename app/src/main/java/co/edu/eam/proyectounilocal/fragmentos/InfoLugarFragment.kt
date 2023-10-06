@@ -79,7 +79,7 @@ class InfoLugarFragment : Fragment() {
                 }
             }
         } else {
-            telefonos = "No tiene telefonos de contacto"
+            telefonos = getString(R.string.no_tiene_telefonos_contac)
         }
         binding.contactoLugar.text = telefonos
 
@@ -91,10 +91,10 @@ class InfoLugarFragment : Fragment() {
         val abierto = lugar.estaAbierto()
         if(abierto){
             binding.estado.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
-            binding.estado.text = "Abierto"
+            binding.estado.text = getString(R.string.txt_abierto)
         }else{
             binding.estado.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
-            binding.estado.text = "Cerrado"
+            binding.estado.text = getString(R.string.cerrado)
         }
 
     }

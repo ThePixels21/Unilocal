@@ -33,37 +33,37 @@ class RegistroActivity : AppCompatActivity() {
         val cpassword = binding.passwordConfirmUsuario.text.toString()
 
         if(nombre.isEmpty()) {
-            binding.nombreUsuario.error = "Campo obligatorio"
+            binding.nombreUsuario.error = getString(R.string.campo_obligatorio)
         } else {
             binding.nombreUsuario.error = null
         }
 
         if(nickname.isEmpty()) {
-            binding.usuarioUsuario.error = "Campo obligatorio"
+            binding.usuarioUsuario.error = getString(R.string.campo_obligatorio)
         } else {
             binding.usuarioUsuario.error = null
         }
 
         if(email.isEmpty()) {
-            binding.emailUsuario.error = "Campo obligatorio"
+            binding.emailUsuario.error = getString(R.string.campo_obligatorio)
         } else {
             binding.emailUsuario.error = null
         }
 
         if(ciudad.isEmpty()) {
-            binding.ciudadUsuario.error = "Campo obligatorio"
+            binding.ciudadUsuario.error = getString(R.string.campo_obligatorio)
         } else {
             binding.ciudadUsuario.error = null
         }
 
         if(password.isEmpty()) {
-            binding.passwordUsuario.error = "Campo obligatorio"
+            binding.passwordUsuario.error = getString(R.string.campo_obligatorio)
         } else {
             binding.passwordUsuario.error = null
         }
 
         if(cpassword.isEmpty()) {
-            binding.passwordConfirmUsuario.error = "Campo obligatorio"
+            binding.passwordConfirmUsuario.error = getString(R.string.campo_obligatorio)
         } else {
             binding.passwordConfirmUsuario.error = null
         }
@@ -72,13 +72,13 @@ class RegistroActivity : AppCompatActivity() {
             if(password==cpassword){
                 binding.passwordConfirmUsuario.error = null
                 if(Usuarios.agregar(Usuario(0, nombre, nickname, ciudad, email, password))){
-                    Toast.makeText(this, "Registrado exitosamente", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.registrado_exitosamente), Toast.LENGTH_LONG).show()
                     startActivity(Intent(this, LoginActivity::class.java))
                 }else{
-                    Toast.makeText(this, "No se pudo registrar", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.no_se_pudo_registrar), Toast.LENGTH_LONG).show()
                 }
             }else{
-                binding.passwordConfirmUsuario.error = "La contraseña ingresada no coincide"
+                binding.passwordConfirmUsuario.error = getString(R.string.la_contrasena_ingresada_no_coincide)
             }
         }
     }

@@ -44,8 +44,8 @@ class ModDetalleLugarActivity : AppCompatActivity() {
                 binding.viewPager.adapter = ViewPagerAdapterLugarMod(this, codigoLugar)
                 TabLayoutMediator(binding.tabs, binding.viewPager){ tab, pos ->
                     when(pos){
-                        0 -> tab.text = "Descripción"
-                        1 -> tab.text = "Fotos"
+                        0 -> tab.text = getString(R.string.descripcion)
+                        1 -> tab.text = getString(R.string.fotos)
                     }
                 }.attach()
             }

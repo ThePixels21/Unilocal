@@ -63,7 +63,7 @@ class ComentarFragment : Fragment() {
         val texto = binding.comentarioLugar.text.toString()
 
         if(texto.isEmpty()){
-            binding.comentarioLugar.error = "Campo obligatorio"
+            binding.comentarioLugar.error = getString(R.string.campo_obligatorio)
         } else {
             binding.comentarioLugar.error = null
         }
@@ -73,11 +73,11 @@ class ComentarFragment : Fragment() {
             val codigoUsuario = sp.getInt("codigo_usuario", -1)
             if(codigoUsuario != -1 && codigoLugar != -1){
                 val comentario = Comentarios.crear(Comentario(texto, codigoUsuario, codigoLugar, estrellas))
-                Toast.makeText(requireContext(), "Comentario enviado", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), getString(R.string.comentario_enviado), Toast.LENGTH_LONG).show()
                 DetalleLugarActivity.binding.viewPager.adapter =  ViewPagerAdapterLugar(requireActivity(), codigoLugar, 1)
                 DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
             } else {
-                Toast.makeText(requireContext(), "No se pudo enviar el comentario", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), getString(R.string.no_se_pudo_enviar_comentario) , Toast.LENGTH_LONG).show()
             }
         }
     }

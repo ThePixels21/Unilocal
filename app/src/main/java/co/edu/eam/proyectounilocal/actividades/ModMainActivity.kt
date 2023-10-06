@@ -29,8 +29,8 @@ class ModMainActivity : AppCompatActivity() {
         binding.viewPager.adapter = ViewPagerAdapterMod(this)
         TabLayoutMediator(binding.tabs, binding.viewPager){tab, pos ->
             when (pos){
-                0 -> tab.text = "Lugares"
-                1 -> tab.text = "Registro"
+                0 -> tab.text = getString(R.string.lugares)
+                1 -> tab.text = getString(R.string.registro)
             }
         }.attach()
 

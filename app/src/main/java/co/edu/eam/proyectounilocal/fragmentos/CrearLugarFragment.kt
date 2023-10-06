@@ -123,23 +123,23 @@ class CrearLugarFragment : Fragment() {
         val idCategoria = categorias[posCategoria].id
 
         if( nombre.isEmpty() ){
-            binding.nombreLayout.error = "Campo obligatorio"
+            binding.nombreLayout.error = getString(R.string.campo_obligatorio)
         }else{
             binding.nombreLayout.error = null
         }
 
         if( descripcion.isEmpty() ){
-            binding.descripcionLayout.error = "Campo obligatorio"
+            binding.descripcionLayout.error = getString(R.string.campo_obligatorio)
         }else{
             binding.descripcionLayout.error = null
         }
 
         if( direccion.isEmpty() ){
-            binding.direccionLayout.error = "Campo obligatorio"
+            binding.direccionLayout.error = getString(R.string.campo_obligatorio)
         }
 
         if( telefono.isEmpty() ){
-            binding.telefonoLayout.error = "Campo obligatorio"
+            binding.telefonoLayout.error = getString(R.string.campo_obligatorio)
         }else{
             binding.telefonoLayout.error = null
         }
@@ -164,7 +164,7 @@ class CrearLugarFragment : Fragment() {
                         val horario = Horario(0, dia, horaInicio, horaFinal)
                         nuevoLugar.horarios.add(horario)
                     }else{
-                        Toast.makeText(requireActivity(), "Horario del lunes no válido", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), getString(R.string.horario_de_lunes_no_valido), Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -177,7 +177,7 @@ class CrearLugarFragment : Fragment() {
                         val horario = Horario(0, dia, horaInicio, horaFinal)
                         nuevoLugar.horarios.add(horario)
                     }else{
-                        Toast.makeText(requireActivity(), "Horario del martes no válido", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), getString(R.string.horario_de_martes_no_valido), Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -190,7 +190,7 @@ class CrearLugarFragment : Fragment() {
                         val horario = Horario(0, dia, horaInicio, horaFinal)
                         nuevoLugar.horarios.add(horario)
                     }else{
-                        Toast.makeText(requireActivity(), "Horario del miércoles no válido", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), getString(R.string.horario_de_miercoles_no_valido), Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -203,7 +203,7 @@ class CrearLugarFragment : Fragment() {
                         val horario = Horario(0, dia, horaInicio, horaFinal)
                         nuevoLugar.horarios.add(horario)
                     }else{
-                        Toast.makeText(requireActivity(), "Horario del jueves no válido", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), getString(R.string.horario_de_jueves_no_valido), Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -216,7 +216,7 @@ class CrearLugarFragment : Fragment() {
                         val horario = Horario(0, dia, horaInicio, horaFinal)
                         nuevoLugar.horarios.add(horario)
                     }else{
-                        Toast.makeText(requireActivity(), "Horario del viernes no válido", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), getString(R.string.horario_de_viernes_no_valido), Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -229,7 +229,7 @@ class CrearLugarFragment : Fragment() {
                         val horario = Horario(0, dia, horaInicio, horaFinal)
                         nuevoLugar.horarios.add(horario)
                     }else{
-                        Toast.makeText(requireActivity(), "Horario del sábado no válido", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), getString(R.string.horario_de_sabado_no_valido), Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -242,13 +242,13 @@ class CrearLugarFragment : Fragment() {
                         val horario = Horario(0, dia, horaInicio, horaFinal)
                         nuevoLugar.horarios.add(horario)
                     }else{
-                        Toast.makeText(requireActivity(), "Horario del domingo no válido", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), getString(R.string.horario_de_domingo_no_valido), Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 Lugares.crear(nuevoLugar)
 
-                Toast.makeText(requireActivity(), "Lugar creado correctamente, será revisado por un moderador", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireActivity(), getString(R.string.lugar_creado_rev_mod), Toast.LENGTH_LONG).show()
 
                 requireActivity().supportFragmentManager.beginTransaction().replace( R.id.contenido_principal, MisLugaresFragment() )
                     .addToBackStack(MainActivity.MENU_MIS_LUGARES).commit()

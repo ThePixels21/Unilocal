@@ -58,7 +58,7 @@ class ComentariosLugarFragment : Fragment() {
                     DetalleLugarActivity.binding.viewPager.adapter =  ViewPagerAdapterLugar(requireActivity(), codigoLugar, 2)
                     DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
                 } else{
-                    Toast.makeText(requireContext(), "No puede agregar más de un comentario", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), getString(R.string.no_puede_agregar_mas_de_un_comentario), Toast.LENGTH_LONG).show()
                 }
             }
 
