@@ -4,16 +4,30 @@ import java.time.LocalDate
 import java.util.Calendar
 import java.util.Date
 
-class Lugar(var nombre:String,
-            var descripcion:String,
-            var idCreador:Int,
-            var estado:EstadoLugar,
-            var idCategoria:Int,
-            var direccion:String,
-            var latitud:Float, var longitud:Float,
-            var idCiudad:Int
-) {
+class Lugar() {
+
+    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, idCategoria:Int, direccion:String, latitud:Float, longitud:Float, idCiudad:Int):this(){
+        this.nombre = nombre
+        this.descripcion = descripcion
+        this.idCreador = idCreador
+        this.estado = estado
+        this.idCategoria = idCategoria
+        this.direccion = direccion
+        this.latitud = latitud
+        this.longitud = longitud
+        this.idCiudad = idCiudad
+    }
+    var key:String = ""
     var id:Int = 0
+    var nombre:String = ""
+    var descripcion:String = ""
+    var idCreador:Int = 0
+    var estado:EstadoLugar = EstadoLugar.SIN_REVISAR
+    var idCategoria:Int = 0
+    var direccion:String = ""
+    var idCiudad:Int = 0
+    var latitud:Float = 0f
+    var longitud:Float = 0f
     var imagenes:ArrayList<String> = ArrayList()
     var telefonos:ArrayList<String> = ArrayList()
     var fecha: Date = Date()
