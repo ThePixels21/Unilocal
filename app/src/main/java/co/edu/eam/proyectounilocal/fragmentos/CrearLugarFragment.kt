@@ -24,12 +24,25 @@ import co.edu.eam.proyectounilocal.modelo.DiaSemana
 import co.edu.eam.proyectounilocal.modelo.EstadoLugar
 import co.edu.eam.proyectounilocal.modelo.Horario
 import co.edu.eam.proyectounilocal.modelo.Lugar
+import co.edu.eam.proyectounilocal.modelo.Posicion
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
-class CrearLugarFragment : Fragment() {
+class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
 
     lateinit var binding: FragmentCrearLugarBinding
     lateinit var ciudades:ArrayList<Ciudad>
     lateinit var categorias:ArrayList<Categoria>
+
+
+    lateinit var gMap:GoogleMap
+    private var tienePermiso = false
+    private val defaultLocation = LatLng(4.550923, -75.6557201)
+    private var posicion:Posicion? = null
 
     var posCiudad:Int = -1
     var posCategoria:Int = -1
@@ -55,6 +68,9 @@ class CrearLugarFragment : Fragment() {
             MainActivity.binding.menuInferior.menu.getItem(0).isChecked = true}
 
         binding.btnBuscar.setOnClickListener { startActivity(Intent(requireActivity(), BusquedaActivity::class.java)) }
+
+        val mapFragment = childFragmentManager.findFragmentById(R.id.mapa_crear_lugar) as SupportMapFragment
+        mapFragment.getMapAsync(this)
 
         return binding.root
     }
@@ -144,12 +160,12 @@ class CrearLugarFragment : Fragment() {
             binding.telefonoLayout.error = null
         }
 
-        if(nombre.isNotEmpty() && descripcion.isNotEmpty() && telefono.isNotEmpty() && direccion.isNotEmpty() && idCiudad != -1 && idCategoria != -1) {
+        if(nombre.isNotEmpty() && descripcion.isNotEmpty() && telefono.isNotEmpty() && direccion.isNotEmpty() && idCiudad != -1 && idCategoria != -1 && posicion != null) {
 
             val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
             val codigoUsuario = sp.getInt("codigo_usuario", -1)
             if(codigoUsuario != -1){
-                val nuevoLugar = Lugar(nombre, descripcion, codigoUsuario, EstadoLugar.SIN_REVISAR, idCategoria, direccion, 0f, 0f, idCiudad)
+                val nuevoLugar = Lugar(nombre, descripcion, codigoUsuario, EstadoLugar.SIN_REVISAR, idCategoria, direccion,posicion!! , idCiudad)
 
                 val telefonos: ArrayList<String> = ArrayList()
                 telefonos.add(telefono)
@@ -246,6 +262,7 @@ class CrearLugarFragment : Fragment() {
                     }
                 }
 
+
                 Lugares.crear(nuevoLugar)
 
                 Toast.makeText(requireActivity(), getString(R.string.lugar_creado_rev_mod), Toast.LENGTH_LONG).show()
@@ -256,6 +273,23 @@ class CrearLugarFragment : Fragment() {
 
         }
 
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        gMap = googleMap
+        gMap.uiSettings.isZoomControlsEnabled = true
+
+        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 12f))
+
+        gMap.setOnMapClickListener {
+            if(posicion == null){
+                posicion = Posicion()
+            }
+            posicion!!.lat = it.latitude
+            posicion!!.lng = it.longitude
+            gMap.clear()
+            gMap.addMarker( MarkerOptions().position(it).title("Aqui Esta el lugar"))
+        }
     }
 
 }
