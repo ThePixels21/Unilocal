@@ -1,8 +1,25 @@
 package co.edu.eam.proyectounilocal.modelo
 
-class Usuario(id: Int, nombre: String, var nickname:String, var ciudad:String, correo: String, password: String): Persona(id, nombre, correo, password){
+class Usuario(): Persona(){
+
+    override var key: String = ""
+    override var id: Int = 0
+    override var nombre: String = ""
+    var nickname: String = ""
+    var ciudad: String = ""
+    override var correo: String = ""
+    override var password: String = ""
     var busquedasRecientes: ArrayList<String> = ArrayList()
     var lugaresFavoritos:ArrayList<Int> = ArrayList()
+
+    constructor(id: Int, nombre: String, nickname:String, ciudad:String, correo: String, password: String) : this() {
+        this.id = id
+        this.nombre = nombre
+        this.nickname = nickname
+        this.ciudad = ciudad
+        this.correo = correo
+        this.password = password
+    }
 
     fun agregarBusqueda(busqueda:String){
         this.busquedasRecientes.add(busqueda)
