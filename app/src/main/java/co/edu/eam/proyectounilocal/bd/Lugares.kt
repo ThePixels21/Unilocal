@@ -4,6 +4,7 @@ import co.edu.eam.proyectounilocal.modelo.Comentario
 import co.edu.eam.proyectounilocal.modelo.EstadoLugar
 import co.edu.eam.proyectounilocal.modelo.Horario
 import co.edu.eam.proyectounilocal.modelo.Lugar
+import co.edu.eam.proyectounilocal.modelo.Posicion
 import co.edu.eam.proyectounilocal.modelo.RegistroEstadoLugar
 
 object Lugares {
@@ -21,28 +22,28 @@ object Lugares {
         tels.add("7828789")
         tels.add("7464657")
 
-        val lugar1 = Lugar("Café ABC", "Excelente café para compartir", 1, EstadoLugar.ACEPTADO, 2, "Calle 123",73.3434f, -40.4345f, 1)
+        val lugar1 = Lugar("Café ABC", "Excelente café para compartir", 1, EstadoLugar.ACEPTADO, 2, "Calle 123", Posicion(4.5106545,-75.7050586), 1)
         lugar1.id = 1
         lugar1.horarios.add(horario2)
 
-        val lugar2 = Lugar("Bar City Pub", "Bar en la ciudad de Armenia", 2, EstadoLugar.ACEPTADO, 5, "Calle 12 # 23-1",73.3434f, -40.4345f, 1)
+        val lugar2 = Lugar("Bar City Pub", "Bar en la ciudad de Armenia", 2, EstadoLugar.ACEPTADO, 5, "Calle 12 # 23-1", Posicion(4.5276916,-75.6973675), 1)
         lugar2.id = 2
         lugar2.telefonos = tels
         lugar2.horarios.add(horario1)
 
-        val lugar3 = Lugar("Restaurante Mi Cuate", "Comida Mexicana para todos", 3, EstadoLugar.ACEPTADO, 3, "Calle 452",73.3434f, -40.4345f, 5)
+        val lugar3 = Lugar("Restaurante Mi Cuate", "Comida Mexicana para todos", 3, EstadoLugar.ACEPTADO, 3, "Calle 452", Posicion(4.5057171,-75.7022026), 5)
         lugar3.id = 3
         lugar3.horarios.add(horario1)
 
-        val lugar4 = Lugar("BBC Norte Pub", "Cervezas BBC muy buenas", 1, EstadoLugar.ACEPTADO, 5, "Calle 53",73.3434f, -40.4345f, 3)
+        val lugar4 = Lugar("BBC Norte Pub", "Cervezas BBC muy buenas", 1, EstadoLugar.ACEPTADO, 5, "Calle 53", Posicion(4.5433488,-75.6739659), 3)
         lugar4.id = 4
         lugar4.horarios.add(horario3)
 
-        val lugar5 = Lugar("Hotel barato", "Hotel para ahorrar mucho dinero", 1, EstadoLugar.ACEPTADO, 1, "Calle 23 # 34-1",73.3434f, -40.4345f, 1)
+        val lugar5 = Lugar("Hotel barato", "Hotel para ahorrar mucho dinero", 1, EstadoLugar.ACEPTADO, 1, "Calle 23 # 34-1", Posicion(4.5452105,-75.671197), 1)
         lugar5.id = 5
         lugar5.horarios.add( horario1 )
 
-        val lugar6 = Lugar("Hostal Hippie", "Alojamiento para todos y todas", 2, EstadoLugar.SIN_REVISAR, 1, "Carrera 123",73.3434f, -40.4345f, 2)
+        val lugar6 = Lugar("Hostal Hippie", "Alojamiento para todos y todas", 2, EstadoLugar.SIN_REVISAR, 1, "Carrera 123", Posicion(4.5452105,-75.671197), 2)
         lugar6.id = 6
         lugar6.horarios.add( horario2 )
 

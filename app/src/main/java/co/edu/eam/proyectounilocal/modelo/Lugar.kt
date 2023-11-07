@@ -1,12 +1,24 @@
 package co.edu.eam.proyectounilocal.modelo
 
-import java.time.LocalDate
 import java.util.Calendar
 import java.util.Date
 
 class Lugar() {
 
-    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, idCategoria:Int, direccion:String, latitud:Float, longitud:Float, idCiudad:Int):this(){
+    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, idCategoria:Int, direccion:String, posicion: Posicion, idCiudad:Int):this(){
+        this.nombre = nombre
+        this.descripcion = descripcion
+        this.idCreador = idCreador
+        this.estado = estado
+        this.idCategoria = idCategoria
+        this.direccion = direccion
+        this.posicion = posicion
+        this.latitud = posicion.lat
+        this.longitud = posicion.lng
+        this.idCiudad = idCiudad
+    }
+
+    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, idCategoria:Int, direccion:String, latitud:Double, longitud:Double, idCiudad:Int):this(){
         this.nombre = nombre
         this.descripcion = descripcion
         this.idCreador = idCreador
@@ -15,8 +27,11 @@ class Lugar() {
         this.direccion = direccion
         this.latitud = latitud
         this.longitud = longitud
+        val pos = Posicion(latitud, longitud)
+        this.posicion = pos
         this.idCiudad = idCiudad
     }
+
     var key:String = ""
     var id:Int = 0
     var nombre:String = ""
@@ -25,9 +40,10 @@ class Lugar() {
     var estado:EstadoLugar = EstadoLugar.SIN_REVISAR
     var idCategoria:Int = 0
     var direccion:String = ""
+    var posicion: Posicion = Posicion()
     var idCiudad:Int = 0
-    var latitud:Float = 0f
-    var longitud:Float = 0f
+    var latitud:Double = 0.0
+    var longitud:Double = 0.0
     var imagenes:ArrayList<String> = ArrayList()
     var telefonos:ArrayList<String> = ArrayList()
     var fecha: Date = Date()
@@ -80,6 +96,6 @@ class Lugar() {
     }
 
     override fun toString(): String {
-        return "Lugar(id=$id, nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, idCategoria=$idCategoria, latitud=$latitud, longitud=$longitud, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, fecha=$fecha, horarios=$horarios)"
+        return "Lugar(id=$id, nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, idCategoria=$idCategoria,posicion=$posicion, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, fecha=$fecha, horarios=$horarios)"
     }
 }
