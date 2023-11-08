@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.bd.Categorias
 import co.edu.eam.proyectounilocal.bd.Lugares
+import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentInfoLugarBinding
 import co.edu.eam.proyectounilocal.modelo.Categoria
 import co.edu.eam.proyectounilocal.modelo.DiaSemana
@@ -17,14 +18,14 @@ import co.edu.eam.proyectounilocal.modelo.Lugar
 class InfoLugarFragment : Fragment() {
 
     lateinit var binding: FragmentInfoLugarBinding
-    var codigoLugar: Int = -1
+    var codigoLugar: String = ""
     private var lugar: Lugar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         if(arguments != null){
-            codigoLugar = requireArguments().getInt("id_lugar")
+            codigoLugar = requireArguments().getString("id_lugar", "")
         }
     }
 
@@ -35,11 +36,12 @@ class InfoLugarFragment : Fragment() {
     ): View? {
         binding = FragmentInfoLugarBinding.inflate(inflater, container, false)
 
-        lugar = Lugares.obtener(codigoLugar)
-
-        if(lugar != null){
-            //Cargar info layout
-            cargarInformacion(lugar!!)
+        LugaresService.obtener(codigoLugar){lug ->
+            lugar = lug
+            if(lugar != null){
+                //Cargar info layout
+                cargarInformacion(lugar!!)
+            }
         }
 
         return binding.root
@@ -100,9 +102,9 @@ class InfoLugarFragment : Fragment() {
     }
 
     companion object{
-        fun newInstance(codigoLugar:Int):InfoLugarFragment{
+        fun newInstance(codigoLugar:String):InfoLugarFragment{
             val args = Bundle()
-            args.putInt("id_lugar", codigoLugar)
+            args.putString("id_lugar", codigoLugar)
             val fragmento = InfoLugarFragment()
             fragmento.arguments = args
             return fragmento

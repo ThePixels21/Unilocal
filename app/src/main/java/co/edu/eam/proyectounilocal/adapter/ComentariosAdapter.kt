@@ -50,7 +50,8 @@ class ComentariosAdapter(var lista:ArrayList<Comentario>, var codigoUsuario: Int
             if(comentario.idUsuario == codigoUsuario){
                 btnEliminar.setOnClickListener{
                     Comentarios.eliminarComentario(comentario)
-                    DetalleLugarActivity.binding.viewPager.adapter =  ViewPagerAdapterLugar(ComentariosLugarFragment.act, comentario.idLugar, 1)
+                    //ARREGLAR TOSTRING
+                    DetalleLugarActivity.binding.viewPager.adapter =  ViewPagerAdapterLugar(ComentariosLugarFragment.act, comentario.idLugar.toString(), 1)
                     DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
                 }
             }else{

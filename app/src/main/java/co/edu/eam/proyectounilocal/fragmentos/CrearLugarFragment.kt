@@ -17,6 +17,7 @@ import co.edu.eam.proyectounilocal.actividades.MainActivity
 import co.edu.eam.proyectounilocal.bd.Categorias
 import co.edu.eam.proyectounilocal.bd.Ciudades
 import co.edu.eam.proyectounilocal.bd.Lugares
+import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentCrearLugarBinding
 import co.edu.eam.proyectounilocal.modelo.Categoria
 import co.edu.eam.proyectounilocal.modelo.Ciudad
@@ -31,6 +32,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
 
@@ -130,6 +133,7 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
     }
 
     fun crearLugar(){
+
         Log.e("CrearLugarFragment", binding.ciudadLugar.selectedItem.toString())
         val nombre = binding.nombreLugar.text.toString()
         val descripcion = binding.descripcionLugar.text.toString()
@@ -262,15 +266,19 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
                     }
                 }
 
-
-                Lugares.crear(nuevoLugar)
-
-                Toast.makeText(requireActivity(), getString(R.string.lugar_creado_rev_mod), Toast.LENGTH_LONG).show()
-
-                requireActivity().supportFragmentManager.beginTransaction().replace( R.id.contenido_principal, MisLugaresFragment() )
-                    .addToBackStack(MainActivity.MENU_MIS_LUGARES).commit()
+                //Lugares.crear(nuevoLugar)
+                LugaresService.crearLugar(nuevoLugar){res ->
+                    if(res){
+                        Toast.makeText(requireActivity(), getString(R.string.lugar_creado_rev_mod), Toast.LENGTH_LONG).show()
+                        requireActivity().supportFragmentManager.beginTransaction().replace( R.id.contenido_principal, MisLugaresFragment() )
+                            .addToBackStack(MainActivity.MENU_MIS_LUGARES).commit()
+                    }else{
+                        Toast.makeText(requireActivity(), getString(R.string.lugar_creado_error), Toast.LENGTH_LONG).show()
+                        requireActivity().supportFragmentManager.beginTransaction().replace( R.id.contenido_principal, MisLugaresFragment() )
+                            .addToBackStack(MainActivity.MENU_MIS_LUGARES).commit()
+                    }
+                }
             }
-
         }
 
     }

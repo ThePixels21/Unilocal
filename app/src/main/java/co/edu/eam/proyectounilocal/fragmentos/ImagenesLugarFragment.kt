@@ -10,9 +10,9 @@ import co.edu.eam.proyectounilocal.R
 class ImagenesLugarFragment : Fragment() {
 
     companion object{
-        fun newInstance(codigoLugar:Int):ImagenesLugarFragment{
+        fun newInstance(codigoLugar:String):ImagenesLugarFragment{
             val args = Bundle()
-            args.putInt("id_lugar", codigoLugar)
+            args.putString("id_lugar", codigoLugar)
             val fragmento = ImagenesLugarFragment()
             fragmento.arguments = args
             return fragmento

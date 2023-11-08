@@ -13,7 +13,7 @@ object Lugares {
     private val registros:ArrayList<RegistroEstadoLugar> = ArrayList()
 
     init {
-
+        /*
         val horario1 = Horario(1, Horarios.obtenerTodos(), 12, 20)
         val horario2 = Horario(2, Horarios.obtenerEntreSemana(), 9, 12)
         val horario3 = Horario(3, Horarios.obtenerFinSemana(), 14, 23)
@@ -53,6 +53,8 @@ object Lugares {
         lista.add( lugar4 )
         lista.add( lugar5 )
         lista.add( lugar6 )
+
+         */
 
     }
 

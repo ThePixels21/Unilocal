@@ -19,6 +19,7 @@ import co.edu.eam.proyectounilocal.adapter.ComentariosAdapter
 import co.edu.eam.proyectounilocal.adapter.ViewPagerAdapterLugar
 import co.edu.eam.proyectounilocal.bd.Comentarios
 import co.edu.eam.proyectounilocal.bd.Lugares
+import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentComentariosLugarBinding
 import co.edu.eam.proyectounilocal.modelo.Comentario
 import co.edu.eam.proyectounilocal.modelo.Lugar
@@ -27,8 +28,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class ComentariosLugarFragment : Fragment() {
 
     lateinit var binding: FragmentComentariosLugarBinding
-    private var lista : ArrayList<Comentario> = ArrayList()
-    var codigoLugar: Int = -1
+    var codigoLugar: String = ""
     var codigoUsuario: Int = -1
     private var lugar: Lugar? = null
 
@@ -36,7 +36,7 @@ class ComentariosLugarFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         if(arguments != null){
-            codigoLugar = requireArguments().getInt("id_lugar")
+            codigoLugar = requireArguments().getString("id_lugar", "")
         }
         act = requireActivity()
     }
@@ -48,22 +48,35 @@ class ComentariosLugarFragment : Fragment() {
     ): View? {
         binding = FragmentComentariosLugarBinding.inflate(inflater, container, false)
 
-        lugar = Lugares.obtener(codigoLugar)
         val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
         codigoUsuario = sp.getInt("codigo_usuario", -1)
 
-        if(lugar != null){
-            binding.btnCalificar.setOnClickListener {
-                if(codigoUsuario != -1 && !Comentarios.comentado(codigoLugar, codigoUsuario)){
-                    DetalleLugarActivity.binding.viewPager.adapter =  ViewPagerAdapterLugar(requireActivity(), codigoLugar, 2)
-                    DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
-                } else{
-                    Toast.makeText(requireContext(), getString(R.string.no_puede_agregar_mas_de_un_comentario), Toast.LENGTH_LONG).show()
+        LugaresService.obtener(codigoLugar){lug ->
+            lugar = lug
+
+            if(lugar != null){
+                binding.btnCalificar.setOnClickListener {
+                    //ARREGLAR .comentado
+                    if(codigoUsuario != -1 && !Comentarios.comentado(codigoLugar, codigoUsuario)){
+                        DetalleLugarActivity.binding.viewPager.adapter =  ViewPagerAdapterLugar(requireActivity(), codigoLugar, 2)
+                        DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
+                    } else{
+                        Toast.makeText(requireContext(), getString(R.string.no_puede_agregar_mas_de_un_comentario), Toast.LENGTH_LONG).show()
+                    }
                 }
             }
+        }
 
-            //Cargar info
-            val cal: Int = lugar!!.obtenerCalificacionPromedio(Comentarios.listar(lugar!!.id))
+        //Listar comentarios y estrellas
+        LugaresService.listarComentarios(codigoLugar){comentarios ->
+            val adapter = ComentariosAdapter(comentarios, codigoUsuario)
+            binding.listaComentarios.adapter = adapter
+            binding.listaComentarios.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
+
+            binding.cantComentarios.text = "(${comentarios.size})"
+
+            //Cargar estrellas
+            val cal: Int = lugar!!.obtenerCalificacionPromedio(comentarios)
 
             binding.calificacionPromedio.text = cal.toString()
 
@@ -73,21 +86,15 @@ class ComentariosLugarFragment : Fragment() {
                 }
             }
 
-            lista = Comentarios.listar(codigoLugar)
-            val adapter = ComentariosAdapter(lista, codigoUsuario)
-            binding.listaComentarios.adapter = adapter
-            binding.listaComentarios.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
-
-            binding.cantComentarios.text = "(${lista.size})"
         }
 
         return binding.root
     }
 
     companion object{
-        fun newInstance(codigoLugar:Int):ComentariosLugarFragment{
+        fun newInstance(codigoLugar:String):ComentariosLugarFragment{
             val args = Bundle()
-            args.putInt("id_lugar", codigoLugar)
+            args.putString("id_lugar", codigoLugar)
             val fragmento = ComentariosLugarFragment()
             fragmento.arguments = args
             return fragmento

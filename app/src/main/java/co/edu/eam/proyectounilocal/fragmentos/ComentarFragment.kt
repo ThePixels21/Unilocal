@@ -16,6 +16,7 @@ import co.edu.eam.proyectounilocal.actividades.DetalleLugarActivity
 import co.edu.eam.proyectounilocal.adapter.ViewPagerAdapterLugar
 import co.edu.eam.proyectounilocal.bd.Comentarios
 import co.edu.eam.proyectounilocal.bd.Lugares
+import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentComentarBinding
 import co.edu.eam.proyectounilocal.modelo.Comentario
 import co.edu.eam.proyectounilocal.modelo.Lugar
@@ -23,7 +24,7 @@ import co.edu.eam.proyectounilocal.modelo.Lugar
 class ComentarFragment : Fragment() {
 
     lateinit var binding: FragmentComentarBinding
-    var codigoLugar: Int = -1
+    var codigoLugar: String = ""
     private var lugar: Lugar? = null
     var estrellas: Int = 0
     var colorPorDefecto: Int = 0
@@ -31,7 +32,7 @@ class ComentarFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if(arguments != null){
-            codigoLugar = requireArguments().getInt("id_lugar")
+            codigoLugar = requireArguments().getString("id_lugar", "")
         }
     }
 
@@ -42,20 +43,20 @@ class ComentarFragment : Fragment() {
     ): View? {
         binding = FragmentComentarBinding.inflate(inflater, container, false)
 
-        lugar = Lugares.obtener(codigoLugar)
+        LugaresService.obtener(codigoLugar){lug ->
+            lugar = lug
+            if(lugar != null){
+                binding.btnComentar.setOnClickListener {
+                    enviarComentario()
+                }
 
-        if(lugar != null){
-            binding.btnComentar.setOnClickListener {
-                enviarComentario()
-            }
-
-            //Cargar datos
-            colorPorDefecto = binding.e1.textColors.defaultColor
-            for(i in 0 until binding.listaEstrellas.childCount){
-                (binding.listaEstrellas[i] as TextView).setOnClickListener { presionarEstrella(i) }
+                //Cargar datos
+                colorPorDefecto = binding.e1.textColors.defaultColor
+                for(i in 0 until binding.listaEstrellas.childCount){
+                    (binding.listaEstrellas[i] as TextView).setOnClickListener { presionarEstrella(i) }
+                }
             }
         }
-
         return binding.root
     }
 
@@ -71,11 +72,17 @@ class ComentarFragment : Fragment() {
         if(texto.isNotEmpty()){
             val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
             val codigoUsuario = sp.getInt("codigo_usuario", -1)
-            if(codigoUsuario != -1 && codigoLugar != -1){
-                val comentario = Comentarios.crear(Comentario(texto, codigoUsuario, codigoLugar, estrellas))
-                Toast.makeText(requireContext(), getString(R.string.comentario_enviado), Toast.LENGTH_LONG).show()
-                DetalleLugarActivity.binding.viewPager.adapter =  ViewPagerAdapterLugar(requireActivity(), codigoLugar, 1)
-                DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
+            if(codigoUsuario != -1 && codigoLugar != ""){
+                val comentario = Comentario(texto, codigoUsuario, estrellas)
+                LugaresService.agregarComentario(comentario, codigoLugar) { res ->
+                    if (res) {
+                        Toast.makeText(requireContext(), getString(R.string.comentario_enviado), Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(requireContext(), getString(R.string.no_se_pudo_enviar_comentario), Toast.LENGTH_LONG).show()
+                    }
+                    DetalleLugarActivity.binding.viewPager.adapter = ViewPagerAdapterLugar(requireActivity(), codigoLugar, 1)
+                    DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
+                }
             } else {
                 Toast.makeText(requireContext(), getString(R.string.no_se_pudo_enviar_comentario) , Toast.LENGTH_LONG).show()
             }
@@ -97,9 +104,9 @@ class ComentarFragment : Fragment() {
     }
 
     companion object{
-        fun newInstance(codigoLugar:Int):ComentarFragment{
+        fun newInstance(codigoLugar:String):ComentarFragment{
             val args = Bundle()
-            args.putInt("id_lugar", codigoLugar)
+            args.putString("id_lugar", codigoLugar)
             val fragmento = ComentarFragment()
             fragmento.arguments = args
             return fragmento

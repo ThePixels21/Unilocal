@@ -38,8 +38,9 @@ object Comentarios {
         lista.add( comentario )
     }
 
-    fun comentado(idLugar:Int, idUsuario:Int): Boolean{
-        var list = listar(idLugar)
+    fun comentado(idLugar:String, idUsuario:Int): Boolean{
+        //ARREGLAR
+        var list = listar(0)
         for (coment in list){
             if(coment.idUsuario == idUsuario){
                 return true

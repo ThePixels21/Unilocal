@@ -15,6 +15,7 @@ import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.adapter.ComentariosAdapter
 import co.edu.eam.proyectounilocal.bd.Comentarios
 import co.edu.eam.proyectounilocal.bd.Lugares
+import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentComentariosGestionarLugarBinding
 import co.edu.eam.proyectounilocal.modelo.Comentario
 
@@ -22,12 +23,12 @@ class ComentariosGestionarLugarFragment : Fragment() {
 
     lateinit var binding: FragmentComentariosGestionarLugarBinding
     private var lista : ArrayList<Comentario> = ArrayList()
-    var codigoLugar: Int = -1
+    var codigoLugar: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if(arguments != null){
-            codigoLugar = requireArguments().getInt("id_lugar")
+            codigoLugar = requireArguments().getString("id_lugar", "")
         }
     }
 
@@ -41,34 +42,36 @@ class ComentariosGestionarLugarFragment : Fragment() {
         val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
         val codigoUsuario = sp.getInt("codigo_usuario", -1)
 
-        val lugar = Lugares.obtener(codigoLugar)
+        LugaresService.obtener(codigoLugar){lug ->
+            val lugar = lug
+            if(lugar != null){
+                //Cargar info
+                val cal: Int = lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
+                binding.calificacionPromedio.text = cal.toString()
 
-        if(lugar != null){
-            //Cargar info
-            val cal: Int = lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
-            binding.calificacionPromedio.text = cal.toString()
-
-            if(cal != 0){
-                for (i in 0 until cal){
-                    (binding.listaEstrellas[i] as TextView).setTextColor(ContextCompat.getColor(binding.listaEstrellas.context, R.color.yellow))
+                if(cal != 0){
+                    for (i in 0 until cal){
+                        (binding.listaEstrellas[i] as TextView).setTextColor(ContextCompat.getColor(binding.listaEstrellas.context, R.color.yellow))
+                    }
                 }
+
+                //ARREGLAR
+                lista = Comentarios.listar(0)
+                val adapter = ComentariosAdapter(lista, codigoUsuario)
+                binding.listaComentarios.adapter = adapter
+                binding.listaComentarios.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
+
+                binding.cantComentarios.text = "(${lista.size})"
             }
-
-            lista = Comentarios.listar(codigoLugar)
-            val adapter = ComentariosAdapter(lista, codigoUsuario)
-            binding.listaComentarios.adapter = adapter
-            binding.listaComentarios.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
-
-            binding.cantComentarios.text = "(${lista.size})"
         }
 
         return binding.root
     }
 
     companion object{
-        fun newInstance(codigoLugar:Int):ComentariosGestionarLugarFragment{
+        fun newInstance(codigoLugar:String):ComentariosGestionarLugarFragment{
             val args = Bundle()
-            args.putInt("id_lugar", codigoLugar)
+            args.putString("id_lugar", codigoLugar)
             val fragmento = ComentariosGestionarLugarFragment()
             fragmento.arguments = args
             return fragmento

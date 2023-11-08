@@ -4,6 +4,12 @@ import java.util.Date
 
 class Comentario() {
 
+    constructor(texto:String, idUsuario:Int, calificacion:Int):this(){
+        this.texto = texto
+        this.idUsuario = idUsuario
+        this.calificacion = calificacion
+    }
+
     constructor(texto:String, idUsuario:Int, idLugar: Int, calificacion:Int):this(){
         this.texto = texto
         this.idUsuario = idUsuario

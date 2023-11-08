@@ -130,6 +130,7 @@
     <string name="horario_de_sabado_no_valido">Horario de sábado no válido</string>
     <string name="horario_de_domingo_no_valido">Horario de domingo no válido</string>
     <string name="lugar_creado_rev_mod">Lugar creado correctamente, será revisado por un moderador</string>
+    <string name="lugar_creado_error">Hubo un error al crear el lugar</string>
 
     <!-- info lugar fragmento -->
     <string name="no_tiene_telefonos_contac">No tiene telefonos de contacto</string>

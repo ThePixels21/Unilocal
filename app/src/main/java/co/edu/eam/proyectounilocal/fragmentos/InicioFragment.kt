@@ -1,6 +1,7 @@
 package co.edu.eam.proyectounilocal.fragmentos
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -10,18 +11,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import co.edu.eam.proyectounilocal.R
-import co.edu.eam.proyectounilocal.bd.Lugares
+import co.edu.eam.proyectounilocal.actividades.DetalleLugarActivity
+import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentInicioBinding
 import co.edu.eam.proyectounilocal.modelo.EstadoLugar
+import co.edu.eam.proyectounilocal.modelo.Lugar
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-class InicioFragment : Fragment(), OnMapReadyCallback {
+class InicioFragment : Fragment(), OnMapReadyCallback, OnInfoWindowClickListener {
 
     lateinit var binding: FragmentInicioBinding
 
@@ -60,12 +67,13 @@ class InicioFragment : Fragment(), OnMapReadyCallback {
         } catch (e: SecurityException) {
             e.printStackTrace()
         }
-        Lugares.listarPorEstado(EstadoLugar.ACEPTADO).forEach{
-            gMap.addMarker( MarkerOptions().position(LatLng(it.posicion.lat,it.posicion.lng)).title(it.nombre).visible(true))
+        LugaresService.listarLugaresAceptados { lugares ->
+            for (lugar in lugares) {
+                gMap.addMarker(MarkerOptions().position(LatLng(lugar.posicion.lat,lugar.posicion.lng)).title(lugar.nombre).visible(true))!!.tag = lugar.key
+            }
         }
+        gMap.setOnInfoWindowClickListener(this)
         obtenerUbicacion()
-
-
     }
 
     private fun getLocationPermission() {
@@ -101,5 +109,11 @@ class InicioFragment : Fragment(), OnMapReadyCallback {
         } catch (e: SecurityException) {
             Log.e("Exception: %%s", e.message, e)
         }
+    }
+
+    override fun onInfoWindowClick(p0: Marker) {
+        val intent = Intent(requireContext(), DetalleLugarActivity::class.java)
+        intent.putExtra("codigo", p0.tag.toString())
+        requireContext().startActivity(intent)
     }
 }
