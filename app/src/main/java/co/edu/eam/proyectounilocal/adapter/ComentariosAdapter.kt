@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.core.view.isVisible
@@ -16,12 +17,13 @@ import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.DetalleLugarActivity
 import co.edu.eam.proyectounilocal.actividades.MainActivity
 import co.edu.eam.proyectounilocal.bd.Comentarios
+import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.bd.Usuarios
 import co.edu.eam.proyectounilocal.fragmentos.ComentariosLugarFragment
 import co.edu.eam.proyectounilocal.modelo.Comentario
 import org.w3c.dom.Text
 
-class ComentariosAdapter(var lista:ArrayList<Comentario>, var codigoUsuario: Int): RecyclerView.Adapter<ComentariosAdapter.ViewHolder>() {
+class ComentariosAdapter(var lista:ArrayList<Comentario>, var codigoUsuario: Int, var keyLugar: String): RecyclerView.Adapter<ComentariosAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -49,10 +51,12 @@ class ComentariosAdapter(var lista:ArrayList<Comentario>, var codigoUsuario: Int
 
             if(comentario.idUsuario == codigoUsuario){
                 btnEliminar.setOnClickListener{
-                    Comentarios.eliminarComentario(comentario)
-                    //ARREGLAR TOSTRING
-                    DetalleLugarActivity.binding.viewPager.adapter =  ViewPagerAdapterLugar(ComentariosLugarFragment.act, comentario.idLugar.toString(), 1)
-                    DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
+                    LugaresService.eliminarComentario(comentario.key, keyLugar){res ->
+                        if(res){
+                            DetalleLugarActivity.binding.viewPager.adapter =  ViewPagerAdapterLugar(ComentariosLugarFragment.act, keyLugar, 1)
+                            DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
+                        }
+                    }
                 }
             }else{
                 btnEliminar.isVisible = false

@@ -67,7 +67,7 @@ class InicioFragment : Fragment(), OnMapReadyCallback, OnInfoWindowClickListener
         } catch (e: SecurityException) {
             e.printStackTrace()
         }
-        LugaresService.listarLugaresAceptados { lugares ->
+        LugaresService.listarLugaresPorEstado(EstadoLugar.ACEPTADO) { lugares ->
             for (lugar in lugares) {
                 gMap.addMarker(MarkerOptions().position(LatLng(lugar.posicion.lat,lugar.posicion.lng)).title(lugar.nombre).visible(true))!!.tag = lugar.key
             }

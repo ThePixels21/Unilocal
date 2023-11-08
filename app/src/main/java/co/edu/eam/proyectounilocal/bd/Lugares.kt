@@ -58,27 +58,27 @@ object Lugares {
 
     }
 
-    fun listarPorEstado(estado:EstadoLugar):ArrayList<Lugar>{
+    /*fun listarPorEstado(estado:EstadoLugar):ArrayList<Lugar>{
         return lista.filter { l -> l.estado == estado }.toCollection(ArrayList())
-    }
+    }*/
 
-    fun obtener(id:Int): Lugar?{
+    /*fun obtener(id:Int): Lugar?{
         return lista.firstOrNull { l -> l.id == id }
-    }
+    }*/
 
-    fun eliminar(lugar: Lugar){
+    /*fun eliminar(lugar: Lugar){
         lista.remove(lugar)
-    }
+    }*/
 
+    //Pendiente
     fun obtenerFavoritos(codigoUsuario: Int):ArrayList<Lugar>{
         val usuario = Usuarios.buscar(codigoUsuario)
         val lista: ArrayList<Lugar> = ArrayList()
         if(usuario != null){
             for (codigoLugar in usuario.lugaresFavoritos){
-                val lugar = obtener(codigoLugar)
-                if(lugar != null){
-                    lista.add(lugar)
-                }
+                val lugar = Lugar()
+
+                lista.add(lugar)
             }
         }
         return lista
@@ -88,10 +88,10 @@ object Lugares {
         return lista.filter { l -> l.nombre.lowercase().contains(nombre.lowercase()) && l.estado == EstadoLugar.ACEPTADO }.toCollection(ArrayList())
     }
 
-    fun crear(lugar:Lugar){
+    /*fun crear(lugar:Lugar){
         lugar.id = lista.size + 1
         lista.add( lugar )
-    }
+    }*/
 
     fun buscarCiudad(codigoCiudad:Int): ArrayList<Lugar> {
         return lista.filter { l -> l.idCiudad == codigoCiudad && l.estado == EstadoLugar.ACEPTADO }.toCollection(ArrayList())
@@ -101,9 +101,9 @@ object Lugares {
         return lista.filter { l -> l.idCategoria == codigoCategoria && l.estado == EstadoLugar.ACEPTADO }.toCollection(ArrayList())
     }
 
-    fun listarPorPropietario(codigo:Int):ArrayList<Lugar>{
+    /*fun listarPorPropietario(codigo:Int):ArrayList<Lugar>{
         return lista.filter { l -> l.idCreador == codigo }.toCollection(ArrayList())
-    }
+    }*/
 
     fun agregarRegistro(lugar: Lugar, nuevoEstado: EstadoLugar){
         registros.add(RegistroEstadoLugar(lugar, nuevoEstado))
@@ -113,7 +113,7 @@ object Lugares {
         return registros
     }
 
-    fun cambiarEstado(codigo:Int, nuevoEstado:EstadoLugar){
+    /*fun cambiarEstado(codigo:Int, nuevoEstado:EstadoLugar){
 
         val lugar = lista.firstOrNull{ l -> l.id == codigo}
 
@@ -121,6 +121,6 @@ object Lugares {
             lugar.estado = nuevoEstado
         }
 
-    }
+    }*/
 
 }

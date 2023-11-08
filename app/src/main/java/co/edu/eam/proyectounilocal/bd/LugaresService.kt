@@ -45,11 +45,22 @@ object LugaresService {
             }
     }
 
-    fun listarLugaresAceptados(callback: (ArrayList<Lugar>) -> Unit) {
+    fun eliminarLugar(key: String, callback: (Boolean) -> Unit){
+        Firebase.firestore
+            .collection("lugares")
+            .document(key)
+            .delete()
+            .addOnSuccessListener { callback(true) }
+            .addOnFailureListener {
+                Log.e("LugaresService_eliminarLugar", it.message.toString())
+                callback(false) }
+    }
+
+    fun listarLugaresPorEstado(estado: EstadoLugar, callback: (ArrayList<Lugar>) -> Unit) {
         val lugares: ArrayList<Lugar> = ArrayList()
         Firebase.firestore
             .collection("lugares")
-            .whereEqualTo("estado", EstadoLugar.ACEPTADO)
+            .whereEqualTo("estado", estado)
             .get()
             .addOnSuccessListener {
                 for(doc in it){
@@ -61,6 +72,27 @@ object LugaresService {
             }
             .addOnFailureListener {
                 Log.e("LugaresService_listarLugaresAceptados", it.message.toString())
+                callback(lugares)
+            }
+    }
+
+    //Corregir idUsuario
+    fun listarLugaresPorPropietario(idUsuario: Int, callback: (ArrayList<Lugar>) -> Unit){
+        val lugares: ArrayList<Lugar> = ArrayList()
+        Firebase.firestore
+            .collection("lugares")
+            .whereEqualTo("idCreador", idUsuario)
+            .get()
+            .addOnSuccessListener {
+                for(doc in it){
+                    var lugar = doc.toObject(Lugar::class.java)
+                    lugar.key = doc.id
+                    lugares.add(lugar)
+                }
+                callback(lugares) // Llama al callback con los lugares
+            }
+            .addOnFailureListener {
+                Log.e("LugaresService_listarLugaresPorPropietario", it.message.toString())
                 callback(lugares)
             }
     }
@@ -90,6 +122,7 @@ object LugaresService {
             .addOnSuccessListener {
                 for(doc in it){
                     var comentario = doc.toObject(Comentario::class.java)
+                    comentario.key = doc.id
                     comentarios.add(comentario)
                 }
                 callback(comentarios)
@@ -97,6 +130,41 @@ object LugaresService {
             .addOnFailureListener {
                 Log.e("LugaresService_listarComentarios", it.message.toString())
                 callback(comentarios)
+            }
+    }
+
+    fun eliminarComentario(keyComentario: String, keyLugar: String, callback: (Boolean) -> Unit){
+        Firebase.firestore
+            .collection("lugares")
+            .document(keyLugar)
+            .collection("comentarios")
+            .document(keyComentario)
+            .delete()
+            .addOnSuccessListener { callback(true) }
+            .addOnFailureListener {
+                Log.e("LugaresService_eliminarComentario", it.message.toString())
+                callback(false) }
+    }
+
+    //Corregir idUsuario
+    fun tieneComentarios(keyLugar: String, idUsuario: Int, callback: (Boolean) -> Unit) {
+        Firebase.firestore
+            .collection("lugares")
+            .document(keyLugar)
+            .collection("comentarios")
+            .whereEqualTo("idUsuario", idUsuario)
+            .get()
+            .addOnSuccessListener {
+                var res = false
+                for(doc in it){
+                    res = true
+                    break
+                }
+                callback(res)
+            }
+            .addOnFailureListener {
+                Log.e("LugaresService_tieneComentarios", it.message.toString())
+                callback(false)
             }
     }
 

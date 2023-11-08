@@ -57,35 +57,37 @@ class ComentariosLugarFragment : Fragment() {
             if(lugar != null){
                 binding.btnCalificar.setOnClickListener {
                     //ARREGLAR .comentado
-                    if(codigoUsuario != -1 && !Comentarios.comentado(codigoLugar, codigoUsuario)){
-                        DetalleLugarActivity.binding.viewPager.adapter =  ViewPagerAdapterLugar(requireActivity(), codigoLugar, 2)
-                        DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
-                    } else{
-                        Toast.makeText(requireContext(), getString(R.string.no_puede_agregar_mas_de_un_comentario), Toast.LENGTH_LONG).show()
+                    LugaresService.tieneComentarios(codigoLugar, codigoUsuario){res ->
+                        if(codigoUsuario != -1 && !res){
+                            DetalleLugarActivity.binding.viewPager.adapter =  ViewPagerAdapterLugar(requireActivity(), codigoLugar, 2)
+                            DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
+                        } else{
+                            Toast.makeText(requireContext(), getString(R.string.no_puede_agregar_mas_de_un_comentario), Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+                //Listar comentarios y estrellas
+                LugaresService.listarComentarios(codigoLugar){comentarios ->
+                    if(comentarios.size > 0){
+                        val adapter = ComentariosAdapter(comentarios, codigoUsuario, codigoLugar)
+                        binding.listaComentarios.adapter = adapter
+                        binding.listaComentarios.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
+
+                        binding.cantComentarios.text = "(${comentarios.size})"
+
+                        //Cargar estrellas
+                        val cal: Int = lugar!!.obtenerCalificacionPromedio(comentarios)
+
+                        binding.calificacionPromedio.text = cal.toString()
+
+                        if(cal != 0){
+                            for (i in 0 until cal){
+                                (binding.listaEstrellas[i] as TextView).setTextColor(ContextCompat.getColor(binding.listaEstrellas.context, R.color.yellow))
+                            }
+                        }
                     }
                 }
             }
-        }
-
-        //Listar comentarios y estrellas
-        LugaresService.listarComentarios(codigoLugar){comentarios ->
-            val adapter = ComentariosAdapter(comentarios, codigoUsuario)
-            binding.listaComentarios.adapter = adapter
-            binding.listaComentarios.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
-
-            binding.cantComentarios.text = "(${comentarios.size})"
-
-            //Cargar estrellas
-            val cal: Int = lugar!!.obtenerCalificacionPromedio(comentarios)
-
-            binding.calificacionPromedio.text = cal.toString()
-
-            if(cal != 0){
-                for (i in 0 until cal){
-                    (binding.listaEstrellas[i] as TextView).setTextColor(ContextCompat.getColor(binding.listaEstrellas.context, R.color.yellow))
-                }
-            }
-
         }
 
         return binding.root

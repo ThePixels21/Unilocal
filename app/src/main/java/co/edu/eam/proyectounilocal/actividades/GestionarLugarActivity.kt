@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.adapter.ViewPagerAdapterGestionarLugar
@@ -43,9 +44,15 @@ class GestionarLugarActivity : AppCompatActivity() {
 
                     //Botón eliminar
                     binding.btnEliminarLugar.setOnClickListener{
-                        Lugares.eliminar(lugar)
-                        startActivity(Intent(this, MainActivity::class.java))
-                        this.finish()
+                        LugaresService.eliminarLugar(codigoLugar){res ->
+                            if(res){
+                                Toast.makeText(this, getString(R.string.lugar_eliminado), Toast.LENGTH_LONG).show()
+                                startActivity(Intent(this, MainActivity::class.java))
+                                this.finish()
+                            }else {
+                                Toast.makeText(this, getString(R.string.lugar_no_eliminado), Toast.LENGTH_LONG).show()
+                            }
+                        }
                     }
 
                     //Icono estado

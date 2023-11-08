@@ -13,6 +13,7 @@ import co.edu.eam.proyectounilocal.actividades.BusquedaActivity
 import co.edu.eam.proyectounilocal.actividades.MainActivity
 import co.edu.eam.proyectounilocal.adapter.LugarAdapter
 import co.edu.eam.proyectounilocal.bd.Lugares
+import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentMisLugaresBinding
 import co.edu.eam.proyectounilocal.modelo.Lugar
 
@@ -40,10 +41,13 @@ class MisLugaresFragment : Fragment() {
         val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
         val codigoUsuario = sp.getInt("codigo_usuario", -1)
         if(codigoUsuario != -1){
-            lista = Lugares.listarPorPropietario(codigoUsuario)
-            val adapter = LugarAdapter(lista, codigoUsuario)
-            binding.listaMisLugares.adapter = adapter
-            binding.listaMisLugares.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+            LugaresService.listarLugaresPorPropietario(codigoUsuario){lista ->
+                if(lista.size > 0){
+                    val adapter = LugarAdapter(lista, codigoUsuario)
+                    binding.listaMisLugares.adapter = adapter
+                    binding.listaMisLugares.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+                }
+            }
         }
 
         return binding.root

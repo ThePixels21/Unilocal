@@ -34,21 +34,23 @@ class LugaresModAdapter(var lista: ArrayList<Lugar>): RecyclerView.Adapter<Lugar
         val nombre: TextView = itemView.findViewById(R.id.nombre_lugar)
         val btnAprobar: TextView = itemView.findViewById(R.id.btn_aprobar)
         val btnRechazar: TextView = itemView.findViewById(R.id.btn_rechazar)
-        var codigoLugar: Int = -1
+        var codigoLugar: String = ""
 
         init {
             itemView.setOnClickListener(this)
         }
 
         fun bind(lugar: Lugar){
-            codigoLugar = lugar.id
+            codigoLugar = lugar.key
             nombre.text = lugar.nombre
+            //Arreglar
             btnAprobar.setOnClickListener {
                 lugar.estado = EstadoLugar.ACEPTADO
                 Lugares.agregarRegistro(lugar, EstadoLugar.ACEPTADO)
                 lista.remove(lugar)
                 ModMainActivity.binding.viewPager.adapter = ViewPagerAdapterMod(ModMainActivity.act)
             }
+            //Arreglar
             btnRechazar.setOnClickListener {
                 lugar.estado = EstadoLugar.RECHAZADO
                 Lugares.agregarRegistro(lugar, EstadoLugar.RECHAZADO)
@@ -59,7 +61,7 @@ class LugaresModAdapter(var lista: ArrayList<Lugar>): RecyclerView.Adapter<Lugar
 
         override fun onClick(p0: View?) {
             //Enviar al lugar
-            if(codigoLugar != -1){
+            if(codigoLugar != ""){
                 var intent = Intent(nombre.context, ModDetalleLugarActivity::class.java)
                 intent.putExtra("codigo", codigoLugar)
                 nombre.context.startActivity(intent)

@@ -22,7 +22,6 @@ import co.edu.eam.proyectounilocal.modelo.Comentario
 class ComentariosGestionarLugarFragment : Fragment() {
 
     lateinit var binding: FragmentComentariosGestionarLugarBinding
-    private var lista : ArrayList<Comentario> = ArrayList()
     var codigoLugar: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,22 +45,21 @@ class ComentariosGestionarLugarFragment : Fragment() {
             val lugar = lug
             if(lugar != null){
                 //Cargar info
-                val cal: Int = lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
-                binding.calificacionPromedio.text = cal.toString()
+                LugaresService.listarComentarios(codigoLugar){lista ->
+                    val cal: Int = lugar.obtenerCalificacionPromedio(lista)
+                    binding.calificacionPromedio.text = cal.toString()
 
-                if(cal != 0){
-                    for (i in 0 until cal){
-                        (binding.listaEstrellas[i] as TextView).setTextColor(ContextCompat.getColor(binding.listaEstrellas.context, R.color.yellow))
+                    if(cal != 0){
+                        for (i in 0 until cal){
+                            (binding.listaEstrellas[i] as TextView).setTextColor(ContextCompat.getColor(binding.listaEstrellas.context, R.color.yellow))
+                        }
                     }
+                    val adapter = ComentariosAdapter(lista, codigoUsuario, codigoLugar)
+                    binding.listaComentarios.adapter = adapter
+                    binding.listaComentarios.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
+
+                    binding.cantComentarios.text = "(${lista.size})"
                 }
-
-                //ARREGLAR
-                lista = Comentarios.listar(0)
-                val adapter = ComentariosAdapter(lista, codigoUsuario)
-                binding.listaComentarios.adapter = adapter
-                binding.listaComentarios.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
-
-                binding.cantComentarios.text = "(${lista.size})"
             }
         }
 

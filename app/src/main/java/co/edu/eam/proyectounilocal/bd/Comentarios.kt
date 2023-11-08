@@ -4,9 +4,10 @@ import co.edu.eam.proyectounilocal.modelo.Comentario
 
 object Comentarios {
 
-    private val lista:ArrayList<Comentario> = ArrayList()
+//    private val lista:ArrayList<Comentario> = ArrayList()
 
     init {
+/*
 
         var comentario1 = Comentario("Excelente servicio y buen ambiente", 1, 2, 5 )
         comentario1.id = 1
@@ -26,19 +27,20 @@ object Comentarios {
         var comentario6 = Comentario("Un hotel bien ubicado y con desayuno incluído. Recomendado.", 6, 5, 5 )
         comentario6.id = 6
         lista.add( comentario6 )
+*/
 
     }
 
-    fun listar(idLugar:Int):ArrayList<Comentario>{
+    /*fun listar(idLugar:Int):ArrayList<Comentario>{
         return lista.filter { c -> c.idLugar == idLugar }.toCollection(ArrayList())
-    }
+    }*/
 
-    fun crear(comentario: Comentario){
+/*    fun crear(comentario: Comentario){
         comentario.id = lista.size+1
         lista.add( comentario )
-    }
+    }*/
 
-    fun comentado(idLugar:String, idUsuario:Int): Boolean{
+    /*fun comentado(idLugar:String, idUsuario:Int): Boolean{
         //ARREGLAR
         var list = listar(0)
         for (coment in list){
@@ -47,9 +49,9 @@ object Comentarios {
             }
         }
         return false
-    }
+    }*/
 
-    fun eliminarComentario(comentario: Comentario){
+    /*fun eliminarComentario(comentario: Comentario){
         lista.remove(comentario)
-    }
+    }*/
 }
