@@ -1,5 +1,6 @@
 package co.edu.eam.proyectounilocal.fragmentos
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.BusquedaActivity
 import co.edu.eam.proyectounilocal.actividades.MainActivity
@@ -39,7 +41,7 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
     lateinit var ciudades:ArrayList<Ciudad>
     lateinit var categorias:ArrayList<Categoria>
 
-
+    lateinit var dialog: Dialog
     lateinit var gMap:GoogleMap
     private val defaultLocation = LatLng(4.550923, -75.6557201)
     private var posicion:Posicion? = null
@@ -53,6 +55,10 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCrearLugarBinding.inflate(inflater, container, false)
+
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder.setView(R.layout.dialogo_progreso)
+        dialog = builder.create()
 
         CiudadesService.listar { lista ->
             ciudades = lista
@@ -136,7 +142,7 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
     }
 
     fun crearLugar(){
-
+        setDialog(true)
         Log.e("CrearLugarFragment", binding.ciudadLugar.selectedItem.toString())
         val nombre = binding.nombreLugar.text.toString()
         val descripcion = binding.descripcionLugar.text.toString()
@@ -271,16 +277,23 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
 
                 LugaresService.crearLugar(nuevoLugar){res ->
                     if(res){
+                        setDialog(false)
                         Toast.makeText(requireActivity(), getString(R.string.lugar_creado_rev_mod), Toast.LENGTH_LONG).show()
                         requireActivity().supportFragmentManager.beginTransaction().replace( R.id.contenido_principal, MisLugaresFragment() )
                             .addToBackStack(MainActivity.MENU_MIS_LUGARES).commit()
                     }else{
+                        setDialog(false)
                         Toast.makeText(requireActivity(), getString(R.string.lugar_creado_error), Toast.LENGTH_LONG).show()
                         requireActivity().supportFragmentManager.beginTransaction().replace( R.id.contenido_principal, MisLugaresFragment() )
                             .addToBackStack(MainActivity.MENU_MIS_LUGARES).commit()
                     }
                 }
+            } else {
+                setDialog(false)
+                Toast.makeText(requireActivity(), getString(R.string.lugar_creado_error), Toast.LENGTH_LONG).show()
             }
+        } else {
+            setDialog(false)
         }
 
     }
@@ -300,6 +313,10 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
             gMap.clear()
             gMap.addMarker( MarkerOptions().position(it).title("Aqui Esta el lugar"))
         }
+    }
+
+    private fun setDialog(show: Boolean){
+        if (show) dialog.show() else dialog.dismiss()
     }
 
 }

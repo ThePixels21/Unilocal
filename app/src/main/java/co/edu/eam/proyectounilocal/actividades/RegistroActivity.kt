@@ -66,7 +66,11 @@ class RegistroActivity : AppCompatActivity() {
         if(password.isEmpty()) {
             binding.passwordUsuario.error = getString(R.string.campo_obligatorio)
         } else {
-            binding.passwordUsuario.error = null
+            if(password.length >= 6){
+                binding.passwordUsuario.error = null
+            } else {
+                binding.passwordUsuario.error = getString(R.string.seis_caracteres_minimo)
+            }
         }
 
         if(cpassword.isEmpty()) {
@@ -75,7 +79,7 @@ class RegistroActivity : AppCompatActivity() {
             binding.passwordConfirmUsuario.error = null
         }
 
-        if(nombre.isNotEmpty() && nickname.isNotEmpty() && email.isNotEmpty() && ciudad.isNotEmpty() && password.isNotEmpty() && cpassword.isNotEmpty()){
+        if(nombre.isNotEmpty() && nickname.isNotEmpty() && email.isNotEmpty() && ciudad.isNotEmpty() && password.isNotEmpty() && cpassword.isNotEmpty() && password.length >= 6){
             if(password==cpassword){
                 setDialog(true)
                 binding.passwordConfirmUsuario.error = null

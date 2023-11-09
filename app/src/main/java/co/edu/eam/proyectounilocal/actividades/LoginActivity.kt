@@ -136,7 +136,24 @@ class LoginActivity : AppCompatActivity() {
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(intent)
                     finish()
+                } else {
+                    FirebaseAuth.getInstance().signOut()
+                    binding = ActivityLoginBinding.inflate(layoutInflater)
+                    setContentView(binding.root)
+
+                    binding.btnIniciarSesion.setOnClickListener{ login() }
+                    binding.txtOlvidoContrasenia.setOnClickListener{ irAOlvidoContrasenia() }
+                    binding.txtNoCuenta.setOnClickListener { irARegsitro() }
                 }
+            }
+            .addOnFailureListener {
+                FirebaseAuth.getInstance().signOut()
+                binding = ActivityLoginBinding.inflate(layoutInflater)
+                setContentView(binding.root)
+
+                binding.btnIniciarSesion.setOnClickListener{ login() }
+                binding.txtOlvidoContrasenia.setOnClickListener{ irAOlvidoContrasenia() }
+                binding.txtNoCuenta.setOnClickListener { irARegsitro() }
             }
     }
 

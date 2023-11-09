@@ -106,6 +106,7 @@
     <!-- registro activity -->
 
     <string name="campo_obligatorio">Campo obligatorio</string>
+    <string name="seis_caracteres_minimo">Mínimo 6 caracteres</string>
     <string name="registrado_exitosamente">Registrado exitosamente</string>
     <string name="no_se_pudo_registrar">No se pudo registrar</string>
     <string name="la_contrasena_ingresada_no_coincide">La contraseña ingresada no coincide</string>
