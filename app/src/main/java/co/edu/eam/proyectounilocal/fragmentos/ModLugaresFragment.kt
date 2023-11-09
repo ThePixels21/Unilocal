@@ -6,13 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.adapter.LugaresModAdapter
-import co.edu.eam.proyectounilocal.bd.Lugares
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentModLugaresBinding
 import co.edu.eam.proyectounilocal.modelo.EstadoLugar
-import co.edu.eam.proyectounilocal.modelo.Lugar
 
 class ModLugaresFragment : Fragment() {
 

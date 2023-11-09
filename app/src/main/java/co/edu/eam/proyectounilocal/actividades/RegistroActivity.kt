@@ -4,16 +4,12 @@ import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import co.edu.eam.proyectounilocal.R
-import co.edu.eam.proyectounilocal.bd.Usuarios
 import co.edu.eam.proyectounilocal.databinding.ActivityRegistroBinding
 import co.edu.eam.proyectounilocal.modelo.Rol
 import co.edu.eam.proyectounilocal.modelo.Usuario
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase

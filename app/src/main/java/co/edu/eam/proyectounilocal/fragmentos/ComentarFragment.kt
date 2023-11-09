@@ -17,6 +17,7 @@ import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentComentarBinding
 import co.edu.eam.proyectounilocal.modelo.Comentario
 import co.edu.eam.proyectounilocal.modelo.Lugar
+import com.google.firebase.auth.FirebaseAuth
 
 class ComentarFragment : Fragment() {
 
@@ -67,21 +68,23 @@ class ComentarFragment : Fragment() {
         }
 
         if(texto.isNotEmpty()){
-            val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
-            val codigoUsuario = sp.getInt("codigo_usuario", -1)
-            if(codigoUsuario != -1 && codigoLugar != ""){
-                val comentario = Comentario(texto, codigoUsuario, estrellas)
-                LugaresService.agregarComentario(comentario, codigoLugar) { res ->
-                    if (res) {
-                        Toast.makeText(requireContext(), getString(R.string.comentario_enviado), Toast.LENGTH_LONG).show()
-                    } else {
-                        Toast.makeText(requireContext(), getString(R.string.no_se_pudo_enviar_comentario), Toast.LENGTH_LONG).show()
+            val user = FirebaseAuth.getInstance().currentUser
+            if(user != null){
+                val codigoUsuario: String = user.uid
+                if(codigoLugar != ""){
+                    val comentario = Comentario(texto, codigoUsuario, estrellas)
+                    LugaresService.agregarComentario(comentario, codigoLugar) { res ->
+                        if (res) {
+                            Toast.makeText(requireContext(), getString(R.string.comentario_enviado), Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(requireContext(), getString(R.string.no_se_pudo_enviar_comentario), Toast.LENGTH_LONG).show()
+                        }
+                        DetalleLugarActivity.binding.viewPager.adapter = ViewPagerAdapterLugar(requireActivity(), codigoLugar, 1)
+                        DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
                     }
-                    DetalleLugarActivity.binding.viewPager.adapter = ViewPagerAdapterLugar(requireActivity(), codigoLugar, 1)
-                    DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
+                } else {
+                    Toast.makeText(requireContext(), getString(R.string.no_se_pudo_enviar_comentario) , Toast.LENGTH_LONG).show()
                 }
-            } else {
-                Toast.makeText(requireContext(), getString(R.string.no_se_pudo_enviar_comentario) , Toast.LENGTH_LONG).show()
             }
         }
     }

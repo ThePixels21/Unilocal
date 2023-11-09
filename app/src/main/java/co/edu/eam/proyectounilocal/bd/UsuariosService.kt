@@ -27,4 +27,16 @@ object UsuariosService {
             }
     }
 
+    fun actualizarUsuario(usuario: Usuario, callback: (Boolean) -> Unit){
+        Firebase.firestore
+            .collection("usuarios")
+            .document(usuario.key)
+            .set(usuario)
+            .addOnSuccessListener { callback(true) }
+            .addOnFailureListener {
+                Log.e("UsuariosService_actualizarUsuario", it.message.toString())
+                callback(false)
+            }
+    }
+
 }

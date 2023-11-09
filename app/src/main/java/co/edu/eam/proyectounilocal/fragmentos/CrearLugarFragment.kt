@@ -31,6 +31,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.auth.FirebaseAuth
 
 class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
 
@@ -168,9 +169,9 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
 
         if(nombre.isNotEmpty() && descripcion.isNotEmpty() && telefono.isNotEmpty() && direccion.isNotEmpty() && idCiudad != "" && idCategoria != "" && posicion != null) {
 
-            val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
-            val codigoUsuario = sp.getInt("codigo_usuario", -1)
-            if(codigoUsuario != -1){
+            val user = FirebaseAuth.getInstance().currentUser
+            if(user != null){
+                val codigoUsuario = user.uid
                 val nuevoLugar = Lugar(nombre, descripcion, codigoUsuario, EstadoLugar.SIN_REVISAR, idCategoria, direccion,posicion!! , idCiudad)
 
                 val telefonos: ArrayList<String> = ArrayList()
@@ -268,7 +269,6 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
                     }
                 }
 
-                //Lugares.crear(nuevoLugar)
                 LugaresService.crearLugar(nuevoLugar){res ->
                     if(res){
                         Toast.makeText(requireActivity(), getString(R.string.lugar_creado_rev_mod), Toast.LENGTH_LONG).show()

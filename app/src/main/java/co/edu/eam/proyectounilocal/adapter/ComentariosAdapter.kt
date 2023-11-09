@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.DetalleLugarActivity
 import co.edu.eam.proyectounilocal.bd.LugaresService
-import co.edu.eam.proyectounilocal.bd.Usuarios
+import co.edu.eam.proyectounilocal.bd.UsuariosService
 import co.edu.eam.proyectounilocal.fragmentos.ComentariosLugarFragment
 import co.edu.eam.proyectounilocal.modelo.Comentario
 
-class ComentariosAdapter(var lista:ArrayList<Comentario>, var codigoUsuario: Int, var keyLugar: String): RecyclerView.Adapter<ComentariosAdapter.ViewHolder>() {
+class ComentariosAdapter(var lista:ArrayList<Comentario>, var codigoUsuario: String, var keyLugar: String): RecyclerView.Adapter<ComentariosAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -41,36 +41,37 @@ class ComentariosAdapter(var lista:ArrayList<Comentario>, var codigoUsuario: Int
         val btnEliminar: TextView =  itemView.findViewById(R.id.btn_eliminar_comentario)
 
         fun bind(comentario: Comentario){
-            val usuario = Usuarios.buscar(comentario.idUsuario)
+            UsuariosService.buscar(comentario.keyUsuario){usuario ->
 
-            if(comentario.idUsuario == codigoUsuario){
-                btnEliminar.setOnClickListener{
-                    LugaresService.eliminarComentario(comentario.key, keyLugar){res ->
-                        if(res){
-                            DetalleLugarActivity.binding.viewPager.adapter =  ViewPagerAdapterLugar(ComentariosLugarFragment.act, keyLugar, 1)
-                            DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
+                if(comentario.keyUsuario == codigoUsuario){
+                    btnEliminar.setOnClickListener{
+                        LugaresService.eliminarComentario(comentario.key, keyLugar){res ->
+                            if(res){
+                                DetalleLugarActivity.binding.viewPager.adapter =  ViewPagerAdapterLugar(ComentariosLugarFragment.act, keyLugar, 1)
+                                DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
+                            }
                         }
                     }
+                }else{
+                    btnEliminar.isVisible = false
                 }
-            }else{
-                btnEliminar.isVisible = false
-            }
 
-            if(usuario != null){
-                nombreUsuario.text = usuario.nickname
-            }
-
-            val cal: Int = comentario.calificacion
-
-            if(cal != 0){
-                for (i in 0 until cal){
-                    (listaEstrellas[i] as TextView).setTextColor(ContextCompat.getColor(listaEstrellas.context, R.color.yellow))
+                if(usuario != null){
+                    nombreUsuario.text = usuario.nickname
                 }
+
+                val cal: Int = comentario.calificacion
+
+                if(cal != 0){
+                    for (i in 0 until cal){
+                        (listaEstrellas[i] as TextView).setTextColor(ContextCompat.getColor(listaEstrellas.context, R.color.yellow))
+                    }
+                }
+
+                fecha.text = comentario.fecha.toString().substring(0, 10)
+
+                coment.text = comentario.texto
             }
-
-            fecha.text = comentario.fecha.toString().substring(0, 10)
-
-            coment.text = comentario.texto
         }
 
         override fun onClick(p0: View?) {}

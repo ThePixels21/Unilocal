@@ -14,6 +14,7 @@ import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.adapter.ComentariosAdapter
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentComentariosGestionarLugarBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class ComentariosGestionarLugarFragment : Fragment() {
 
@@ -34,9 +35,6 @@ class ComentariosGestionarLugarFragment : Fragment() {
     ): View? {
         binding = FragmentComentariosGestionarLugarBinding.inflate(inflater, container, false)
 
-        val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
-        val codigoUsuario = sp.getInt("codigo_usuario", -1)
-
         LugaresService.obtener(codigoLugar){lug ->
             val lugar = lug
             if(lugar != null){
@@ -50,10 +48,12 @@ class ComentariosGestionarLugarFragment : Fragment() {
                             (binding.listaEstrellas[i] as TextView).setTextColor(ContextCompat.getColor(binding.listaEstrellas.context, R.color.yellow))
                         }
                     }
-                    val adapter = ComentariosAdapter(lista, codigoUsuario, codigoLugar)
-                    binding.listaComentarios.adapter = adapter
-                    binding.listaComentarios.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
-
+                    val user = FirebaseAuth.getInstance().currentUser
+                    if(user != null){
+                        val adapter = ComentariosAdapter(lista, user.uid, codigoLugar)
+                        binding.listaComentarios.adapter = adapter
+                        binding.listaComentarios.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
+                    }
                     binding.cantComentarios.text = "(${lista.size})"
                 }
             }

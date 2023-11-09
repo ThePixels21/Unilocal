@@ -1,6 +1,5 @@
 package co.edu.eam.proyectounilocal.fragmentos
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,10 +11,10 @@ import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.BusquedaActivity
 import co.edu.eam.proyectounilocal.actividades.MainActivity
 import co.edu.eam.proyectounilocal.adapter.LugarAdapter
-import co.edu.eam.proyectounilocal.bd.Lugares
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentMisLugaresBinding
 import co.edu.eam.proyectounilocal.modelo.Lugar
+import com.google.firebase.auth.FirebaseAuth
 
 class MisLugaresFragment : Fragment() {
 
@@ -38,15 +37,13 @@ class MisLugaresFragment : Fragment() {
         binding.btnNuevoLugar.setOnClickListener { requireActivity().supportFragmentManager.beginTransaction().replace( R.id.contenido_principal, CrearLugarFragment() )
             .addToBackStack(MainActivity.MENU_CREAR_LUGAR).commit() }
 
-        val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
-        val codigoUsuario = sp.getInt("codigo_usuario", -1)
-        if(codigoUsuario != -1){
+        val user = FirebaseAuth.getInstance().currentUser
+        if(user != null){
+            val codigoUsuario = user.uid
             LugaresService.listarLugaresPorPropietario(codigoUsuario){lista ->
-                if(lista.size > 0){
-                    val adapter = LugarAdapter(lista, codigoUsuario)
-                    binding.listaMisLugares.adapter = adapter
-                    binding.listaMisLugares.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-                }
+                val adapter = LugarAdapter(lista, codigoUsuario)
+                binding.listaMisLugares.adapter = adapter
+                binding.listaMisLugares.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
             }
         }
 

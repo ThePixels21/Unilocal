@@ -7,6 +7,8 @@ import co.edu.eam.proyectounilocal.modelo.Comentario
 import co.edu.eam.proyectounilocal.modelo.EstadoLugar
 import co.edu.eam.proyectounilocal.modelo.Lugar
 import co.edu.eam.proyectounilocal.modelo.RegistroEstadoLugar
+import co.edu.eam.proyectounilocal.modelo.Usuario
+import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.toObject
 import com.google.firebase.ktx.Firebase
@@ -97,12 +99,11 @@ object LugaresService {
             }
     }
 
-    //Corregir idUsuario
-    fun listarLugaresPorPropietario(idUsuario: Int, callback: (ArrayList<Lugar>) -> Unit){
+    fun listarLugaresPorPropietario(keyUsuario: String, callback: (ArrayList<Lugar>) -> Unit){
         val lugares: ArrayList<Lugar> = ArrayList()
         Firebase.firestore
             .collection("lugares")
-            .whereEqualTo("idCreador", idUsuario)
+            .whereEqualTo("idCreador", keyUsuario)
             .get()
             .addOnSuccessListener {
                 for(doc in it){
@@ -115,6 +116,53 @@ object LugaresService {
             .addOnFailureListener {
                 Log.e("LugaresService_listarLugaresPorPropietario", it.message.toString())
                 callback(lugares)
+            }
+    }
+
+    fun obtenerLugaresFavoritos(keyUsuario: String, callback: (ArrayList<Lugar>) -> Unit){
+        Firebase.firestore
+            .collection("usuarios")
+            .document(keyUsuario)
+            .get()
+            .addOnSuccessListener { document ->
+                val usuario = document.toObject(Usuario::class.java)
+                if(usuario != null){
+                    val keysLugares = usuario.lugaresFavoritos
+                    val lugares: ArrayList<Lugar> = ArrayList()
+                    val chunks = keysLugares.chunked(10) // Divide el array en subarrays de tamaño 10
+                    var completedChunks = 0
+
+                    for (chunk in chunks) {
+                        Firebase.firestore
+                            .collection("lugares")
+                            .whereIn(FieldPath.documentId(), chunk)
+                            .get()
+                            .addOnSuccessListener { result ->
+                                for (doc in result) {
+                                    var lugar = doc.toObject(Lugar::class.java)
+                                    lugar.key = doc.id
+                                    lugares.add(lugar)
+                                }
+                                completedChunks++
+                                if (completedChunks == chunks.size) {
+                                    callback(lugares) // Llama al callback solo cuando todas las consultas han terminado
+                                }
+                            }
+                            .addOnFailureListener {
+                                Log.e("LugaresService_obtenerFavoritos", it.message.toString())
+                                completedChunks++
+                                if (completedChunks == chunks.size) {
+                                    callback(lugares)
+                                }
+                            }
+                    }
+                } else {
+                    callback(ArrayList())
+                }
+            }
+            .addOnFailureListener {
+                Log.e("LugaresService_obtenerFavoritos", it.message.toString())
+                callback(ArrayList())
             }
     }
 
@@ -189,13 +237,12 @@ object LugaresService {
                 callback(false) }
     }
 
-    //Corregir idUsuario
-    fun tieneComentarios(keyLugar: String, idUsuario: Int, callback: (Boolean) -> Unit) {
+    fun tieneComentarios(keyLugar: String, keyUsuario: String, callback: (Boolean) -> Unit) {
         Firebase.firestore
             .collection("lugares")
             .document(keyLugar)
             .collection("comentarios")
-            .whereEqualTo("idUsuario", idUsuario)
+            .whereEqualTo("keyUsuario", keyUsuario)
             .get()
             .addOnSuccessListener {
                 var res = false

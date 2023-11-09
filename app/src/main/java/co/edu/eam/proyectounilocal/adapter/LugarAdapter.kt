@@ -16,7 +16,7 @@ import co.edu.eam.proyectounilocal.actividades.GestionarLugarActivity
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.modelo.Lugar
 
-class LugarAdapter(var lista:ArrayList<Lugar>, codigoUsuario: Int = -1): RecyclerView.Adapter<LugarAdapter.ViewHolder>() {
+class LugarAdapter(var lista:ArrayList<Lugar>, codigoUsuario: String = ""): RecyclerView.Adapter<LugarAdapter.ViewHolder>() {
     val codigoUsuario = codigoUsuario
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -80,7 +80,7 @@ class LugarAdapter(var lista:ArrayList<Lugar>, codigoUsuario: Int = -1): Recycle
         }
 
         override fun onClick(p0: View?) {
-            if(codigoUsuario != -1 && lugarActual != null && lugarActual!!.idCreador == codigoUsuario){
+            if(codigoUsuario != "" && lugarActual != null && lugarActual!!.idCreador == codigoUsuario){
                 var intent = Intent(nombre.context, GestionarLugarActivity::class.java)
                 intent.putExtra("codigo", codigoLugar)
                 nombre.context.startActivity(intent)

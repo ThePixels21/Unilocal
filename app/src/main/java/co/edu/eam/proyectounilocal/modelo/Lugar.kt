@@ -5,7 +5,7 @@ import java.util.Date
 
 class Lugar() {
 
-    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, keyCategoria:String, direccion:String, posicion: Posicion, idCiudad:String):this(){
+    constructor( nombre:String, descripcion:String, idCreador:String, estado:EstadoLugar, keyCategoria:String, direccion:String, posicion: Posicion, idCiudad:String):this(){
         this.nombre = nombre
         this.descripcion = descripcion
         this.idCreador = idCreador
@@ -18,7 +18,7 @@ class Lugar() {
         this.idCiudad = idCiudad
     }
 
-    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, keyCategoria:String, direccion:String, latitud:Double, longitud:Double, idCiudad:String):this(){
+    constructor( nombre:String, descripcion:String, idCreador:String, estado:EstadoLugar, keyCategoria:String, direccion:String, latitud:Double, longitud:Double, idCiudad:String):this(){
         this.nombre = nombre
         this.descripcion = descripcion
         this.idCreador = idCreador
@@ -35,7 +35,7 @@ class Lugar() {
     var key:String = ""
     var nombre:String = ""
     var descripcion:String = ""
-    var idCreador:Int = 0
+    var idCreador:String = ""
     var estado:EstadoLugar = EstadoLugar.SIN_REVISAR
     var keyCategoria:String = ""
     var direccion:String = ""

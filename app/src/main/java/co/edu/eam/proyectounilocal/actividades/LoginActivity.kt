@@ -24,11 +24,16 @@ class LoginActivity : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser
         if(user != null) {
             hacerRedireccion(user)
-        }else{
+        } else {
+            binding = ActivityLoginBinding.inflate(layoutInflater)
+            setContentView(binding.root)
 
+            binding.btnIniciarSesion.setOnClickListener{ login() }
+            binding.txtOlvidoContrasenia.setOnClickListener{ irAOlvidoContrasenia() }
+            binding.txtNoCuenta.setOnClickListener { irARegsitro() }
         }
 
-        val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
+        /*val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
         val correo = sp.getString("correo_usuario", "")
         val tipo = sp.getString("tipo_usuario", "")
         if(correo!!.isNotEmpty() && tipo!!.isNotEmpty()){
@@ -52,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
             binding.btnIniciarSesion.setOnClickListener{ login() }
             binding.txtOlvidoContrasenia.setOnClickListener{ irAOlvidoContrasenia() }
             binding.txtNoCuenta.setOnClickListener { irARegsitro() }
-        }
+        }*/
     }
 
     fun login(){

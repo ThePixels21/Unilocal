@@ -19,13 +19,12 @@ import co.edu.eam.proyectounilocal.adapter.ViewPagerAdapterLugar
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentComentariosLugarBinding
 import co.edu.eam.proyectounilocal.modelo.Lugar
+import com.google.firebase.auth.FirebaseAuth
 
 class ComentariosLugarFragment : Fragment() {
 
     lateinit var binding: FragmentComentariosLugarBinding
     var codigoLugar: String = ""
-    var codigoUsuario: Int = -1
-    private var lugar: Lugar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,41 +42,40 @@ class ComentariosLugarFragment : Fragment() {
     ): View? {
         binding = FragmentComentariosLugarBinding.inflate(inflater, container, false)
 
-        val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
-        codigoUsuario = sp.getInt("codigo_usuario", -1)
-
-        LugaresService.obtener(codigoLugar){lug ->
-            lugar = lug
+        LugaresService.obtener(codigoLugar){lugar ->
 
             if(lugar != null){
-                binding.btnCalificar.setOnClickListener {
-                    //ARREGLAR .comentado
-                    LugaresService.tieneComentarios(codigoLugar, codigoUsuario){res ->
-                        if(codigoUsuario != -1 && !res){
-                            DetalleLugarActivity.binding.viewPager.adapter =  ViewPagerAdapterLugar(requireActivity(), codigoLugar, 2)
-                            DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
-                        } else{
-                            Toast.makeText(requireContext(), getString(R.string.no_puede_agregar_mas_de_un_comentario), Toast.LENGTH_LONG).show()
+                val user = FirebaseAuth.getInstance().currentUser
+                if(user != null){
+                    val codigoUsuario = user.uid
+                    binding.btnCalificar.setOnClickListener {
+                        LugaresService.tieneComentarios(codigoLugar, codigoUsuario){res ->
+                            if(!res){
+                                DetalleLugarActivity.binding.viewPager.adapter =  ViewPagerAdapterLugar(requireActivity(), codigoLugar, 2)
+                                DetalleLugarActivity.binding.viewPager.setCurrentItem(1)
+                            } else{
+                                Toast.makeText(requireContext(), getString(R.string.no_puede_agregar_mas_de_un_comentario), Toast.LENGTH_LONG).show()
+                            }
                         }
                     }
-                }
-                //Listar comentarios y estrellas
-                LugaresService.listarComentarios(codigoLugar){comentarios ->
-                    if(comentarios.size > 0){
-                        val adapter = ComentariosAdapter(comentarios, codigoUsuario, codigoLugar)
-                        binding.listaComentarios.adapter = adapter
-                        binding.listaComentarios.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
+                    //Listar comentarios y estrellas
+                    LugaresService.listarComentarios(codigoLugar){comentarios ->
+                        if(comentarios.size > 0){
+                            val adapter = ComentariosAdapter(comentarios, codigoUsuario, codigoLugar)
+                            binding.listaComentarios.adapter = adapter
+                            binding.listaComentarios.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
 
-                        binding.cantComentarios.text = "(${comentarios.size})"
+                            binding.cantComentarios.text = "(${comentarios.size})"
 
-                        //Cargar estrellas
-                        val cal: Int = lugar!!.obtenerCalificacionPromedio(comentarios)
+                            //Cargar estrellas
+                            val cal: Int = lugar!!.obtenerCalificacionPromedio(comentarios)
 
-                        binding.calificacionPromedio.text = cal.toString()
+                            binding.calificacionPromedio.text = cal.toString()
 
-                        if(cal != 0){
-                            for (i in 0 until cal){
-                                (binding.listaEstrellas[i] as TextView).setTextColor(ContextCompat.getColor(binding.listaEstrellas.context, R.color.yellow))
+                            if(cal != 0){
+                                for (i in 0 until cal){
+                                    (binding.listaEstrellas[i] as TextView).setTextColor(ContextCompat.getColor(binding.listaEstrellas.context, R.color.yellow))
+                                }
                             }
                         }
                     }

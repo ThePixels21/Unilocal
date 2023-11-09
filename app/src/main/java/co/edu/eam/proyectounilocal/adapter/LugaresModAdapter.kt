@@ -5,13 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.proyectounilocal.R
-import co.edu.eam.proyectounilocal.actividades.GestionarLugarActivity
 import co.edu.eam.proyectounilocal.actividades.ModDetalleLugarActivity
 import co.edu.eam.proyectounilocal.actividades.ModMainActivity
-import co.edu.eam.proyectounilocal.bd.Lugares
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.modelo.EstadoLugar
 import co.edu.eam.proyectounilocal.modelo.Lugar
