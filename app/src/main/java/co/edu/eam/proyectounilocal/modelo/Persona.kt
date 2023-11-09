@@ -1,5 +1,6 @@
 package co.edu.eam.proyectounilocal.modelo
 
+/*
 open class Persona() {
 
     open var key: String = ""
@@ -19,4 +20,4 @@ open class Persona() {
         return "Persona(id=$id, nombre='$nombre', correo='$correo', password='$password')"
     }
 
-}
+}*/

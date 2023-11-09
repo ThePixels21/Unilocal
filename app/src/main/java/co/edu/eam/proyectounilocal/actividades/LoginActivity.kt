@@ -9,7 +9,6 @@ import android.widget.Toast
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.bd.Personas
 import co.edu.eam.proyectounilocal.databinding.ActivityLoginBinding
-import co.edu.eam.proyectounilocal.modelo.Moderador
 import co.edu.eam.proyectounilocal.modelo.Usuario
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -66,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         if(correo.isNotEmpty() && password.isNotEmpty()){
-            val persona = Personas.login(correo.toString(), password.toString())
+            /*val persona = Personas.login(correo.toString(), password.toString())
             if(persona != null){
 
                 val tipo = if(persona is Usuario) "usuario" else "moderador"
@@ -84,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             } else {
                 Toast.makeText(this, getString(R.string.datos_incorrectos), Toast.LENGTH_LONG).show()
-            }
+            }*/
         }
     }
 

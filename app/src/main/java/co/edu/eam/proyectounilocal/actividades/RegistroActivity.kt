@@ -71,12 +71,12 @@ class RegistroActivity : AppCompatActivity() {
         if(nombre.isNotEmpty() && nickname.isNotEmpty() && email.isNotEmpty() && ciudad.isNotEmpty() && password.isNotEmpty() && cpassword.isNotEmpty()){
             if(password==cpassword){
                 binding.passwordConfirmUsuario.error = null
-                if(Usuarios.agregar(Usuario(0, nombre, nickname, ciudad, email, password))){
+                /*if(Usuarios.agregar(Usuario(0, nombre, nickname, ciudad, email, password))){
                     Toast.makeText(this, getString(R.string.registrado_exitosamente), Toast.LENGTH_LONG).show()
                     startActivity(Intent(this, LoginActivity::class.java))
                 }else{
                     Toast.makeText(this, getString(R.string.no_se_pudo_registrar), Toast.LENGTH_LONG).show()
-                }
+                }*/
             }else{
                 binding.passwordConfirmUsuario.error = getString(R.string.la_contrasena_ingresada_no_coincide)
             }

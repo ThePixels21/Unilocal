@@ -1,5 +1,6 @@
 package co.edu.eam.proyectounilocal.modelo
 
+/*
 class Moderador(): Persona() {
 
     override var key: String = ""
@@ -19,4 +20,4 @@ class Moderador(): Persona() {
         return "Moderador() ${super.toString()}"
     }
 
-}
+}*/

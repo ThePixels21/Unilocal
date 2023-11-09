@@ -1,8 +1,8 @@
 package co.edu.eam.proyectounilocal.bd
 
-import co.edu.eam.proyectounilocal.modelo.Moderador
 
 object Moderadores {
+/*
 
     private val lista:ArrayList<Moderador> = ArrayList()
 
@@ -18,5 +18,6 @@ object Moderadores {
     fun obtener(id:Int): Moderador?{
         return lista.firstOrNull { a -> a.id == id }
     }
+*/
 
 }

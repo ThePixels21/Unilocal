@@ -76,6 +76,26 @@ object LugaresService {
             }
     }
 
+    fun listarPorCategoria(keyCategoria: String, callback: (ArrayList<Lugar>) -> Unit){
+        val lugares: ArrayList<Lugar> = ArrayList()
+        Firebase.firestore
+            .collection("lugares")
+            .whereEqualTo("keyCategoria", keyCategoria)
+            .get()
+            .addOnSuccessListener {
+                for(doc in it){
+                    var lugar = doc.toObject(Lugar::class.java)
+                    lugar.key = doc.id
+                    lugares.add(lugar)
+                }
+                callback(lugares)
+            }
+            .addOnFailureListener {
+                Log.e("LugaresService_listarPorCategoria", it.message.toString())
+                callback(lugares)
+            }
+    }
+
     //Corregir idUsuario
     fun listarLugaresPorPropietario(idUsuario: Int, callback: (ArrayList<Lugar>) -> Unit){
         val lugares: ArrayList<Lugar> = ArrayList()

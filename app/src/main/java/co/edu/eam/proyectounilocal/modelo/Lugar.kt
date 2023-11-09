@@ -5,12 +5,12 @@ import java.util.Date
 
 class Lugar() {
 
-    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, idCategoria:Int, direccion:String, posicion: Posicion, idCiudad:Int):this(){
+    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, keyCategoria:String, direccion:String, posicion: Posicion, idCiudad:Int):this(){
         this.nombre = nombre
         this.descripcion = descripcion
         this.idCreador = idCreador
         this.estado = estado
-        this.idCategoria = idCategoria
+        this.keyCategoria = keyCategoria
         this.direccion = direccion
         this.posicion = posicion
         this.latitud = posicion.lat
@@ -18,12 +18,12 @@ class Lugar() {
         this.idCiudad = idCiudad
     }
 
-    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, idCategoria:Int, direccion:String, latitud:Double, longitud:Double, idCiudad:Int):this(){
+    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, keyCategoria:String, direccion:String, latitud:Double, longitud:Double, idCiudad:Int):this(){
         this.nombre = nombre
         this.descripcion = descripcion
         this.idCreador = idCreador
         this.estado = estado
-        this.idCategoria = idCategoria
+        this.keyCategoria = keyCategoria
         this.direccion = direccion
         this.latitud = latitud
         this.longitud = longitud
@@ -37,7 +37,7 @@ class Lugar() {
     var descripcion:String = ""
     var idCreador:Int = 0
     var estado:EstadoLugar = EstadoLugar.SIN_REVISAR
-    var idCategoria:Int = 0
+    var keyCategoria:String = ""
     var direccion:String = ""
     var posicion: Posicion = Posicion()
     var idCiudad:Int = 0
@@ -95,6 +95,6 @@ class Lugar() {
     }
 
     override fun toString(): String {
-        return "Lugar(id=$key, nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, idCategoria=$idCategoria,posicion=$posicion, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, fecha=$fecha, horarios=$horarios)"
+        return "Lugar(id=$key, nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, keyCategoria=$keyCategoria,posicion=$posicion, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, fecha=$fecha, horarios=$horarios)"
     }
 }

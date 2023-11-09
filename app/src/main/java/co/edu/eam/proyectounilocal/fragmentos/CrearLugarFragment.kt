@@ -15,6 +15,7 @@ import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.BusquedaActivity
 import co.edu.eam.proyectounilocal.actividades.MainActivity
 import co.edu.eam.proyectounilocal.bd.Categorias
+import co.edu.eam.proyectounilocal.bd.CategoriasService
 import co.edu.eam.proyectounilocal.bd.Ciudades
 import co.edu.eam.proyectounilocal.bd.Lugares
 import co.edu.eam.proyectounilocal.bd.LugaresService
@@ -43,7 +44,6 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
 
 
     lateinit var gMap:GoogleMap
-    private var tienePermiso = false
     private val defaultLocation = LatLng(4.550923, -75.6557201)
     private var posicion:Posicion? = null
 
@@ -58,11 +58,15 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
         binding = FragmentCrearLugarBinding.inflate(inflater, container, false)
 
         ciudades = Ciudades.listar()
-        categorias = Categorias.listar()
+        CategoriasService.listar { lista ->
+            if(lista.size>0){
+                categorias = lista
+                cargarCategorias()
+            }
+        }
 
         cargarHorarios()
         cargarCiudades()
-        cargarCategorias()
 
         binding.btnCrearLugar.setOnClickListener { crearLugar() }
 
@@ -140,7 +144,7 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
         val telefono = binding.telefonoLugar.text.toString()
         val direccion = binding.direccionLugar.text.toString()
         val idCiudad = ciudades[posCiudad].id
-        val idCategoria = categorias[posCategoria].id
+        val idCategoria = categorias[posCategoria].key
 
         if( nombre.isEmpty() ){
             binding.nombreLayout.error = getString(R.string.campo_obligatorio)
@@ -164,7 +168,7 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
             binding.telefonoLayout.error = null
         }
 
-        if(nombre.isNotEmpty() && descripcion.isNotEmpty() && telefono.isNotEmpty() && direccion.isNotEmpty() && idCiudad != -1 && idCategoria != -1 && posicion != null) {
+        if(nombre.isNotEmpty() && descripcion.isNotEmpty() && telefono.isNotEmpty() && direccion.isNotEmpty() && idCiudad != -1 && idCategoria != "" && posicion != null) {
 
             val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
             val codigoUsuario = sp.getInt("codigo_usuario", -1)

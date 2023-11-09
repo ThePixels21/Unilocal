@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.DetalleLugarActivity
+import co.edu.eam.proyectounilocal.bd.Categorias
+import co.edu.eam.proyectounilocal.bd.Lugares
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentInicioBinding
 import co.edu.eam.proyectounilocal.modelo.EstadoLugar
