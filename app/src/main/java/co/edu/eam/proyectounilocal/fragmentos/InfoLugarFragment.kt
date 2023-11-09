@@ -5,15 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import co.edu.eam.proyectounilocal.R
-import co.edu.eam.proyectounilocal.bd.Categorias
 import co.edu.eam.proyectounilocal.bd.CategoriasService
-import co.edu.eam.proyectounilocal.bd.Lugares
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentInfoLugarBinding
-import co.edu.eam.proyectounilocal.modelo.Categoria
 import co.edu.eam.proyectounilocal.modelo.DiaSemana
 import co.edu.eam.proyectounilocal.modelo.Lugar
 

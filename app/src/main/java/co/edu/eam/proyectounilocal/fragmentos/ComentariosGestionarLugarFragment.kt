@@ -9,15 +9,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.adapter.ComentariosAdapter
-import co.edu.eam.proyectounilocal.bd.Comentarios
-import co.edu.eam.proyectounilocal.bd.Lugares
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentComentariosGestionarLugarBinding
-import co.edu.eam.proyectounilocal.modelo.Comentario
 
 class ComentariosGestionarLugarFragment : Fragment() {
 

@@ -12,13 +12,9 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.DetalleLugarActivity
-import co.edu.eam.proyectounilocal.bd.Categorias
-import co.edu.eam.proyectounilocal.bd.Ciudades
-import co.edu.eam.proyectounilocal.bd.Lugares
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentInicioBinding
 import co.edu.eam.proyectounilocal.modelo.EstadoLugar
-import co.edu.eam.proyectounilocal.modelo.Lugar
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -28,8 +24,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 class InicioFragment : Fragment(), OnMapReadyCallback, OnInfoWindowClickListener {
 

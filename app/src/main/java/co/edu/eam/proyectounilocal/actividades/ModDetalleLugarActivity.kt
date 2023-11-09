@@ -2,10 +2,10 @@ package co.edu.eam.proyectounilocal.actividades
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.adapter.ViewPagerAdapterLugarMod
 import co.edu.eam.proyectounilocal.adapter.ViewPagerAdapterMod
-import co.edu.eam.proyectounilocal.bd.Lugares
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.ActivityModDetalleLugarBinding
 import co.edu.eam.proyectounilocal.modelo.EstadoLugar
@@ -31,16 +31,30 @@ class ModDetalleLugarActivity : AppCompatActivity() {
 
                     binding.btnVolver.setOnClickListener { this.finish() }
                     binding.btnAprobar.setOnClickListener {
-                        lugar.estado = EstadoLugar.ACEPTADO
-                        Lugares.agregarRegistro(lugar, EstadoLugar.ACEPTADO)
-                        ModMainActivity.binding.viewPager.adapter = ViewPagerAdapterMod(ModMainActivity.act)
-                        this.finish()
+                        LugaresService.editarEstadoLugar(lugar, EstadoLugar.ACEPTADO){res ->
+                            if(res){
+                                Toast.makeText(this, getString(R.string.lugar_aceptado), Toast.LENGTH_LONG).show()
+                                ModMainActivity.binding.viewPager.adapter = ViewPagerAdapterMod(ModMainActivity.act)
+                                this.finish()
+                            }else{
+                                Toast.makeText(this, getString(R.string.error_lugar_estado), Toast.LENGTH_LONG).show()
+                                ModMainActivity.binding.viewPager.adapter = ViewPagerAdapterMod(ModMainActivity.act)
+                                this.finish()
+                            }
+                        }
                     }
                     binding.btnRechazar.setOnClickListener {
-                        lugar.estado = EstadoLugar.RECHAZADO
-                        Lugares.agregarRegistro(lugar, EstadoLugar.RECHAZADO)
-                        ModMainActivity.binding.viewPager.adapter = ViewPagerAdapterMod(ModMainActivity.act)
-                        this.finish()
+                        LugaresService.editarEstadoLugar(lugar, EstadoLugar.RECHAZADO){res ->
+                            if(res){
+                                Toast.makeText(this, getString(R.string.lugar_rechazado), Toast.LENGTH_LONG).show()
+                                ModMainActivity.binding.viewPager.adapter = ViewPagerAdapterMod(ModMainActivity.act)
+                                this.finish()
+                            }else{
+                                Toast.makeText(this, getString(R.string.error_lugar_estado), Toast.LENGTH_LONG).show()
+                                ModMainActivity.binding.viewPager.adapter = ViewPagerAdapterMod(ModMainActivity.act)
+                                this.finish()
+                            }
+                        }
                     }
 
                     binding.viewPager.adapter = ViewPagerAdapterLugarMod(this, codigoLugar)

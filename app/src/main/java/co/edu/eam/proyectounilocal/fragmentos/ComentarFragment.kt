@@ -2,7 +2,6 @@ package co.edu.eam.proyectounilocal.fragmentos
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +13,6 @@ import androidx.core.view.get
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.DetalleLugarActivity
 import co.edu.eam.proyectounilocal.adapter.ViewPagerAdapterLugar
-import co.edu.eam.proyectounilocal.bd.Comentarios
-import co.edu.eam.proyectounilocal.bd.Lugares
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentComentarBinding
 import co.edu.eam.proyectounilocal.modelo.Comentario

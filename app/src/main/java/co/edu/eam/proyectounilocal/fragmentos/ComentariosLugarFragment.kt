@@ -12,18 +12,13 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.DetalleLugarActivity
 import co.edu.eam.proyectounilocal.adapter.ComentariosAdapter
 import co.edu.eam.proyectounilocal.adapter.ViewPagerAdapterLugar
-import co.edu.eam.proyectounilocal.bd.Comentarios
-import co.edu.eam.proyectounilocal.bd.Lugares
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentComentariosLugarBinding
-import co.edu.eam.proyectounilocal.modelo.Comentario
 import co.edu.eam.proyectounilocal.modelo.Lugar
-import com.google.android.material.tabs.TabLayoutMediator
 
 class ComentariosLugarFragment : Fragment() {
 

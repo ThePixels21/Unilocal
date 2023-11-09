@@ -55,17 +55,19 @@ class ResultadoBusquedaFragment : Fragment() {
                     binding.listaLugares.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
                 }
             } else {
-                lista = Lugares.buscarNombre(busqueda!!)
-                val adapter: LugarAdapter
-                val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
-                val codigoUsuario = sp.getInt("codigo_usuario", -1)
-                adapter = if(codigoUsuario != -1){
-                    LugarAdapter(lista, codigoUsuario)
-                } else {
-                    LugarAdapter(lista)
+                LugaresService.buscarPorNombre(busqueda!!){lugares ->
+                    lista = lugares
+                    val adapter: LugarAdapter
+                    val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
+                    val codigoUsuario = sp.getInt("codigo_usuario", -1)
+                    adapter = if(codigoUsuario != -1){
+                        LugarAdapter(lista, codigoUsuario)
+                    } else {
+                        LugarAdapter(lista)
+                    }
+                    binding.listaLugares.adapter = adapter
+                    binding.listaLugares.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
                 }
-                binding.listaLugares.adapter = adapter
-                binding.listaLugares.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
             }
         }
 

@@ -13,10 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.DetalleLugarActivity
 import co.edu.eam.proyectounilocal.actividades.GestionarLugarActivity
-import co.edu.eam.proyectounilocal.bd.Comentarios
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.modelo.Lugar
-import org.w3c.dom.Text
 
 class LugarAdapter(var lista:ArrayList<Lugar>, codigoUsuario: Int = -1): RecyclerView.Adapter<LugarAdapter.ViewHolder>() {
     val codigoUsuario = codigoUsuario

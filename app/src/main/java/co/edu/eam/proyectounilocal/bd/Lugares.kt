@@ -78,9 +78,9 @@ object Lugares {
         return lista
     }
 
-    fun buscarNombre(nombre:String): ArrayList<Lugar> {
+    /*fun buscarNombre(nombre:String): ArrayList<Lugar> {
         return lista.filter { l -> l.nombre.lowercase().contains(nombre.lowercase()) && l.estado == EstadoLugar.ACEPTADO }.toCollection(ArrayList())
-    }
+    }*/
 
     /*fun crear(lugar:Lugar){
         lugar.id = lista.size + 1
@@ -99,13 +99,13 @@ object Lugares {
         return lista.filter { l -> l.idCreador == codigo }.toCollection(ArrayList())
     }*/
 
-    fun agregarRegistro(lugar: Lugar, nuevoEstado: EstadoLugar){
+    /*fun agregarRegistro(lugar: Lugar, nuevoEstado: EstadoLugar){
         registros.add(RegistroEstadoLugar(lugar, nuevoEstado))
-    }
+    }*/
 
-    fun obtenerRegistros(): ArrayList<RegistroEstadoLugar>{
+    /*fun obtenerRegistros(): ArrayList<RegistroEstadoLugar>{
         return registros
-    }
+    }*/
 
     /*fun cambiarEstado(codigo:Int, nuevoEstado:EstadoLugar){
 

@@ -12,6 +12,7 @@ import co.edu.eam.proyectounilocal.actividades.BusquedaActivity
 import co.edu.eam.proyectounilocal.actividades.LoginActivity
 import co.edu.eam.proyectounilocal.databinding.FragmentBuscadorBinding
 import co.edu.eam.proyectounilocal.databinding.FragmentInicioBinding
+import com.google.firebase.auth.FirebaseAuth
 
 
 class BuscadorFragment : Fragment() {
@@ -32,10 +33,14 @@ class BuscadorFragment : Fragment() {
     }
 
     fun cerrarSesion(){
-        val sh = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE).edit()
+        FirebaseAuth.getInstance().signOut()
+        val intent = Intent(requireContext(), LoginActivity::class.java)
+        requireActivity().startActivity( intent )
+        requireActivity().finish()
+        /*val sh = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE).edit()
         sh.clear()
         sh.commit()
-        startActivity(Intent(requireActivity(), LoginActivity::class.java))
+        startActivity(Intent(requireActivity(), LoginActivity::class.java))*/
     }
 
 }

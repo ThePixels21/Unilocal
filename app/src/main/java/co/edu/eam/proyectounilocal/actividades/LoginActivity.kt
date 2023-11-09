@@ -4,15 +4,15 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import co.edu.eam.proyectounilocal.R
-import co.edu.eam.proyectounilocal.bd.Personas
 import co.edu.eam.proyectounilocal.databinding.ActivityLoginBinding
+import co.edu.eam.proyectounilocal.modelo.Rol
 import co.edu.eam.proyectounilocal.modelo.Usuario
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
-import kotlin.math.log
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
 
@@ -20,6 +20,13 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val user = FirebaseAuth.getInstance().currentUser
+        if(user != null) {
+            hacerRedireccion(user)
+        }else{
+
+        }
 
         val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
         val correo = sp.getString("correo_usuario", "")
@@ -65,6 +72,25 @@ class LoginActivity : AppCompatActivity() {
         }
 
         if(correo.isNotEmpty() && password.isNotEmpty()){
+
+            FirebaseAuth.getInstance()
+                .signInWithEmailAndPassword(correo.toString(), password.toString())
+                .addOnCompleteListener { it ->
+                    if(it.isSuccessful){
+
+                        val user = FirebaseAuth.getInstance().currentUser
+
+                        if(user != null){
+                            hacerRedireccion(user)
+                        }
+                    }else{
+                        Toast.makeText(this, getString(R.string.datos_incorrectos), Toast.LENGTH_LONG).show()
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, getString(R.string.datos_incorrectos), Toast.LENGTH_LONG).show()
+                }
+
             /*val persona = Personas.login(correo.toString(), password.toString())
             if(persona != null){
 
@@ -85,6 +111,28 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.datos_incorrectos), Toast.LENGTH_LONG).show()
             }*/
         }
+    }
+
+    fun hacerRedireccion(user: FirebaseUser){
+        Firebase.firestore
+            .collection("usuarios")
+            .document(user.uid)
+            .get()
+            .addOnSuccessListener {u ->
+                val usuario = u.toObject(Usuario::class.java)
+                if(usuario != null){
+                    val rol = usuario.rol
+                    var intent: Intent = Intent()
+                    if(rol == Rol.USUARIO){
+                        intent = Intent(this, MainActivity::class.java)
+                    } else if(rol == Rol.MODERADOR){
+                        intent = Intent(this, ModMainActivity::class.java)
+                    }
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(intent)
+                    finish()
+                }
+            }
     }
 
     fun irARegsitro(){

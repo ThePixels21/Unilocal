@@ -1,27 +1,21 @@
 package co.edu.eam.proyectounilocal.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.DetalleLugarActivity
-import co.edu.eam.proyectounilocal.actividades.MainActivity
-import co.edu.eam.proyectounilocal.bd.Comentarios
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.bd.Usuarios
 import co.edu.eam.proyectounilocal.fragmentos.ComentariosLugarFragment
 import co.edu.eam.proyectounilocal.modelo.Comentario
-import org.w3c.dom.Text
 
 class ComentariosAdapter(var lista:ArrayList<Comentario>, var codigoUsuario: Int, var keyLugar: String): RecyclerView.Adapter<ComentariosAdapter.ViewHolder>() {
     override fun onCreateViewHolder(

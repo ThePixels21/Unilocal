@@ -27,10 +27,13 @@ class BusquedasRecientesFragment : Fragment() {
         val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
         val codigoUsuario = sp.getInt("codigo_usuario", -1)
         if(codigoUsuario != -1){
-            lista = Usuarios.buscar(codigoUsuario)!!.busquedasRecientes
-            val adapter = BusquedasRecientesAdapter(lista)
-            binding.listaBusquedasRecientes.adapter = adapter
-            binding.listaBusquedasRecientes.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
+            val usuario = Usuarios.buscar(codigoUsuario)
+            if(usuario != null){
+                lista = usuario.busquedasRecientes
+                val adapter = BusquedasRecientesAdapter(lista)
+                binding.listaBusquedasRecientes.adapter = adapter
+                binding.listaBusquedasRecientes.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
+            }
         }
 
         return binding.root

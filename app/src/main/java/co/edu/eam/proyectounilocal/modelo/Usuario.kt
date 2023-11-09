@@ -2,24 +2,22 @@ package co.edu.eam.proyectounilocal.modelo
 
 class Usuario(){
 
-    var key: String = ""
     var id: Int = 0
+
+    var key: String = ""
     var nombre: String = ""
     var nickname: String = ""
     var ciudad: String = ""
     var correo: String = ""
-    var password: String = ""
     var busquedasRecientes: ArrayList<String> = ArrayList()
     var lugaresFavoritos:ArrayList<Int> = ArrayList()
     var rol: Rol = Rol.USUARIO
 
-    constructor(id: Int, nombre: String, nickname:String, ciudad:String, correo: String, password: String, rol: Rol) : this() {
-        this.id = id
+    constructor(nombre: String, nickname:String, ciudad:String, correo: String, rol: Rol) : this() {
         this.nombre = nombre
         this.nickname = nickname
         this.ciudad = ciudad
         this.correo = correo
-        this.password = password
         this.rol = rol
     }
 
@@ -35,9 +33,9 @@ class Usuario(){
         return "Usuario(nickname='$nickname') ${super.toString()}"
     }
 
-    fun buscarFavorito(codigoLugar:Int): Boolean{
+    fun buscarFavorito(keyLugar:Int): Boolean{
         for(codigo in lugaresFavoritos){
-            if(codigo == codigoLugar){
+            if(codigo == keyLugar){
                 return true
             }
         }

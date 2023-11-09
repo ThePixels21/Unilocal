@@ -6,6 +6,7 @@ import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.modelo.Comentario
 import co.edu.eam.proyectounilocal.modelo.EstadoLugar
 import co.edu.eam.proyectounilocal.modelo.Lugar
+import co.edu.eam.proyectounilocal.modelo.RegistroEstadoLugar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.toObject
 import com.google.firebase.ktx.Firebase
@@ -117,6 +118,28 @@ object LugaresService {
             }
     }
 
+    fun buscarPorNombre(nombre: String, callback: (ArrayList<Lugar>) -> Unit) {
+        val lugares: ArrayList<Lugar> = ArrayList()
+        Firebase.firestore
+            .collection("lugares")
+            .whereEqualTo("estado", EstadoLugar.ACEPTADO)
+            .get()
+            .addOnSuccessListener {
+                for(doc in it){
+                    var lugar = doc.toObject(Lugar::class.java)
+                    if (lugar.nombre.lowercase().contains(nombre.lowercase())) {
+                        lugar.key = doc.id
+                        lugares.add(lugar)
+                    }
+                }
+                callback(lugares) // Llama al callback con los lugares
+            }
+            .addOnFailureListener {
+                Log.e("LugaresService_buscarPorNombre", it.message.toString())
+                callback(lugares)
+            }
+    }
+
     fun agregarComentario(comentario: Comentario, keyLugar: String, callback: (Boolean) -> Unit) {
         Firebase.firestore
             .collection("lugares")
@@ -185,6 +208,58 @@ object LugaresService {
             .addOnFailureListener {
                 Log.e("LugaresService_tieneComentarios", it.message.toString())
                 callback(false)
+            }
+    }
+
+    fun editarEstadoLugar(lugar: Lugar, estado: EstadoLugar, callback: (Boolean) -> Unit){
+        lugar.estado = estado
+        Firebase.firestore
+            .collection("lugares")
+            .document(lugar.key)
+            .set(lugar)
+            .addOnSuccessListener {
+                val registro = RegistroEstadoLugar(lugar, estado)
+                agregarRegistro(registro){res ->
+                    if(res){
+                        callback(true)
+                    } else {
+                        callback(false)
+                    }
+                }
+            }
+            .addOnFailureListener {
+                Log.e("LugaresService_editarEstadoLugar", it.message.toString())
+                callback(false)
+            }
+    }
+
+    fun agregarRegistro(registro: RegistroEstadoLugar, callback: (Boolean) -> Unit){
+        Firebase.firestore
+            .collection("registrosEstadoLugar")
+            .add(registro)
+            .addOnSuccessListener { callback(true) }
+            .addOnFailureListener {
+                Log.e("LugaresService_agregarRegistro", it.message.toString())
+                callback(false)
+            }
+    }
+
+    fun obtenerRegistros(callback: (ArrayList<RegistroEstadoLugar>) -> Unit){
+        val registros: ArrayList<RegistroEstadoLugar> = ArrayList()
+        Firebase.firestore
+            .collection("registrosEstadoLugar")
+            .get()
+            .addOnSuccessListener {
+                for (doc in it){
+                    var registro = doc.toObject(RegistroEstadoLugar::class.java)
+                    registro.key = doc.id
+                    registros.add(registro)
+                }
+                callback(registros)
+            }
+            .addOnFailureListener {
+                Log.e("LugaresService_obtenerRegistros", it.message.toString())
+                callback(registros)
             }
     }
 

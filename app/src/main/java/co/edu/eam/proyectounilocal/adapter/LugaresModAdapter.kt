@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.GestionarLugarActivity
 import co.edu.eam.proyectounilocal.actividades.ModDetalleLugarActivity
 import co.edu.eam.proyectounilocal.actividades.ModMainActivity
 import co.edu.eam.proyectounilocal.bd.Lugares
+import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.modelo.EstadoLugar
 import co.edu.eam.proyectounilocal.modelo.Lugar
 
@@ -43,19 +45,21 @@ class LugaresModAdapter(var lista: ArrayList<Lugar>): RecyclerView.Adapter<Lugar
         fun bind(lugar: Lugar){
             codigoLugar = lugar.key
             nombre.text = lugar.nombre
-            //Arreglar
             btnAprobar.setOnClickListener {
-                lugar.estado = EstadoLugar.ACEPTADO
-                Lugares.agregarRegistro(lugar, EstadoLugar.ACEPTADO)
-                lista.remove(lugar)
-                ModMainActivity.binding.viewPager.adapter = ViewPagerAdapterMod(ModMainActivity.act)
+                LugaresService.editarEstadoLugar(lugar, EstadoLugar.ACEPTADO){res ->
+                    if(res){
+                        lista.remove(lugar)
+                        ModMainActivity.binding.viewPager.adapter = ViewPagerAdapterMod(ModMainActivity.act)
+                    }
+                }
             }
-            //Arreglar
             btnRechazar.setOnClickListener {
-                lugar.estado = EstadoLugar.RECHAZADO
-                Lugares.agregarRegistro(lugar, EstadoLugar.RECHAZADO)
-                lista.remove(lugar)
-                ModMainActivity.binding.viewPager.adapter = ViewPagerAdapterMod(ModMainActivity.act)
+                LugaresService.editarEstadoLugar(lugar, EstadoLugar.RECHAZADO){res ->
+                    if(res){
+                        lista.remove(lugar)
+                        ModMainActivity.binding.viewPager.adapter = ViewPagerAdapterMod(ModMainActivity.act)
+                    }
+                }
             }
         }
 

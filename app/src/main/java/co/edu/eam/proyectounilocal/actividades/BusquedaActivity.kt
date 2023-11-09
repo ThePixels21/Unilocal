@@ -36,7 +36,10 @@ class BusquedaActivity : AppCompatActivity() {
                     val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
                     val codigoUsuario = sp.getInt("codigo_usuario", -1)
                     if(codigoUsuario != -1){
-                        Usuarios.buscar(codigoUsuario)!!.agregarBusqueda(busqueda)
+                        val usuario = Usuarios.buscar(codigoUsuario)
+                        if(usuario != null){
+                            Usuarios.buscar(codigoUsuario)!!.agregarBusqueda(busqueda)
+                        }
                     }
                     //Ejecutar fragmento busqueda
                     supportFragmentManager.beginTransaction()
@@ -72,7 +75,7 @@ class BusquedaActivity : AppCompatActivity() {
 
         //Hotel
         binding.categoriaHotel.setOnClickListener {
-            val categoria: String = "categoria/1"
+            val categoria: String = "categoria/nrMTt1xipRohUJ1ve8h3"
             supportFragmentManager.beginTransaction()
                 .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
                 .addToBackStack("busqueda_categoria")
@@ -84,7 +87,7 @@ class BusquedaActivity : AppCompatActivity() {
 
         //Cafe
         binding.categoriaCafe.setOnClickListener {
-            val categoria: String = "categoria/2"
+            val categoria: String = "categoria/bKBEccdiX1sM2rqOJfa2"
             supportFragmentManager.beginTransaction()
                 .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
                 .addToBackStack("busqueda_categoria")
@@ -96,7 +99,7 @@ class BusquedaActivity : AppCompatActivity() {
 
         //Restaurante
         binding.categoriaRestaurante.setOnClickListener {
-            val categoria: String = "categoria/3"
+            val categoria: String = "categoria/Ok32nX2SMCldB94gqoc8"
             supportFragmentManager.beginTransaction()
                 .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
                 .addToBackStack("busqueda_categoria")
@@ -108,7 +111,7 @@ class BusquedaActivity : AppCompatActivity() {
 
         //Parque
         binding.categoriaParque.setOnClickListener {
-            val categoria: String = "categoria/4"
+            val categoria: String = "categoria/FlzN40xzQVUzEZKJob8L"
             supportFragmentManager.beginTransaction()
                 .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
                 .addToBackStack("busqueda_categoria")
@@ -120,7 +123,7 @@ class BusquedaActivity : AppCompatActivity() {
 
         //Bar
         binding.categoriaBar.setOnClickListener {
-            val categoria: String = "categoria/5"
+            val categoria: String = "categoria/FWEdhnySuVxPhS4u2YWZ"
             supportFragmentManager.beginTransaction()
                 .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
                 .addToBackStack("busqueda_categoria")
@@ -132,7 +135,7 @@ class BusquedaActivity : AppCompatActivity() {
 
         //Centro comercial
         binding.categoriaCentroComercial.setOnClickListener {
-            val categoria: String = "categoria/6"
+            val categoria: String = "categoria/tsmBKksmDCYbY7zoL5HW"
             supportFragmentManager.beginTransaction()
                 .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
                 .addToBackStack("busqueda_categoria")
@@ -144,7 +147,7 @@ class BusquedaActivity : AppCompatActivity() {
 
         //Tienda
         binding.categoriaTienda.setOnClickListener {
-            val categoria: String = "categoria/7"
+            val categoria: String = "categoria/eHDCTbaFBgYyKUeKrg1X"
             supportFragmentManager.beginTransaction()
                 .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
                 .addToBackStack("busqueda_categoria")
@@ -156,7 +159,7 @@ class BusquedaActivity : AppCompatActivity() {
 
         //Museo
         binding.categoriaMuseo.setOnClickListener {
-            val categoria: String = "categoria/8"
+            val categoria: String = "categoria/SM9kUXfWfhWZpp5TIXP6"
             supportFragmentManager.beginTransaction()
                 .replace(binding.contenido.id, ResultadoBusquedaFragment.newInstance(categoria))
                 .addToBackStack("busqueda_categoria")

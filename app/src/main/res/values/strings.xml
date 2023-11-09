@@ -136,6 +136,11 @@
     <string name="lugar_eliminado">Lugar eliminado correctamente</string>
     <string name="lugar_no_eliminado">No se pudo eliminar el lugar</string>
 
+    <!-- ModDetalleLugar activity -->
+    <string name="lugar_aceptado">Lugar aceptado</string>
+    <string name="lugar_rechazado">Lugar rechazado</string>
+    <string name="error_lugar_estado">Hubo un error al cambiar el estado</string>
+
     <!-- info lugar fragmento -->
     <string name="no_tiene_telefonos_contac">No tiene telefonos de contacto</string>
 
