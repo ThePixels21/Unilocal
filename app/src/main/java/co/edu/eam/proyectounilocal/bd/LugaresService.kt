@@ -259,13 +259,14 @@ object LugaresService {
     }
 
     fun editarEstadoLugar(lugar: Lugar, estado: EstadoLugar, callback: (Boolean) -> Unit){
+        val estadoAnterior = lugar.estado
         lugar.estado = estado
         Firebase.firestore
             .collection("lugares")
             .document(lugar.key)
             .set(lugar)
             .addOnSuccessListener {
-                val registro = RegistroEstadoLugar(lugar, estado)
+                val registro = RegistroEstadoLugar(estadoAnterior, estado, lugar)
                 agregarRegistro(registro){res ->
                     if(res){
                         callback(true)
