@@ -1,16 +1,14 @@
 package co.edu.eam.proyectounilocal.modelo
 
 class Ciudad() {
-    constructor(id:Int, nombre:String):this(){
-        this.id = id
+    constructor(nombre:String):this(){
         this.nombre = nombre
     }
 
-    var id:Int = 0
     var key:String = ""
     var nombre:String = ""
 
     override fun toString(): String {
-        return "Ciudad(id=$id, nombre='$nombre')"
+        return "Ciudad(id=$key, nombre='$nombre')"
     }
 }

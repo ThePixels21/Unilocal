@@ -7,19 +7,19 @@ object Ciudades {
     private val lista:ArrayList<Ciudad> = ArrayList()
 
     init {
-        lista.add( Ciudad(1, "Armenia") )
-        lista.add( Ciudad(2, "Salento") )
-        lista.add( Ciudad(3, "Pereira") )
-        lista.add( Ciudad(4, "Calarcá") )
-        lista.add( Ciudad(5, "Manizales") )
+        /*lista.add( Ciudad("Armenia") )
+        lista.add( Ciudad("Salento") )
+        lista.add( Ciudad("Pereira") )
+        lista.add( Ciudad("Calarcá") )
+        lista.add( Ciudad("Manizales") )*/
     }
 
-    fun listar():ArrayList<Ciudad>{
+    /*fun listar():ArrayList<Ciudad>{
         return lista
-    }
+    }*/
 
-    fun obtener(id:Int): Ciudad?{
+    /*fun obtener(id:Int): Ciudad?{
         return lista.firstOrNull { c -> c.id == id }
-    }
+    }*/
 
 }

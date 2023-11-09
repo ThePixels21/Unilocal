@@ -87,9 +87,9 @@ object Lugares {
         lista.add( lugar )
     }*/
 
-    fun buscarCiudad(codigoCiudad:Int): ArrayList<Lugar> {
+    /*fun buscarCiudad(codigoCiudad:Int): ArrayList<Lugar> {
         return lista.filter { l -> l.idCiudad == codigoCiudad && l.estado == EstadoLugar.ACEPTADO }.toCollection(ArrayList())
-    }
+    }*/
 
     /*fun buscarCategoria(codigoCategoria:Int): ArrayList<Lugar> {
         return lista.filter { l -> l.idCategoria == codigoCategoria && l.estado == EstadoLugar.ACEPTADO }.toCollection(ArrayList())

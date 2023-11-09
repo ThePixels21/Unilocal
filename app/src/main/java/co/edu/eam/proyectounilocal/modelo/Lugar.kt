@@ -5,7 +5,7 @@ import java.util.Date
 
 class Lugar() {
 
-    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, keyCategoria:String, direccion:String, posicion: Posicion, idCiudad:Int):this(){
+    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, keyCategoria:String, direccion:String, posicion: Posicion, idCiudad:String):this(){
         this.nombre = nombre
         this.descripcion = descripcion
         this.idCreador = idCreador
@@ -18,7 +18,7 @@ class Lugar() {
         this.idCiudad = idCiudad
     }
 
-    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, keyCategoria:String, direccion:String, latitud:Double, longitud:Double, idCiudad:Int):this(){
+    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, keyCategoria:String, direccion:String, latitud:Double, longitud:Double, idCiudad:String):this(){
         this.nombre = nombre
         this.descripcion = descripcion
         this.idCreador = idCreador
@@ -40,7 +40,7 @@ class Lugar() {
     var keyCategoria:String = ""
     var direccion:String = ""
     var posicion: Posicion = Posicion()
-    var idCiudad:Int = 0
+    var idCiudad:String = ""
     var latitud:Double = 0.0
     var longitud:Double = 0.0
     var imagenes:ArrayList<String> = ArrayList()
