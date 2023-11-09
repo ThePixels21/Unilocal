@@ -41,6 +41,7 @@
     <string name="crear_lugar_hint_divider">-</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txt_horario">Horario</string>
+    <string name="txt_imagenes">Imagenes</string>
     <string name="txt_seleccione">Seleccione</string>
 
     <!-- fragmento info lugar -->
@@ -132,6 +133,7 @@
     <string name="horario_de_domingo_no_valido">Horario de domingo no válido</string>
     <string name="lugar_creado_rev_mod">Lugar creado correctamente, será revisado por un moderador</string>
     <string name="lugar_creado_error">Hubo un error al crear el lugar</string>
+    <string name="lugar_creado_imagenes_error">Por favor seleccione al menos una imágen</string>
 
     <!-- Gestionar lugar activity -->
     <string name="lugar_eliminado">Lugar eliminado correctamente</string>

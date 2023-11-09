@@ -1,9 +1,13 @@
 package co.edu.eam.proyectounilocal.fragmentos
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +15,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.BusquedaActivity
@@ -27,19 +36,28 @@ import co.edu.eam.proyectounilocal.modelo.EstadoLugar
 import co.edu.eam.proyectounilocal.modelo.Horario
 import co.edu.eam.proyectounilocal.modelo.Lugar
 import co.edu.eam.proyectounilocal.modelo.Posicion
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
+import java.io.ByteArrayOutputStream
+import java.util.Date
 
 class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
 
     lateinit var binding: FragmentCrearLugarBinding
     lateinit var ciudades:ArrayList<Ciudad>
     lateinit var categorias:ArrayList<Categoria>
+
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    var codigoArchivo = 0
+    var imagenes: ArrayList<String> = ArrayList()
 
     lateinit var dialog: Dialog
     lateinit var gMap:GoogleMap
@@ -48,6 +66,81 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
 
     var posCiudad:Int = -1
     var posCategoria:Int = -1
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        resultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult() ) {
+            onActivityResult(it.resultCode, it)
+        }
+    }
+
+    private fun onActivityResult(resultCode:Int, result: ActivityResult){
+        if( resultCode == Activity.RESULT_OK ){
+            setDialog(true)
+            val fecha = Date()
+            val storageRef = FirebaseStorage.getInstance()
+                .reference
+                .child("/p-${fecha.time}.jpg")
+            if( codigoArchivo == 1 ){
+                //Imagen capturada desde la cámara del celular
+                val data = result.data?.extras
+                if( data?.get("data") is Bitmap){
+                    val imageBitmap = data?.get("data") as Bitmap
+                    val baos = ByteArrayOutputStream()
+                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                    val data = baos.toByteArray()
+                    storageRef.putBytes(data).addOnSuccessListener {
+                        storageRef.downloadUrl.addOnSuccessListener {
+                            dibujarImagen(it)
+                            setDialog(false)
+                        }.addOnFailureListener { setDialog(false) }
+                    }.addOnFailureListener {
+                        setDialog(false)
+                        Snackbar.make(binding.root, "${it.message}", Snackbar.LENGTH_LONG).show()
+                    }
+                }
+
+            }else if( codigoArchivo == 2 ){
+                //Archivo seleccionado desde el almacenamiento
+                val data = result.data
+                if(data!=null){
+                    val selectedImageUri: Uri? = data.data
+                    if(selectedImageUri!=null){
+                        storageRef.putFile(selectedImageUri).addOnSuccessListener {
+                            storageRef.downloadUrl.addOnSuccessListener {
+                                dibujarImagen(it)
+                                setDialog(false)
+                            }.addOnFailureListener { setDialog(false) }
+                        }.addOnFailureListener {
+                            setDialog(false)
+                            Snackbar.make(binding.root, "${it.message}", Snackbar.LENGTH_LONG).show()
+                        }
+                    }else{
+                        setDialog(false)
+                    }
+                }else{
+                    setDialog(false)
+                }
+
+            }
+        }
+    }
+
+    fun dibujarImagen(url: Uri){
+
+        imagenes.add(url.toString())
+
+        var imagen = ImageView(requireContext())
+        imagen.layoutParams = LinearLayout.LayoutParams(300, 310)
+        binding.imagenesSel.addView(imagen)
+
+        Glide.with( requireContext() )
+            .load(url.toString())
+            .into(imagen)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,10 +174,30 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
 
         binding.btnBuscar.setOnClickListener { startActivity(Intent(requireActivity(), BusquedaActivity::class.java)) }
 
+        binding.btnTomarFoto.setOnClickListener { tomarFoto() }
+        binding.btnSelArchivo.setOnClickListener { seleccionarFoto() }
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapa_crear_lugar) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         return binding.root
+    }
+
+    fun tomarFoto(){
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(requireActivity().packageManager)?.also {
+                resultLauncher.launch(takePictureIntent)
+                codigoArchivo = 1
+            }
+        }
+    }
+
+    fun seleccionarFoto(){
+        val i = Intent()
+        i.type = "image/*"
+        i.action = Intent.ACTION_GET_CONTENT
+        codigoArchivo = 2
+        resultLauncher.launch(i)
     }
 
     fun cargarHorarios(){
@@ -175,122 +288,128 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
 
         if(nombre.isNotEmpty() && descripcion.isNotEmpty() && telefono.isNotEmpty() && direccion.isNotEmpty() && idCiudad != "" && idCategoria != "" && posicion != null) {
 
-            val user = FirebaseAuth.getInstance().currentUser
-            if(user != null){
-                val codigoUsuario = user.uid
-                val nuevoLugar = Lugar(nombre, descripcion, codigoUsuario, EstadoLugar.SIN_REVISAR, idCategoria, direccion,posicion!! , idCiudad)
+            if(imagenes.isNotEmpty()){
+                val user = FirebaseAuth.getInstance().currentUser
+                if(user != null){
+                    val codigoUsuario = user.uid
+                    val nuevoLugar = Lugar(nombre, descripcion, codigoUsuario, EstadoLugar.SIN_REVISAR, idCategoria, direccion,posicion!! , idCiudad)
 
-                val telefonos: ArrayList<String> = ArrayList()
-                telefonos.add(telefono)
-                nuevoLugar.telefonos = telefonos
+                    val telefonos: ArrayList<String> = ArrayList()
+                    telefonos.add(telefono)
+                    nuevoLugar.telefonos = telefonos
+                    nuevoLugar.imagenes = imagenes
 
-                if(binding.inicioLunes.selectedItemPosition!=0 && binding.finalLunes.selectedItemPosition != 0){
-                    val horaInicio: Int = binding.inicioLunes.selectedItem.toString().toInt()
-                    val horaFinal: Int = binding.finalLunes.selectedItem.toString().toInt()
-                    if(horaInicio < horaFinal){
-                        val dia: ArrayList<DiaSemana> = ArrayList()
-                        dia.add(DiaSemana.LUNES)
-                        val horario = Horario(0, dia, horaInicio, horaFinal)
-                        nuevoLugar.horarios.add(horario)
-                    }else{
-                        Toast.makeText(requireActivity(), getString(R.string.horario_de_lunes_no_valido), Toast.LENGTH_SHORT).show()
+                    if(binding.inicioLunes.selectedItemPosition!=0 && binding.finalLunes.selectedItemPosition != 0){
+                        val horaInicio: Int = binding.inicioLunes.selectedItem.toString().toInt()
+                        val horaFinal: Int = binding.finalLunes.selectedItem.toString().toInt()
+                        if(horaInicio < horaFinal){
+                            val dia: ArrayList<DiaSemana> = ArrayList()
+                            dia.add(DiaSemana.LUNES)
+                            val horario = Horario(0, dia, horaInicio, horaFinal)
+                            nuevoLugar.horarios.add(horario)
+                        }else{
+                            Toast.makeText(requireActivity(), getString(R.string.horario_de_lunes_no_valido), Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
 
-                if(binding.inicioMartes.selectedItemPosition!=0 && binding.finalMartes.selectedItemPosition != 0){
-                    val horaInicio: Int = binding.inicioMartes.selectedItem.toString().toInt()
-                    val horaFinal: Int = binding.finalMartes.selectedItem.toString().toInt()
-                    if(horaInicio < horaFinal){
-                        val dia: ArrayList<DiaSemana> = ArrayList()
-                        dia.add(DiaSemana.MARTES)
-                        val horario = Horario(0, dia, horaInicio, horaFinal)
-                        nuevoLugar.horarios.add(horario)
-                    }else{
-                        Toast.makeText(requireActivity(), getString(R.string.horario_de_martes_no_valido), Toast.LENGTH_SHORT).show()
+                    if(binding.inicioMartes.selectedItemPosition!=0 && binding.finalMartes.selectedItemPosition != 0){
+                        val horaInicio: Int = binding.inicioMartes.selectedItem.toString().toInt()
+                        val horaFinal: Int = binding.finalMartes.selectedItem.toString().toInt()
+                        if(horaInicio < horaFinal){
+                            val dia: ArrayList<DiaSemana> = ArrayList()
+                            dia.add(DiaSemana.MARTES)
+                            val horario = Horario(0, dia, horaInicio, horaFinal)
+                            nuevoLugar.horarios.add(horario)
+                        }else{
+                            Toast.makeText(requireActivity(), getString(R.string.horario_de_martes_no_valido), Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
 
-                if(binding.inicioMiercoles.selectedItemPosition!=0 && binding.finalMiercoles.selectedItemPosition != 0){
-                    val horaInicio: Int = binding.inicioMiercoles.selectedItem.toString().toInt()
-                    val horaFinal: Int = binding.finalMiercoles.selectedItem.toString().toInt()
-                    if(horaInicio < horaFinal){
-                        val dia: ArrayList<DiaSemana> = ArrayList()
-                        dia.add(DiaSemana.MIERCOLES)
-                        val horario = Horario(0, dia, horaInicio, horaFinal)
-                        nuevoLugar.horarios.add(horario)
-                    }else{
-                        Toast.makeText(requireActivity(), getString(R.string.horario_de_miercoles_no_valido), Toast.LENGTH_SHORT).show()
+                    if(binding.inicioMiercoles.selectedItemPosition!=0 && binding.finalMiercoles.selectedItemPosition != 0){
+                        val horaInicio: Int = binding.inicioMiercoles.selectedItem.toString().toInt()
+                        val horaFinal: Int = binding.finalMiercoles.selectedItem.toString().toInt()
+                        if(horaInicio < horaFinal){
+                            val dia: ArrayList<DiaSemana> = ArrayList()
+                            dia.add(DiaSemana.MIERCOLES)
+                            val horario = Horario(0, dia, horaInicio, horaFinal)
+                            nuevoLugar.horarios.add(horario)
+                        }else{
+                            Toast.makeText(requireActivity(), getString(R.string.horario_de_miercoles_no_valido), Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
 
-                if(binding.inicioJueves.selectedItemPosition!=0 && binding.finalJueves.selectedItemPosition != 0){
-                    val horaInicio: Int = binding.inicioJueves.selectedItem.toString().toInt()
-                    val horaFinal: Int = binding.finalJueves.selectedItem.toString().toInt()
-                    if(horaInicio < horaFinal){
-                        val dia: ArrayList<DiaSemana> = ArrayList()
-                        dia.add(DiaSemana.JUEVES)
-                        val horario = Horario(0, dia, horaInicio, horaFinal)
-                        nuevoLugar.horarios.add(horario)
-                    }else{
-                        Toast.makeText(requireActivity(), getString(R.string.horario_de_jueves_no_valido), Toast.LENGTH_SHORT).show()
+                    if(binding.inicioJueves.selectedItemPosition!=0 && binding.finalJueves.selectedItemPosition != 0){
+                        val horaInicio: Int = binding.inicioJueves.selectedItem.toString().toInt()
+                        val horaFinal: Int = binding.finalJueves.selectedItem.toString().toInt()
+                        if(horaInicio < horaFinal){
+                            val dia: ArrayList<DiaSemana> = ArrayList()
+                            dia.add(DiaSemana.JUEVES)
+                            val horario = Horario(0, dia, horaInicio, horaFinal)
+                            nuevoLugar.horarios.add(horario)
+                        }else{
+                            Toast.makeText(requireActivity(), getString(R.string.horario_de_jueves_no_valido), Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
 
-                if(binding.inicioViernes.selectedItemPosition!=0 && binding.finalViernes.selectedItemPosition != 0){
-                    val horaInicio: Int = binding.inicioViernes.selectedItem.toString().toInt()
-                    val horaFinal: Int = binding.finalViernes.selectedItem.toString().toInt()
-                    if(horaInicio < horaFinal){
-                        val dia: ArrayList<DiaSemana> = ArrayList()
-                        dia.add(DiaSemana.VIERNES)
-                        val horario = Horario(0, dia, horaInicio, horaFinal)
-                        nuevoLugar.horarios.add(horario)
-                    }else{
-                        Toast.makeText(requireActivity(), getString(R.string.horario_de_viernes_no_valido), Toast.LENGTH_SHORT).show()
+                    if(binding.inicioViernes.selectedItemPosition!=0 && binding.finalViernes.selectedItemPosition != 0){
+                        val horaInicio: Int = binding.inicioViernes.selectedItem.toString().toInt()
+                        val horaFinal: Int = binding.finalViernes.selectedItem.toString().toInt()
+                        if(horaInicio < horaFinal){
+                            val dia: ArrayList<DiaSemana> = ArrayList()
+                            dia.add(DiaSemana.VIERNES)
+                            val horario = Horario(0, dia, horaInicio, horaFinal)
+                            nuevoLugar.horarios.add(horario)
+                        }else{
+                            Toast.makeText(requireActivity(), getString(R.string.horario_de_viernes_no_valido), Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
 
-                if(binding.inicioSabado.selectedItemPosition!=0 && binding.finalSabado.selectedItemPosition != 0){
-                    val horaInicio: Int = binding.inicioSabado.selectedItem.toString().toInt()
-                    val horaFinal: Int = binding.finalSabado.selectedItem.toString().toInt()
-                    if(horaInicio < horaFinal){
-                        val dia: ArrayList<DiaSemana> = ArrayList()
-                        dia.add(DiaSemana.SABADO)
-                        val horario = Horario(0, dia, horaInicio, horaFinal)
-                        nuevoLugar.horarios.add(horario)
-                    }else{
-                        Toast.makeText(requireActivity(), getString(R.string.horario_de_sabado_no_valido), Toast.LENGTH_SHORT).show()
+                    if(binding.inicioSabado.selectedItemPosition!=0 && binding.finalSabado.selectedItemPosition != 0){
+                        val horaInicio: Int = binding.inicioSabado.selectedItem.toString().toInt()
+                        val horaFinal: Int = binding.finalSabado.selectedItem.toString().toInt()
+                        if(horaInicio < horaFinal){
+                            val dia: ArrayList<DiaSemana> = ArrayList()
+                            dia.add(DiaSemana.SABADO)
+                            val horario = Horario(0, dia, horaInicio, horaFinal)
+                            nuevoLugar.horarios.add(horario)
+                        }else{
+                            Toast.makeText(requireActivity(), getString(R.string.horario_de_sabado_no_valido), Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
 
-                if(binding.inicioDomingo.selectedItemPosition!=0 && binding.finalDomingo.selectedItemPosition != 0){
-                    val horaInicio: Int = binding.inicioDomingo.selectedItem.toString().toInt()
-                    val horaFinal: Int = binding.finalDomingo.selectedItem.toString().toInt()
-                    if(horaInicio < horaFinal){
-                        val dia: ArrayList<DiaSemana> = ArrayList()
-                        dia.add(DiaSemana.DOMINGO)
-                        val horario = Horario(0, dia, horaInicio, horaFinal)
-                        nuevoLugar.horarios.add(horario)
-                    }else{
-                        Toast.makeText(requireActivity(), getString(R.string.horario_de_domingo_no_valido), Toast.LENGTH_SHORT).show()
+                    if(binding.inicioDomingo.selectedItemPosition!=0 && binding.finalDomingo.selectedItemPosition != 0){
+                        val horaInicio: Int = binding.inicioDomingo.selectedItem.toString().toInt()
+                        val horaFinal: Int = binding.finalDomingo.selectedItem.toString().toInt()
+                        if(horaInicio < horaFinal){
+                            val dia: ArrayList<DiaSemana> = ArrayList()
+                            dia.add(DiaSemana.DOMINGO)
+                            val horario = Horario(0, dia, horaInicio, horaFinal)
+                            nuevoLugar.horarios.add(horario)
+                        }else{
+                            Toast.makeText(requireActivity(), getString(R.string.horario_de_domingo_no_valido), Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
 
-                LugaresService.crearLugar(nuevoLugar){res ->
-                    if(res){
-                        setDialog(false)
-                        Toast.makeText(requireActivity(), getString(R.string.lugar_creado_rev_mod), Toast.LENGTH_LONG).show()
-                        requireActivity().supportFragmentManager.beginTransaction().replace( R.id.contenido_principal, MisLugaresFragment() )
-                            .addToBackStack(MainActivity.MENU_MIS_LUGARES).commit()
-                    }else{
-                        setDialog(false)
-                        Toast.makeText(requireActivity(), getString(R.string.lugar_creado_error), Toast.LENGTH_LONG).show()
-                        requireActivity().supportFragmentManager.beginTransaction().replace( R.id.contenido_principal, MisLugaresFragment() )
-                            .addToBackStack(MainActivity.MENU_MIS_LUGARES).commit()
+                    LugaresService.crearLugar(nuevoLugar){res ->
+                        if(res){
+                            setDialog(false)
+                            Toast.makeText(requireActivity(), getString(R.string.lugar_creado_rev_mod), Toast.LENGTH_LONG).show()
+                            requireActivity().supportFragmentManager.beginTransaction().replace( R.id.contenido_principal, MisLugaresFragment() )
+                                .addToBackStack(MainActivity.MENU_MIS_LUGARES).commit()
+                        }else{
+                            setDialog(false)
+                            Toast.makeText(requireActivity(), getString(R.string.lugar_creado_error), Toast.LENGTH_LONG).show()
+                            requireActivity().supportFragmentManager.beginTransaction().replace( R.id.contenido_principal, MisLugaresFragment() )
+                                .addToBackStack(MainActivity.MENU_MIS_LUGARES).commit()
+                        }
                     }
+                } else {
+                    setDialog(false)
+                    Toast.makeText(requireActivity(), getString(R.string.lugar_creado_error), Toast.LENGTH_LONG).show()
                 }
             } else {
                 setDialog(false)
-                Toast.makeText(requireActivity(), getString(R.string.lugar_creado_error), Toast.LENGTH_LONG).show()
+                Toast.makeText(requireActivity(), getString(R.string.lugar_creado_imagenes_error), Toast.LENGTH_LONG).show()
             }
         } else {
             setDialog(false)

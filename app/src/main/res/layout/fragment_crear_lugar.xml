@@ -439,6 +439,47 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:hint="@string/txt_imagenes"
+                    android:textSize="18sp"
+                    android:layout_gravity="start"
+                    android:textColorHint="@color/black"
+                    android:textAlignment="textStart" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="80"
+                    android:layout_margin="12dp"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/btn_sel_archivo"
+                        android:layout_width="0dp"
+                        android:layout_weight="40"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:text="Seleccionar archivo" />
+                    <Button
+                        android:id="@+id/btn_tomar_foto"
+                        android:layout_width="0dp"
+                        android:layout_weight="40"
+                        android:layout_height="wrap_content"
+                        android:text="Tomar foto" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/imagenes_sel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:orientation="horizontal" />
+
                 <Button
                     android:id="@+id/btn_crear_lugar"
                     android:layout_width="210dp"
