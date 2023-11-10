@@ -9,9 +9,31 @@
     android:gravity="center"
     tools:context=".actividades.OlvidoContrasenaActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Activity olvido contraseña" />
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/logo_unilocal" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/correo_layout"
+        style="@style/til_form" >
+        <EditText
+            android:id="@+id/correo_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:hint="Correo de la cuenta"
+            android:background="@drawable/fondo_forms"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_enviar"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/gray"
+        android:text="Enviar"
+        android:textColor="@color/black" />
 
 </LinearLayout>
