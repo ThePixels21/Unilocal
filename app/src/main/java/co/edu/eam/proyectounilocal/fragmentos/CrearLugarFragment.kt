@@ -25,6 +25,7 @@ import androidx.appcompat.app.AlertDialog
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.BusquedaActivity
 import co.edu.eam.proyectounilocal.actividades.MainActivity
+import co.edu.eam.proyectounilocal.actividades.PosicionLugarActivity
 import co.edu.eam.proyectounilocal.bd.CategoriasService
 import co.edu.eam.proyectounilocal.bd.CiudadesService
 import co.edu.eam.proyectounilocal.bd.LugaresService
@@ -49,7 +50,7 @@ import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 import java.util.Date
 
-class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
+class CrearLugarFragment : Fragment(), OnMapReadyCallback {
 
     lateinit var binding: FragmentCrearLugarBinding
     lateinit var ciudades:ArrayList<Ciudad>
@@ -60,8 +61,9 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
     var imagenes: ArrayList<String> = ArrayList()
 
     lateinit var dialog: Dialog
-    lateinit var gMap:GoogleMap
-    private val defaultLocation = LatLng(4.550923, -75.6557201)
+
+    private lateinit var mapLauncher: ActivityResultLauncher<Intent>
+    lateinit var gMap: GoogleMap
     private var posicion:Posicion? = null
 
     var posCiudad:Int = -1
@@ -73,6 +75,24 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
         resultLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult() ) {
             onActivityResult(it.resultCode, it)
+        }
+
+        mapLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()){result ->
+            if(result.resultCode == Activity.RESULT_OK){
+                val data = result.data
+                val lat = data?.extras?.get("lat")
+                var lng = data?.extras?.get("lng")
+                if(lat is Double && lng is Double){
+                    posicion = Posicion(lat, lng)
+                    binding.btnSeleccionarUbicacion.visibility = View.GONE
+                    binding.layoutMapa.visibility = View.VISIBLE
+                    val pos = LatLng(posicion!!.lat, posicion!!.lng)
+                    gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 18f))
+                    gMap.addMarker( MarkerOptions().position(pos).title("Aquí"))
+
+                }
+            }
         }
     }
 
@@ -148,6 +168,10 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCrearLugarBinding.inflate(inflater, container, false)
+        binding.layoutMapa.visibility = View.GONE
+
+        val mapFragment = childFragmentManager.findFragmentById(R.id.mapa_crear_lugar) as SupportMapFragment
+        mapFragment.getMapAsync(this)
 
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.setView(R.layout.dialogo_progreso)
@@ -174,11 +198,13 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
 
         binding.btnBuscar.setOnClickListener { startActivity(Intent(requireActivity(), BusquedaActivity::class.java)) }
 
+        binding.btnSeleccionarUbicacion.setOnClickListener {
+            val intent = Intent(requireActivity(), PosicionLugarActivity::class.java)
+            mapLauncher.launch(intent)
+        }
+
         binding.btnTomarFoto.setOnClickListener { tomarFoto() }
         binding.btnSelArchivo.setOnClickListener { seleccionarFoto() }
-
-        val mapFragment = childFragmentManager.findFragmentById(R.id.mapa_crear_lugar) as SupportMapFragment
-        mapFragment.getMapAsync(this)
 
         return binding.root
     }
@@ -292,7 +318,7 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
                 val user = FirebaseAuth.getInstance().currentUser
                 if(user != null){
                     val codigoUsuario = user.uid
-                    val nuevoLugar = Lugar(nombre, descripcion, codigoUsuario, EstadoLugar.SIN_REVISAR, idCategoria, direccion,posicion!! , idCiudad)
+                    val nuevoLugar = Lugar(nombre, descripcion, codigoUsuario, EstadoLugar.SIN_REVISAR, idCategoria, direccion, posicion!!, idCiudad)
 
                     val telefonos: ArrayList<String> = ArrayList()
                     telefonos.add(telefono)
@@ -413,29 +439,21 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback  {
             }
         } else {
             setDialog(false)
+            if(posicion == null){
+                Toast.makeText(requireActivity(), "Por favor seleccione la ubicación del lugar", Toast.LENGTH_SHORT).show()
+            }
         }
 
+    }
+
+    private fun setDialog(show: Boolean){
+        if (show) dialog.show() else dialog.dismiss()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         gMap = googleMap
         gMap.uiSettings.isZoomControlsEnabled = true
-
-        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 12f))
-
-        gMap.setOnMapClickListener {
-            if(posicion == null){
-                posicion = Posicion()
-            }
-            posicion!!.lat = it.latitude
-            posicion!!.lng = it.longitude
-            gMap.clear()
-            gMap.addMarker( MarkerOptions().position(it).title("Aqui Esta el lugar"))
-        }
-    }
-
-    private fun setDialog(show: Boolean){
-        if (show) dialog.show() else dialog.dismiss()
+        gMap.uiSettings.isScrollGesturesEnabled = false
     }
 
 }

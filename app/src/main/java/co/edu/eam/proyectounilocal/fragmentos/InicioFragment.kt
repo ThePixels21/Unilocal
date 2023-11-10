@@ -83,7 +83,6 @@ class InicioFragment : Fragment(), OnMapReadyCallback, OnInfoWindowClickListener
         }
     }
 
-
     private fun obtenerUbicacion() {
         try {
             if (tienePermiso) {
