@@ -15,6 +15,7 @@ import co.edu.eam.proyectounilocal.actividades.DetalleLugarActivity
 import co.edu.eam.proyectounilocal.actividades.GestionarLugarActivity
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.modelo.Lugar
+import com.bumptech.glide.Glide
 
 class LugarAdapter(var lista:ArrayList<Lugar>, codigoUsuario: String = ""): RecyclerView.Adapter<LugarAdapter.ViewHolder>() {
     val codigoUsuario = codigoUsuario
@@ -48,6 +49,11 @@ class LugarAdapter(var lista:ArrayList<Lugar>, codigoUsuario: String = ""): Recy
             lugarActual = lugar
             nombre.text = lugar.nombre
             codigoLugar = lugar.key
+            if(lugar.imagenes.isNotEmpty()){
+                Glide.with(itemView.context)
+                    .load(lugar.imagenes[0])
+                    .into(imagen)
+            }
             val abierto = lugar.estaAbierto()
             if(abierto){
                 estado.setTextColor(ContextCompat.getColor(itemView.context, R.color.green))
