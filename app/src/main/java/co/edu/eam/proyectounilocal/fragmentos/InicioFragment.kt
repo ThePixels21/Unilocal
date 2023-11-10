@@ -12,9 +12,11 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.DetalleLugarActivity
+import co.edu.eam.proyectounilocal.actividades.GestionarLugarActivity
 import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentInicioBinding
 import co.edu.eam.proyectounilocal.modelo.EstadoLugar
+import co.edu.eam.proyectounilocal.modelo.Lugar
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -24,6 +26,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class InicioFragment : Fragment(), OnMapReadyCallback, OnInfoWindowClickListener {
 
@@ -137,8 +142,24 @@ class InicioFragment : Fragment(), OnMapReadyCallback, OnInfoWindowClickListener
     }
 
     override fun onInfoWindowClick(p0: Marker) {
-        val intent = Intent(requireContext(), DetalleLugarActivity::class.java)
-        intent.putExtra("codigo", p0.tag.toString())
-        requireContext().startActivity(intent)
+        val user = FirebaseAuth.getInstance().currentUser
+        if(user != null){
+            Firebase.firestore.collection("lugares")
+                .document(p0.tag.toString()).get()
+                .addOnSuccessListener {
+                    val lugar = it.toObject(Lugar::class.java)
+                    if(lugar != null){
+                        if(lugar.idCreador == user.uid){
+                            val intent = Intent(requireContext(), GestionarLugarActivity::class.java)
+                            intent.putExtra("codigo", p0.tag.toString())
+                            requireContext().startActivity(intent)
+                        } else {
+                            val intent = Intent(requireContext(), DetalleLugarActivity::class.java)
+                            intent.putExtra("codigo", p0.tag.toString())
+                            requireContext().startActivity(intent)
+                        }
+                    }
+                }
+        }
     }
 }
