@@ -37,7 +37,7 @@ class InicioFragment : Fragment(), OnMapReadyCallback, OnInfoWindowClickListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getLocationPermission()
-
+        permisoCamara()
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,6 +71,28 @@ class InicioFragment : Fragment(), OnMapReadyCallback, OnInfoWindowClickListener
         }
         gMap.setOnInfoWindowClickListener(this)
         obtenerUbicacion()
+
+        binding.btnReestebalcerUbicacion.setOnClickListener{ reestablecerUbicacion() }
+    }
+
+    private fun reestablecerUbicacion(){
+        try{
+            if(tienePermiso){
+                val ubicacionActual =
+                    LocationServices.getFusedLocationProviderClient(requireActivity()).lastLocation
+                ubicacionActual.addOnCompleteListener(requireActivity()) {
+                    if (it.isSuccessful) {
+                        val ubicacion = it.result
+                        if (ubicacion != null) {
+                            gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(ubicacion.latitude, ubicacion.longitude), 18F))
+
+                        }
+                    }
+                }
+            }
+        }catch (e: SecurityException) {
+            Log.e("Exception: %%s", e.message, e)
+        }
     }
 
     private fun getLocationPermission() {
@@ -80,6 +102,15 @@ class InicioFragment : Fragment(), OnMapReadyCallback, OnInfoWindowClickListener
         } else {
             //permissionsResultCallback.launch(Manifest.permission.ACCESS_FINE_LOCATION)
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
+        }
+    }
+
+    private fun permisoCamara(){
+        if (ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            tienePermiso = true
+        } else {
+            requestPermissions(arrayOf(Manifest.permission.CAMERA), 1)
         }
     }
 

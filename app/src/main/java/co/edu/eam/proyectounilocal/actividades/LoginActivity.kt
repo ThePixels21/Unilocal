@@ -1,10 +1,13 @@
 package co.edu.eam.proyectounilocal.actividades
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.databinding.ActivityLoginBinding
 import co.edu.eam.proyectounilocal.modelo.Rol
@@ -20,6 +23,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getLocationPermission()
 
         val user = FirebaseAuth.getInstance().currentUser
         if(user != null) {
@@ -165,6 +169,13 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, OlvidoContrasenaActivity::class.java)
         startActivity(intent)
 
+    }
+
+    private fun getLocationPermission() {
+        if (!(ContextCompat.checkSelfPermission(baseContext,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
+        }
     }
 
 

@@ -1,9 +1,10 @@
 package co.edu.eam.proyectounilocal.fragmentos
 
+import android.Manifest
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -22,6 +23,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.actividades.BusquedaActivity
 import co.edu.eam.proyectounilocal.actividades.MainActivity
@@ -56,6 +58,8 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback {
     lateinit var ciudades:ArrayList<Ciudad>
     lateinit var categorias:ArrayList<Categoria>
 
+    private var tienePermiso = false
+
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     var codigoArchivo = 0
     var imagenes: ArrayList<String> = ArrayList()
@@ -71,6 +75,8 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        permisoCamara()
 
         resultLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult() ) {
@@ -203,8 +209,16 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback {
             mapLauncher.launch(intent)
         }
 
-        binding.btnTomarFoto.setOnClickListener { tomarFoto() }
-        binding.btnSelArchivo.setOnClickListener { seleccionarFoto() }
+        binding.btnTomarFoto.setOnClickListener {
+            if(tienePermiso){
+                tomarFoto()
+            } else {
+                Toast.makeText(requireActivity(), "Otorgue acceso a la cámara", Toast.LENGTH_SHORT).show()
+            }
+        }
+        binding.btnSelArchivo.setOnClickListener {
+            seleccionarFoto()
+        }
 
         return binding.root
     }
@@ -444,6 +458,15 @@ class CrearLugarFragment : Fragment(), OnMapReadyCallback {
             }
         }
 
+    }
+
+    private fun permisoCamara(){
+        if (ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            tienePermiso = true
+        } else {
+            requestPermissions(arrayOf(Manifest.permission.CAMERA), 1)
+        }
     }
 
     private fun setDialog(show: Boolean){
