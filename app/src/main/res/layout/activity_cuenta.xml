@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".actividades.CuentaActivity">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/logo_unilocal" />
+
+    <TextView
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:text="Editar cuenta"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:textColor="#28BEF5"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nombre_layout"
+        style="@style/til_form" >
+        <EditText
+            android:id="@+id/nombre_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:hint="@string/txt_nombre"
+            android:background="@drawable/fondo_forms"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usuario_layout"
+        style="@style/til_form" >
+        <EditText
+            android:id="@+id/usuario_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:hint="@string/txt_nickname"
+            android:background="@drawable/fondo_forms"
+            android:inputType="textPersonName"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ciudad_layout"
+        style="@style/til_form" >
+        <EditText
+            android:id="@+id/ciudad_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/txt_ciudad"
+            android:background="@drawable/fondo_forms"
+            android:gravity="center" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal" >
+        <Button
+            android:id="@+id/btn_editar"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/gray"
+            android:text="Editar"
+            android:textColor="@color/black" />
+        <Button
+            android:id="@+id/btn_cerrar_sesion"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:text="Cerrar sesión"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -82,36 +82,52 @@ class RegistroActivity : AppCompatActivity() {
         if(nombre.isNotEmpty() && nickname.isNotEmpty() && email.isNotEmpty() && ciudad.isNotEmpty() && password.isNotEmpty() && cpassword.isNotEmpty() && password.length >= 6){
             if(password==cpassword){
                 setDialog(true)
-                binding.passwordConfirmUsuario.error = null
-                FirebaseAuth.getInstance()
-                    .createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener {
-                        if(it.isSuccessful){
-                            val usuario = FirebaseAuth.getInstance().currentUser
-                            if(usuario != null){
-                                val usuarioRegistro = Usuario(nombre, nickname, ciudad, email, Rol.USUARIO)
-                                usuarioRegistro.key = usuario.uid
-                                Firebase.firestore
-                                    .collection("usuarios")
-                                    .document(usuarioRegistro.key)
-                                    .set(usuarioRegistro)
-                                    .addOnSuccessListener {
-                                        setDialog(false)
-                                        Toast.makeText(this, getString(R.string.registrado_exitosamente), Toast.LENGTH_LONG).show()
-                                        startActivity(Intent(this, LoginActivity::class.java))
-                                        finish()
-                                    }
-                                    .addOnFailureListener {
+                Firebase.firestore.collection("usuarios")
+                    .whereEqualTo("nickname", nickname)
+                    .get()
+                    .addOnSuccessListener {
+                        if(it.isEmpty){
+                            binding.usuarioUsuario.error = null
+                            binding.passwordConfirmUsuario.error = null
+                            FirebaseAuth.getInstance()
+                                .createUserWithEmailAndPassword(email, password)
+                                .addOnCompleteListener {
+                                    if(it.isSuccessful){
+                                        val usuario = FirebaseAuth.getInstance().currentUser
+                                        if(usuario != null){
+                                            val usuarioRegistro = Usuario(nombre, nickname, ciudad, email, Rol.USUARIO)
+                                            usuarioRegistro.key = usuario.uid
+                                            Firebase.firestore
+                                                .collection("usuarios")
+                                                .document(usuarioRegistro.key)
+                                                .set(usuarioRegistro)
+                                                .addOnSuccessListener {
+                                                    setDialog(false)
+                                                    Toast.makeText(this, getString(R.string.registrado_exitosamente), Toast.LENGTH_LONG).show()
+                                                    startActivity(Intent(this, LoginActivity::class.java))
+                                                    finish()
+                                                }
+                                                .addOnFailureListener {
+                                                    setDialog(false)
+                                                    Toast.makeText(this, getString(R.string.no_se_pudo_registrar), Toast.LENGTH_LONG).show()
+                                                }
+                                        } else {
+                                            setDialog(false)
+                                            Toast.makeText(this, getString(R.string.no_se_pudo_registrar), Toast.LENGTH_LONG).show()
+                                        }
+                                    } else {
                                         setDialog(false)
                                         Toast.makeText(this, getString(R.string.no_se_pudo_registrar), Toast.LENGTH_LONG).show()
                                     }
-                            } else {
-                                setDialog(false)
-                                Toast.makeText(this, getString(R.string.no_se_pudo_registrar), Toast.LENGTH_LONG).show()
-                            }
+                                }
+                                .addOnFailureListener {
+                                    setDialog(false)
+                                    Toast.makeText(this, getString(R.string.no_se_pudo_registrar), Toast.LENGTH_LONG).show()
+                                }
                         } else {
                             setDialog(false)
-                            Toast.makeText(this, getString(R.string.no_se_pudo_registrar), Toast.LENGTH_LONG).show()
+                            binding.usuarioUsuario.error = "Nickname en uso"
+                            Toast.makeText(this, "Nickname en uso", Toast.LENGTH_LONG).show()
                         }
                     }
                     .addOnFailureListener {

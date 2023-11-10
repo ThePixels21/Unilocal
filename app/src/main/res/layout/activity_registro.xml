@@ -10,9 +10,9 @@
     tools:context=".actividades.RegistroActivity">
 
     <ImageView
-        android:layout_width="88dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="30dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/logo_unilocal" />
 
     <TextView
@@ -20,7 +20,7 @@
         android:layout_height="40dp"
         android:text="@string/txt_bienvenido"
         android:gravity="center"
-        android:textSize="22dp"
+        android:textSize="22sp"
         android:textColor="#28BEF5"
         />
 
@@ -105,7 +105,7 @@
         android:id="@+id/btn_registrarse"
         android:layout_width="150dp"
         android:layout_height="60dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/gray"
         android:text="@string/txt_registrarse_btn"
         android:textColor="@color/black" />
 

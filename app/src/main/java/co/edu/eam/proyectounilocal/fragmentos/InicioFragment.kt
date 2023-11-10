@@ -53,14 +53,12 @@ class InicioFragment : Fragment(), OnMapReadyCallback, OnInfoWindowClickListener
 
     override fun onMapReady(googleMap: GoogleMap) {
         gMap = googleMap
+        gMap.uiSettings.isMyLocationButtonEnabled = false
+        gMap.uiSettings.isCompassEnabled = false
+        gMap.uiSettings.isRotateGesturesEnabled = false
 
         try {
-            if (tienePermiso) {
-                gMap.isMyLocationEnabled = true
-            } else {
-                gMap.isMyLocationEnabled = false
-                gMap.uiSettings.isMyLocationButtonEnabled = false
-            }
+            gMap.isMyLocationEnabled = tienePermiso
         } catch (e: SecurityException) {
             e.printStackTrace()
         }
