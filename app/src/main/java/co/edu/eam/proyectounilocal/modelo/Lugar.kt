@@ -1,5 +1,6 @@
 package co.edu.eam.proyectounilocal.modelo
 
+import android.util.Log
 import java.util.Calendar
 import java.util.Date
 
