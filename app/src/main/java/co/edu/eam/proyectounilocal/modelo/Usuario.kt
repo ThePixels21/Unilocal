@@ -1,11 +1,40 @@
 package co.edu.eam.proyectounilocal.modelo
 
-class Usuario(id: Int, nombre: String, var nickname:String, var ciudad:String, correo: String, password: String): Persona(id, nombre, correo, password){
+class Usuario(){
+
+    var key: String = ""
+    var nombre: String = ""
+    var nickname: String = ""
+    var ciudad: String = ""
+    var correo: String = ""
+    var rol: Rol = Rol.USUARIO
     var busquedasRecientes: ArrayList<String> = ArrayList()
-    var lugaresFavoritos:ArrayList<Int> = ArrayList()
+    var lugaresFavoritos:ArrayList<String> = ArrayList()
+
+    constructor(nombre: String, nickname:String, ciudad:String, correo: String, rol: Rol) : this() {
+        this.nombre = nombre
+        this.nickname = nickname
+        this.ciudad = ciudad
+        this.correo = correo
+        this.rol = rol
+    }
 
     fun agregarBusqueda(busqueda:String){
+        if(this.busquedasRecientes.size>9){
+            this.busquedasRecientes.removeFirst()
+        }
         this.busquedasRecientes.add(busqueda)
+    }
+
+    fun agregarFavorito(keyLugar: String){
+        if(this.lugaresFavoritos.size>19){
+            this.lugaresFavoritos.removeFirst()
+        }
+        this.lugaresFavoritos.add(keyLugar)
+    }
+
+    fun eliminarFavorito(keyLugar: String){
+        this.lugaresFavoritos.remove(keyLugar)
     }
 
     fun eliminarBusquedas(){
@@ -16,9 +45,9 @@ class Usuario(id: Int, nombre: String, var nickname:String, var ciudad:String, c
         return "Usuario(nickname='$nickname') ${super.toString()}"
     }
 
-    fun buscarFavorito(codigoLugar:Int): Boolean{
+    fun buscarFavorito(keyLugar:String): Boolean{
         for(codigo in lugaresFavoritos){
-            if(codigo == codigoLugar){
+            if(codigo == keyLugar){
                 return true
             }
         }

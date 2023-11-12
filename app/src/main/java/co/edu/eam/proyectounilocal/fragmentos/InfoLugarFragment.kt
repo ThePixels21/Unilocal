@@ -1,30 +1,46 @@
 package co.edu.eam.proyectounilocal.fragmentos
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import co.edu.eam.proyectounilocal.R
-import co.edu.eam.proyectounilocal.bd.Categorias
-import co.edu.eam.proyectounilocal.bd.Lugares
+import co.edu.eam.proyectounilocal.adapter.ViewPagerAdapterImagenes
+import co.edu.eam.proyectounilocal.bd.CategoriasService
+import co.edu.eam.proyectounilocal.bd.LugaresService
 import co.edu.eam.proyectounilocal.databinding.FragmentInfoLugarBinding
-import co.edu.eam.proyectounilocal.modelo.Categoria
 import co.edu.eam.proyectounilocal.modelo.DiaSemana
 import co.edu.eam.proyectounilocal.modelo.Lugar
+import co.edu.eam.proyectounilocal.modelo.Posicion
+import com.bumptech.glide.Glide
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import java.util.Timer
+import java.util.TimerTask
 
-class InfoLugarFragment : Fragment() {
+class InfoLugarFragment : Fragment(), OnMapReadyCallback {
 
     lateinit var binding: FragmentInfoLugarBinding
-    var codigoLugar: Int = -1
+    var codigoLugar: String = ""
     private var lugar: Lugar? = null
+
+    private var currentPage = 0
+
+    lateinit var gMap: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         if(arguments != null){
-            codigoLugar = requireArguments().getInt("id_lugar")
+            codigoLugar = requireArguments().getString("id_lugar", "")
         }
     }
 
@@ -35,17 +51,48 @@ class InfoLugarFragment : Fragment() {
     ): View? {
         binding = FragmentInfoLugarBinding.inflate(inflater, container, false)
 
-        lugar = Lugares.obtener(codigoLugar)
+        val mapFragment = childFragmentManager.findFragmentById(R.id.mapa_direccion_lugar) as SupportMapFragment
+        mapFragment.getMapAsync(this)
 
-        if(lugar != null){
-            //Cargar info layout
-            cargarInformacion(lugar!!)
+        LugaresService.obtener(codigoLugar){lug ->
+            lugar = lug
+            if(lugar != null){
+                //Cargar info layout
+                cargarInformacion(lugar!!)
+            }
         }
 
         return binding.root
     }
 
     fun cargarInformacion(lugar: Lugar){
+
+        //Cargar imágenes
+        if(lugar.imagenes.isNotEmpty()){
+            val adapter = ViewPagerAdapterImagenes(requireActivity(), lugar.imagenes)
+            binding.listaImgs.adapter = adapter
+
+            val handler = Handler(Looper.getMainLooper())
+            val update = Runnable {
+                val itemCount = adapter.itemCount
+                if (currentPage == itemCount) {
+                    currentPage = 0
+                }
+                binding.listaImgs.setCurrentItem(currentPage++, true)
+            }
+            val timer = Timer() // Esto creará un nuevo Timer
+            timer.schedule(object : TimerTask() { // tarea a ejecutar
+                override fun run() {
+                    handler.post(update)
+                }
+            }, DELAY_MS, PERIOD_MS)
+        }
+
+        //Cargar dirección y mapa
+        binding.direccionLugar.text = lugar.direccion
+        val pos = LatLng(lugar.posicion.lat, lugar.posicion.lng)
+        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 18f))
+        gMap.addMarker( MarkerOptions().position(pos).title(lugar.nombre))
 
         binding.detalleLugar.text = lugar.descripcion
 
@@ -83,9 +130,12 @@ class InfoLugarFragment : Fragment() {
         }
         binding.contactoLugar.text = telefonos
 
-        val categoria = Categorias.obtener(lugar.idCategoria)
-        binding.iconoCategoria.text = categoria!!.icono
-        binding.categoriaLugar.text = categoria!!.nombre
+        CategoriasService.obtener(lugar.keyCategoria){categoria ->
+            if(categoria != null){
+                binding.iconoCategoria.text = categoria.icono
+                binding.categoriaLugar.text = categoria.nombre
+            }
+        }
 
         //colores estado
         val abierto = lugar.estaAbierto()
@@ -100,12 +150,22 @@ class InfoLugarFragment : Fragment() {
     }
 
     companion object{
-        fun newInstance(codigoLugar:Int):InfoLugarFragment{
+        private const val DELAY_MS: Long = 0 //delay en milisegundos antes de que la tarea se ejecute por primera vez
+        private const val PERIOD_MS: Long = 3500 //tiempo en milisegundos entre invocaciones sucesivas de la tarea
+        fun newInstance(codigoLugar:String):InfoLugarFragment{
             val args = Bundle()
-            args.putInt("id_lugar", codigoLugar)
+            args.putString("id_lugar", codigoLugar)
             val fragmento = InfoLugarFragment()
             fragmento.arguments = args
             return fragmento
         }
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        gMap = googleMap
+        gMap.uiSettings.isRotateGesturesEnabled = false
+        gMap.uiSettings.isScrollGesturesEnabled = false
+        gMap.uiSettings.isZoomGesturesEnabled = true
+        gMap.uiSettings.isZoomControlsEnabled = true
     }
 }

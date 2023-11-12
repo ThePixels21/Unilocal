@@ -9,6 +9,7 @@ import co.edu.eam.proyectounilocal.R
 import co.edu.eam.proyectounilocal.adapter.ViewPagerAdapterMod
 import co.edu.eam.proyectounilocal.databinding.ActivityModMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
 
 class ModMainActivity : AppCompatActivity() {
 
@@ -37,9 +38,13 @@ class ModMainActivity : AppCompatActivity() {
     }
 
     fun cerrarSesion(){
-        val sh = getSharedPreferences("sesion", Context.MODE_PRIVATE).edit()
+        FirebaseAuth.getInstance().signOut()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity( intent )
+        finish()
+        /*val sh = getSharedPreferences("sesion", Context.MODE_PRIVATE).edit()
         sh.clear()
         sh.commit()
-        startActivity(Intent(this, LoginActivity::class.java))
+        startActivity(Intent(this, LoginActivity::class.java))*/
     }
 }

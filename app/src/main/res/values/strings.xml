@@ -41,6 +41,7 @@
     <string name="crear_lugar_hint_divider">-</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txt_horario">Horario</string>
+    <string name="txt_imagenes">Imagenes</string>
     <string name="txt_seleccione">Seleccione</string>
 
     <!-- fragmento info lugar -->
@@ -106,6 +107,7 @@
     <!-- registro activity -->
 
     <string name="campo_obligatorio">Campo obligatorio</string>
+    <string name="seis_caracteres_minimo">Mínimo 6 caracteres</string>
     <string name="registrado_exitosamente">Registrado exitosamente</string>
     <string name="no_se_pudo_registrar">No se pudo registrar</string>
     <string name="la_contrasena_ingresada_no_coincide">La contraseña ingresada no coincide</string>
@@ -130,9 +132,21 @@
     <string name="horario_de_sabado_no_valido">Horario de sábado no válido</string>
     <string name="horario_de_domingo_no_valido">Horario de domingo no válido</string>
     <string name="lugar_creado_rev_mod">Lugar creado correctamente, será revisado por un moderador</string>
+    <string name="lugar_creado_error">Hubo un error al crear el lugar</string>
+    <string name="lugar_creado_imagenes_error">Por favor seleccione al menos una imágen</string>
+
+    <!-- Gestionar lugar activity -->
+    <string name="lugar_eliminado">Lugar eliminado correctamente</string>
+    <string name="lugar_no_eliminado">No se pudo eliminar el lugar</string>
+
+    <!-- ModDetalleLugar activity -->
+    <string name="lugar_aceptado">Lugar aceptado</string>
+    <string name="lugar_rechazado">Lugar rechazado</string>
+    <string name="error_lugar_estado">Hubo un error al cambiar el estado</string>
 
     <!-- info lugar fragmento -->
     <string name="no_tiene_telefonos_contac">No tiene telefonos de contacto</string>
+
     <!-- Detalle lugar activity -->
     <string name="descripcion">Descripción</string>
     <string name="resenas">Reseñas</string>
@@ -161,5 +175,6 @@
     <string name="icon_uf057">\uf057</string>
     <string name="icon_uf359">\uf359</string>
     <string name="icon_uf005">\uf005</string>
+    <string name="icon_uf3c5">\uf3c5</string>
 
 </resources>

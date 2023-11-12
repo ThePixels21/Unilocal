@@ -1,19 +1,21 @@
 package co.edu.eam.proyectounilocal.actividades
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import co.edu.eam.proyectounilocal.R
-import co.edu.eam.proyectounilocal.bd.Personas
 import co.edu.eam.proyectounilocal.databinding.ActivityLoginBinding
-import co.edu.eam.proyectounilocal.modelo.Moderador
+import co.edu.eam.proyectounilocal.modelo.Rol
 import co.edu.eam.proyectounilocal.modelo.Usuario
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
-import kotlin.math.log
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
 
@@ -21,8 +23,21 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getLocationPermission()
 
-        val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
+        val user = FirebaseAuth.getInstance().currentUser
+        if(user != null) {
+            hacerRedireccion(user)
+        } else {
+            binding = ActivityLoginBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+
+            binding.btnIniciarSesion.setOnClickListener{ login() }
+            binding.txtOlvidoContrasenia.setOnClickListener{ irAOlvidoContrasenia() }
+            binding.txtNoCuenta.setOnClickListener { irARegsitro() }
+        }
+
+        /*val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
         val correo = sp.getString("correo_usuario", "")
         val tipo = sp.getString("tipo_usuario", "")
         if(correo!!.isNotEmpty() && tipo!!.isNotEmpty()){
@@ -46,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
             binding.btnIniciarSesion.setOnClickListener{ login() }
             binding.txtOlvidoContrasenia.setOnClickListener{ irAOlvidoContrasenia() }
             binding.txtNoCuenta.setOnClickListener { irARegsitro() }
-        }
+        }*/
     }
 
     fun login(){
@@ -66,7 +81,26 @@ class LoginActivity : AppCompatActivity() {
         }
 
         if(correo.isNotEmpty() && password.isNotEmpty()){
-            val persona = Personas.login(correo.toString(), password.toString())
+
+            FirebaseAuth.getInstance()
+                .signInWithEmailAndPassword(correo.toString(), password.toString())
+                .addOnCompleteListener { it ->
+                    if(it.isSuccessful){
+
+                        val user = FirebaseAuth.getInstance().currentUser
+
+                        if(user != null){
+                            hacerRedireccion(user)
+                        }
+                    }else{
+                        Toast.makeText(this, getString(R.string.datos_incorrectos), Toast.LENGTH_LONG).show()
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, getString(R.string.datos_incorrectos), Toast.LENGTH_LONG).show()
+                }
+
+            /*val persona = Personas.login(correo.toString(), password.toString())
             if(persona != null){
 
                 val tipo = if(persona is Usuario) "usuario" else "moderador"
@@ -84,8 +118,47 @@ class LoginActivity : AppCompatActivity() {
                 }
             } else {
                 Toast.makeText(this, getString(R.string.datos_incorrectos), Toast.LENGTH_LONG).show()
-            }
+            }*/
         }
+    }
+
+    fun hacerRedireccion(user: FirebaseUser){
+        Firebase.firestore
+            .collection("usuarios")
+            .document(user.uid)
+            .get()
+            .addOnSuccessListener {u ->
+                val usuario = u.toObject(Usuario::class.java)
+                if(usuario != null){
+                    val rol = usuario.rol
+                    var intent: Intent = Intent()
+                    if(rol == Rol.USUARIO){
+                        intent = Intent(this, MainActivity::class.java)
+                    } else if(rol == Rol.MODERADOR){
+                        intent = Intent(this, ModMainActivity::class.java)
+                    }
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    FirebaseAuth.getInstance().signOut()
+                    binding = ActivityLoginBinding.inflate(layoutInflater)
+                    setContentView(binding.root)
+
+                    binding.btnIniciarSesion.setOnClickListener{ login() }
+                    binding.txtOlvidoContrasenia.setOnClickListener{ irAOlvidoContrasenia() }
+                    binding.txtNoCuenta.setOnClickListener { irARegsitro() }
+                }
+            }
+            .addOnFailureListener {
+                FirebaseAuth.getInstance().signOut()
+                binding = ActivityLoginBinding.inflate(layoutInflater)
+                setContentView(binding.root)
+
+                binding.btnIniciarSesion.setOnClickListener{ login() }
+                binding.txtOlvidoContrasenia.setOnClickListener{ irAOlvidoContrasenia() }
+                binding.txtNoCuenta.setOnClickListener { irARegsitro() }
+            }
     }
 
     fun irARegsitro(){
@@ -96,6 +169,13 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, OlvidoContrasenaActivity::class.java)
         startActivity(intent)
 
+    }
+
+    private fun getLocationPermission() {
+        if (!(ContextCompat.checkSelfPermission(baseContext,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
+        }
     }
 
 

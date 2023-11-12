@@ -1,19 +1,49 @@
 package co.edu.eam.proyectounilocal.modelo
 
-import java.time.LocalDate
+import android.util.Log
 import java.util.Calendar
 import java.util.Date
 
-class Lugar(var nombre:String,
-            var descripcion:String,
-            var idCreador:Int,
-            var estado:EstadoLugar,
-            var idCategoria:Int,
-            var direccion:String,
-            var latitud:Float, var longitud:Float,
-            var idCiudad:Int
-) {
-    var id:Int = 0
+class Lugar() {
+
+    constructor( nombre:String, descripcion:String, idCreador:String, estado:EstadoLugar, keyCategoria:String, direccion:String, posicion: Posicion, idCiudad:String):this(){
+        this.nombre = nombre
+        this.descripcion = descripcion
+        this.idCreador = idCreador
+        this.estado = estado
+        this.keyCategoria = keyCategoria
+        this.direccion = direccion
+        this.posicion = posicion
+        this.latitud = posicion.lat
+        this.longitud = posicion.lng
+        this.idCiudad = idCiudad
+    }
+
+    constructor( nombre:String, descripcion:String, idCreador:String, estado:EstadoLugar, keyCategoria:String, direccion:String, latitud:Double, longitud:Double, idCiudad:String):this(){
+        this.nombre = nombre
+        this.descripcion = descripcion
+        this.idCreador = idCreador
+        this.estado = estado
+        this.keyCategoria = keyCategoria
+        this.direccion = direccion
+        this.latitud = latitud
+        this.longitud = longitud
+        val pos = Posicion(latitud, longitud)
+        this.posicion = pos
+        this.idCiudad = idCiudad
+    }
+
+    var key:String = ""
+    var nombre:String = ""
+    var descripcion:String = ""
+    var idCreador:String = ""
+    var estado:EstadoLugar = EstadoLugar.SIN_REVISAR
+    var keyCategoria:String = ""
+    var direccion:String = ""
+    var posicion: Posicion = Posicion()
+    var idCiudad:String = ""
+    var latitud:Double = 0.0
+    var longitud:Double = 0.0
     var imagenes:ArrayList<String> = ArrayList()
     var telefonos:ArrayList<String> = ArrayList()
     var fecha: Date = Date()
@@ -66,6 +96,6 @@ class Lugar(var nombre:String,
     }
 
     override fun toString(): String {
-        return "Lugar(id=$id, nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, idCategoria=$idCategoria, latitud=$latitud, longitud=$longitud, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, fecha=$fecha, horarios=$horarios)"
+        return "Lugar(id=$key, nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, keyCategoria=$keyCategoria,posicion=$posicion, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, fecha=$fecha, horarios=$horarios)"
     }
 }
